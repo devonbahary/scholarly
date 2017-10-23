@@ -9,7 +9,8 @@
   <!-- Add Word Input -->
   <header class="header-word-search">
     <form id="form-add-word-search" name="formAddWordSearch" autocomplete="off">
-      <input type="text" id="add-word-input" name="searchAddWord" ng-model="words.searchAddWord" placeholder="scholarly" class="bga-dark" required autocomplete="off">
+      <input type="text" id="add-word-input" class="bga-dark" name="searchAddWord" autocomplete="off"
+        ng-model="words.searchAddWord" placeholder="scholarly" required >
       <button type="submit" class="ion-search bg-gray"
         ng-click="words.searchWord()"
         ng-disabled="formAddWordSearch.$invalid"></button>

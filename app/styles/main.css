@@ -63,7 +63,7 @@
 
 #viewport .view-content {
   position: absolute;
-  top: 10%;
+  top: 0;
   bottom: 10%;
   width: 100%;
 }
