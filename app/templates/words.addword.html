@@ -45,7 +45,8 @@
           ng-repeat="result in words.searchResults"
           ng-show="!words.searchErrorFlag">
         <!-- Button: Add Word -->
-        <div class="btn-add-word bg-slate">
+        <div class="btn-add-word bg-slate"
+          ng-click="words.btnAddWord(result)">
           <div class="ion-plus-round centered"></div>
         </div>
         <!-- Word Details -->

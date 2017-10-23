@@ -132,6 +132,25 @@
       document.getElementById('add-word-input').blur();
     }
 
+    this.btnAddWord = function(result) {
+      if (UserWords.hasWord(that.searchAddWord)) {
+        alert('already have that word');
+      } else {
+        var wordObject = {
+          name: that.searchAddWord,
+          partOfSpeech: result.partOfSpeech,
+          definition: result.definition
+        }
+        if (UserWords.addWord(wordObject)) {
+          alert('added ' + that.searchAddWord + '!');
+          that.btnReturnToWords();
+        } else {
+          alert("didn't work");
+        };
+
+      }
+    }
+
     // load 'userWords' as soon as user detected
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
