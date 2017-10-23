@@ -1,0 +1,67 @@
+<!--
+  scholarly
+    app
+      templates
+        * words.addword.html
+-->
+
+<section id="add-word-view" class="sliding-content bga-dark">
+  <!-- Add Word Input -->
+  <header class="header-word-search">
+    <form id="form-add-word-search" name="formAddWordSearch">
+      <input type="text" id="add-word-input" name="searchAddWord" ng-model="words.searchAddWord" placeholder="scholarly" class="bga-dark" required>
+      <button type="submit" class="ion-search bg-gray"
+        ng-click="words.searchWord()"
+        ng-disabled="formAddWordSearch.$invalid"></button>
+    </form>
+  </header>
+  <!-- User Search Feedback -->
+  <div id="add-word-search-feedback" class="bga-dark">
+    <div class="txt-feedback v-centered">
+      <!-- initial prompt -->
+      <span ng-show="words.searchResults.length === 0 && !words.searchPending">
+        Enter a word to search for.
+      </span>
+      <!-- search notification -->
+      <span ng-show="words.searchPending">
+        Searching..
+      </span>
+      <!-- results response -->
+      <span ng-show="words.searchResults.length > 0 && !words.searchErrorFlag">
+        Found {{ words.searchResults.length }} definition<span ng-show="words.searchResults.length > 1">s</span>.
+      </span>
+      <!-- error response -->
+      <span ng-show="words.searchErrorFlag">
+        {{ words.searchResults }}
+      </span>
+    </div>
+  </div>
+  <!-- Search Results -->
+  <div id="search-results-box">
+    <ul id="list-search-results">
+      <!-- List Item: Definition -->
+      <li class="search-result bga-gray"
+          ng-repeat="result in words.searchResults"
+          ng-show="!words.searchErrorFlag">
+        <!-- Button: Add Word -->
+        <div class="btn-add-word bg-slate">
+          <div class="ion-plus-round centered"></div>
+        </div>
+        <!-- Word Details -->
+        <div class="word-details">
+          <div class="part-of-speech">
+            {{ result.partOfSpeech }}
+          </div>
+          <div class="definition">
+            {{ result.definition }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Button: Navigation -->
+  <div id="btn-return-to-words" class="btn-nav bg-gray"
+    ng-click="words.btnReturnToWords()">
+    <div class="ion-arrow-right-c btn-text centered"></div>
+  </div>
+</section>

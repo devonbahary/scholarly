@@ -1,0 +1,37 @@
+<!--
+  scholarly
+    app
+      templates
+        * landing.login.html
+-->
+
+<form name="logInForm" id="login-form" class="input-form">
+  <!-- Form Input -->
+  <section class="form-input bg-dark">
+    <div class="input-content">
+      <header class="logo-title">
+        <div class="logo ion-university bg-theme"></div>
+      </header>
+      <div class="input-error" ng-show="inputError">
+        <span class="ion-alert-circled txt-warning"></span> {{ inputError }}
+      </div>
+      <div ng-class="{'border-error': inputError}">
+        <input type="email" placeholder="email address" name="logInEmail" ng-model="logInUser.email" required>
+        <input type="password" placeholder="password" name="logInPassword" ng-model="logInUser.password" required>
+      </div>
+    </div>
+  </section>
+  <!-- Form Submit -->
+  <section class="form-submit bg-gray">
+    <div class="btn-submit">
+      <input type="submit" value="Log In"
+        ng-click="landing.btnLogIn()"
+        ng-disabled="!logInForm.$valid"
+        ng-class="{'bg-theme': logInForm.$valid, 'bg-dark': !logInForm.$valid}">
+    </div>
+  </section>
+</form>
+<!-- Close Button -->
+<div class="btn-close ion-close-round"
+  ng-click="landing.btnClose()">
+</div>

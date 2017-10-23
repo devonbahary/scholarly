@@ -1,0 +1,26 @@
+<!--
+  scholarly
+    app
+      templates
+        * words.html
+-->
+
+<main id="viewport">
+  <!-- View Header -->
+  <section id="view-header">
+    <ng-include src="'/templates/headerlogo.html'"></ng-include>
+    <div id="header-info">
+
+    </div>
+  </section>
+  <!-- Words Content -->
+  <section id="words-content" class="view-content">
+    <!-- Words -->
+    <ng-include src="'/templates/words.userwords.html'"
+      onload="words.attachBtnOpenAddWordResponsiveness()"></ng-include>
+    <!-- Add Word View -->
+    <ng-include src="'/templates/words.addword.html'"></ng-include>
+  </section>
+  <!-- App Navigation -->
+  <ng-include src="'/templates/appnav.html'"></ng-include>
+</main>

@@ -1,0 +1,246 @@
+/*
+  scholarly
+    styles
+      * words.css
+   +---------------------------------------------------------------------------
+    * words.css
+      => Styles for the 'words' view.
+   ---------------------------------------------------------------------------+
+*/
+
+#words-content {
+  background-image: url('/assets/images/bg-mobile.jpeg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 25% 0;
+  overflow: hidden;
+}
+
+#words-content .header-word-search {
+  position: relative;
+  height: 15%;
+}
+
+#words-content input[type="text"] {
+  border: none;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  border: 1px solid rgb(75, 75, 75);
+  padding: 12px;
+}
+
+#words-content input[type=text]:focus {
+  outline: none;
+  border: 1px solid rgb(255, 136, 77);
+}
+
+#words-content .btn-nav {
+  display: inline-block;
+  position: absolute;
+  right: 5%; bottom: 2.5%;
+  border-radius: 100%;
+  width: 66px;
+  height: 66px;
+  opacity: 1;
+  transition: opacity 0.2s ease;*/
+}
+
+#words-content .word-details {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 1.4rem;
+}
+
+#words-content .part-of-speech {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 80%;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+#words-content .definition {
+  position: relative;
+  width: 90%;
+  left: 10%;
+}
+
+/* words view
+  ========================================================================== */
+#words-view {
+  left: 0;
+}
+
+#words-view #form-user-word-search {
+  position: absolute;
+  width: 90%;
+  bottom: 10%; left: 5%;
+}
+
+#words-view input[type=text] {
+  width: 100%;
+  border-radius: 12px;
+  padding: 0 36px;
+}
+
+#words-view .user-word-input-icon {
+  position: absolute;
+  font-size: 1.2rem;
+  line-height: 2.5rem;
+  opacity: 0.8;
+}
+
+#words-view #user-word-search-icon {
+  left: 12px;
+}
+
+#words-view #btn-clear-user-word-search {
+  right: 12px;
+}
+
+#words-view #user-word-sort-panel {
+  position: relative;
+  height: 10%;
+}
+
+#words-view #user-words-box {
+  position: relative;
+  height: 75%;
+  overflow-y: scroll;
+}
+
+#words-view #list-user-words {
+  position: relative;
+  height: 100%;
+  list-style: none;
+}
+
+#words-view .word-item {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  position: relative;
+  min-height: 30%;
+  margin-bottom: 6px;
+  border: 1px solid gray;
+  border-top-right-radius: 12px;
+}
+
+#words-view .word-item:first-child {
+  margin-top: 6px;
+}
+
+#words-view .word-metrics {
+  border-right: 1px solid rgb(255, 136, 77);
+}
+
+#words-view .word-metrics.info {
+  border: 1px solid rgb(255, 136, 77);
+}
+
+#words-view .word-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding-left: 12px;
+  border-top-right-radius: 12px;
+}
+
+#words-view .word-name.info {
+  font-family: 'Work Sans', sans-serif;
+  font-style: normal;
+}
+
+#words-view .definition.info {
+  width: 100%;
+  left: 0;
+}
+
+/* add word view
+  ========================================================================== */
+#add-word-view {
+  position: relative;
+  left: -100%;
+}
+
+#header-info #btn-return-to-words {
+  display: inline-block;
+  position: absolute;
+  right: 100%;
+  width: 66px;
+  height: 100%;
+  opacity: 0.9;
+  transition: right 0.4s ease;
+}
+
+#add-word-view #form-add-word-search {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 90% 10%;
+  width: 90%;
+  bottom: 10%; left: 5%;
+}
+
+#add-word-view input[type=text] {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#add-word-view button[type=submit] {
+  border: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+#add-word-view button[type=submit]:focus {
+  outline: none;
+  border: 1px solid rgb(255, 136, 77);
+}
+
+#add-word-view #add-word-search-feedback {
+  position: relative;
+  height: 10%;
+}
+
+#add-word-view .txt-feedback {
+  left: 5%;
+  opacity: 0.9;
+}
+
+#add-word-view #search-results-box {
+  position: relative;
+  height: 75%;
+  overflow-y: scroll;
+}
+
+#add-word-view #list-search-results {
+  position: relative;
+  height: 100%;
+  list-style: none;
+}
+
+#add-word-view .search-result {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  position: relative;
+  min-height: 30%;
+  margin-bottom: 6px;
+  border: 1px solid gray;
+  border-top-right-radius: 12px;
+}
+
+#add-word-view .search-result:first-child {
+  margin-top: 6px;
+}
+
+#add-word-view .btn-add-word {
+  border-right: 1px solid rgb(255, 136, 77);
+}
+
+/* MEDIA QUERIES
+  ========================================================================== */
+@media only screen and (min-width: 480px) {
+  #add-word-view .search-result {
+    grid-template-columns: 10% 90%;
+  }
+}

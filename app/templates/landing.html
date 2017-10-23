@@ -1,0 +1,22 @@
+<!--
+  scholarly
+    app
+      templates
+        * landing.html
+-->
+
+<main id="landing-content">
+  <div class="overlay bga-gray"></div>
+  <!-- Welcome -->
+  <section id="welcome-view" class="sliding-content">
+    <ng-include src="'/templates/landing.welcome.html'"></ng-include>
+  </section>
+  <!-- Log In -->
+  <section id="login-view" class="sliding-content">
+    <ng-include src="'/templates/landing.login.html'"></ng-include>
+  </section>
+  <!-- Sign Up -->
+  <section id="signup-view" class="sliding-content">
+    <ng-include src="'/templates/landing.signup.html'"></ng-include>
+  </section>
+</main>

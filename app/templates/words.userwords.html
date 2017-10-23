@@ -1,0 +1,75 @@
+<!--
+  scholarly
+    app
+      templates
+        * words.mywords.html
+-->
+<section id="words-view" class="sliding-content bga-gray">
+  <!-- Search Word Input -->
+  <header class="header-word-search">
+    <form id="form-user-word-search">
+      <div id="user-word-search-icon" class="user-word-input-icon ion-search"></div>
+      <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round"
+        ng-click="words.clearSearchUserWord()"></div>
+      <input type="text" ng-model="words.searchUserWord" ng-init="" placeholder="scholarly" class="bga-dark">
+    </form>
+  </header>
+  <!-- User Words Sort Panel -->
+  <div id="user-word-sort-panel" class="bga-slate">
+
+  </div>
+  <!-- User Words (may be limited by search result) -->
+  <div id="user-words-box">
+    <ul id="list-user-words">
+      <!-- List Item: User Word -->
+      <li class="word-item bga-gray" ng-repeat="word in words.userWords | filter:words.searchUserWord | orderBy:'-name':true as filteredSearch">
+        <!-- Word Metrics Bar -->
+        <div class="word-metrics bga-dark">
+
+        </div>
+        <!-- Word Info -->
+        <div class="word-info">
+          <!-- Word Name -->
+          <header class="word-name bg-dark">
+            {{ word.name }}
+          </header>
+          <!-- Word Details -->
+          <div class="word-details">
+            <div class="part-of-speech">
+              {{ word.partOfSpeech }}
+            </div>
+            <div class="definition">
+              {{ word.definition }}
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- No Match Found Message -->
+      <li class="word-item bga-gray" ng-show="words.userWords.length > 0 && filteredSearch.length === 0">
+        <!-- Word Metrics Bar -->
+        <div class="word-metrics info bg-slate"
+          ng-click="words.btnOpenAddWord(words.searchUserWord)">
+          <div class="ion-search centered txt-theme"></div>
+        </div>
+        <!-- Word Info -->
+        <div class="word-info">
+          <!-- Word Name -->
+          <header class="word-name info bg-dark">
+            <span class="ion-alert-circled txt-theme"></span> No match
+          </header>
+          <!-- Word Details -->
+          <div class="word-details">
+            <div class="definition info">
+              Search our database.
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Button: Navigation -->
+  <div id="btn-open-add-word" class="btn-nav bg-theme"
+    ng-click="words.btnOpenAddWord()">
+    <div class="ion-plus-round btn-text centered"></div>
+  </div>
+</section>
