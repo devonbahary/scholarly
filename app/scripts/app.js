@@ -27,7 +27,7 @@
       .state('words', {
         controller: 'WordsCtrl',
         controllerAs: 'words',
-        url: '/words',
+        url: '/#words',
         templateUrl: '/templates/words.html'
       });
   }
