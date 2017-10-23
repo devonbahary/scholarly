@@ -145,6 +145,14 @@
   color: red;
 }
 
+.txt-correct {
+  color: rgb(60, 203, 59);
+}
+
+.txt-wrong {
+  color: rgb(244, 40, 40);
+}
+
 .bg-theme {
   background: rgb(255, 85, 0);
 }

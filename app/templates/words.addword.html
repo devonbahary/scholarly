@@ -29,7 +29,7 @@
       </span>
       <!-- results response -->
       <span ng-show="words.searchResults.length > 0 && !words.searchErrorFlag">
-        Found {{ words.searchResults.length }} definition<span ng-show="words.searchResults.length > 1">s</span>.
+        Found <span class="txt-theme">{{ words.searchResults.length }}</span> definition<span ng-show="words.searchResults.length > 1">s</span>.
       </span>
       <!-- error response -->
       <span ng-show="words.searchErrorFlag">

@@ -17,13 +17,35 @@
   </header>
   <!-- User Words Sort Panel -->
   <div id="user-word-sort-panel" class="bga-slate">
-
+    <div>
+      <div class="txt-feedback v-centered">
+        Found <span class="txt-theme">{{ filteredSearch.length }}</span> word<span ng-show="filteredSearch.length === 0 || filteredSearch.length > 1">s</span>.
+      </div>
+    </div>
+    <div id="btn-sort-user-words" ng-click="words.btnSortUserWords()">
+      <!-- Sort: A-Z --->
+      <div class="centered" ng-show="words.sortBy === 0">
+        A <span class="ion-arrow-swap"></span> Z
+      </div>
+      <!-- Sort: Z-A --->
+      <div class="centered" ng-show="words.sortBy === 1">
+        Z <span class="ion-arrow-swap"></span> A
+      </div>
+      <!-- Sort: numSuccess (lowest to high) --->
+      <div class="centered" ng-show="words.sortBy === 2">
+        <span class="ion-chevron-down txt-wrong"></span> <span class="ion-flash"></span> <span class="ion-chevron-up txt-correct"></span>
+      </div>
+      <!-- Sort: numSuccess (highest to low) --->
+      <div class="centered" ng-show="words.sortBy === 3">
+        <span class="ion-chevron-up txt-correct"></span> <span class="ion-flash"></span> <span class="ion-chevron-down txt-wrong"></span>
+      </div>
+    </div>
   </div>
   <!-- User Words (may be limited by search result) -->
   <div id="user-words-box">
     <ul id="list-user-words">
       <!-- List Item: User Word -->
-      <li class="word-item bga-gray" ng-repeat="word in words.userWords | filter:words.searchUserWord | orderBy:'-name':true as filteredSearch">
+      <li class="word-item bga-gray" ng-repeat="word in words.userWords | filter: words.searchUserWord | orderBy: words.sortByOrder():words.sortByReversed() as filteredSearch">
         <!-- Word Metrics Bar -->
         <div class="word-metrics bga-dark">
 

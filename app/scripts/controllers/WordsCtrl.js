@@ -18,6 +18,15 @@
     this.searchUserWord = "";
     this.userWords = [];
 
+    /*
+      0 => alpha A-Z
+      1 => alpha Z-A
+      2 => numSuccess (lowest to high)
+      3 => numSuccess (highest to low)
+    */
+    this.sortBy = 0;
+
+
     this.scrollMem = 0;
 
     function initSearchVars() {
@@ -29,8 +38,25 @@
 
     initSearchVars();
 
+    this.sortByOrder = function() {
+      return (that.sortBy < 2 ) ? '-name' : '-numSuccess';
+    }
+
+    this.sortByReversed = function() {
+      return (that.sortBy % 2 == 0) ? true : false;
+    }
+
     this.clearSearchUserWord = function() {
       that.searchUserWord = "";
+    }
+
+    /*
+      btnSortUserWords()
+        => Iterates 'this.sortBy' to the next sort category.
+    */
+    this.btnSortUserWords = function() {
+      that.sortBy++;
+      if (that.sortBy > 3) { that.sortBy = 0; }
     }
 
     /*

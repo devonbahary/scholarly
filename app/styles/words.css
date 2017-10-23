@@ -21,6 +21,11 @@
   height: 15%;
 }
 
+#words-content .txt-feedback {
+  left: 5%;
+  opacity: 0.9;
+}
+
 #words-content input[type="text"] {
   border: none;
   height: 2.5rem;
@@ -99,7 +104,14 @@
 
 #words-view #user-word-sort-panel {
   position: relative;
+  display: grid;
+  grid-template-columns: 75% 25%;
   height: 10%;
+  padding: 6px;
+}
+
+#words-view #btn-sort-user-words {
+  border-left: 1px solid rgb(255, 136, 77);
 }
 
 #words-view #user-words-box {
@@ -200,11 +212,6 @@
 #add-word-view #add-word-search-feedback {
   position: relative;
   height: 10%;
-}
-
-#add-word-view .txt-feedback {
-  left: 5%;
-  opacity: 0.9;
 }
 
 #add-word-view #search-results-box {
