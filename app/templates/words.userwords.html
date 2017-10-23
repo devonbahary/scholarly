@@ -7,11 +7,12 @@
 <section id="words-view" class="sliding-content bga-gray">
   <!-- Search Word Input -->
   <header class="header-word-search">
-    <form id="form-user-word-search">
+    <form id="form-user-word-search" autocomplete="off">
       <div id="user-word-search-icon" class="user-word-input-icon ion-search"></div>
       <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round"
         ng-click="words.clearSearchUserWord()"></div>
-      <input type="text" ng-model="words.searchUserWord" ng-init="" placeholder="scholarly" class="bga-dark">
+      <input type="text" class="bga-dark" autocomplete="off" placeholder="scholarly"
+        ng-model="words.searchUserWord" ng-init="" >
     </form>
   </header>
   <!-- User Words Sort Panel -->
