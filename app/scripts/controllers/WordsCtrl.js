@@ -95,6 +95,7 @@
         that.searchErrorFlag = (typeof(value) === 'string');
         that.searchPending = false;
       });
+      document.getElementById('add-word-input').blur();
     }
 
     // load 'userWords' as soon as user detected
