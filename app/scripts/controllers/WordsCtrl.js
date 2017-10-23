@@ -50,6 +50,10 @@
     }
 
     this.btnOpenAddWord = function(searchWord) {
+      if (document.getElementById('btn-open-add-word').style.opacity === '0') {
+        return;
+      }
+
       // transition view
       document.getElementById('words-view').style.left = '100%';
       document.getElementById('add-word-view').style.left = '0';
@@ -75,6 +79,10 @@
     }
 
     this.btnReturnToWords = function() {
+      if (document.getElementById('btn-return-to-words').style.opacity === '0') {
+        return;
+      }
+
       // transition view
       document.getElementById('words-view').style.left = '0';
       document.getElementById('add-word-view').style.left = '-100%';
