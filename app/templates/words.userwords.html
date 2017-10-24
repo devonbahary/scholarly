@@ -106,6 +106,29 @@
           </div>
         </div>
       </li>
+      <!-- No Words Found Message -->
+      <li class="word-item bga-gray" ng-show="words.userWords.length === 0">
+        <!-- Word Metrics Bar -->
+        <div class="word-metrics info bg-slate"
+          ng-click="words.btnOpenAddWord()">
+          <div>
+            <div class="ion-search centered txt-theme"></div>
+          </div>
+        </div>
+        <!-- Word Info -->
+        <div class="word-info">
+          <!-- Word Name -->
+          <header class="word-name info bg-dark">
+            <span class="ion-cloud txt-theme"></span>
+          </header>
+          <!-- Word Details -->
+          <div class="word-details">
+            <div class="definition info">
+              Search our database to start adding words.
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <!-- Button: Navigation -->
