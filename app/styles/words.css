@@ -19,7 +19,7 @@
 #words-content #action-notification {
   position: fixed;
   display: inline-block;
-  top: 35%;
+  top: 50%;
   right: 0;
   z-index: 2;
   padding: 6px 12px;
@@ -78,7 +78,7 @@
 #words-content .btn-nav {
   display: inline-block;
   position: absolute;
-  right: 5%; bottom: 15%;
+  right: 5%; top: 75%;
   border-radius: 100%;
   width: 66px;
   height: 66px;
@@ -341,7 +341,27 @@
 /* MEDIA QUERIES
   ========================================================================== */
 @media only screen and (min-width: 480px) {
-  #add-word-view .search-result {
+  #words-content .word-item {
     grid-template-columns: 10% 90%;
+  }
+
+  #words-view #user-word-sort-panel {
+    grid-template-columns: 75% 25%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #words-content .word-item {
+    grid-template-columns: 5% 95%;
+  }
+
+  #words-view #user-word-sort-panel {
+    grid-template-columns: 75% 25%;
+  }
+}
+
+@media only screen and (max-height: 568px) {
+  #words-content .btn-nav {
+    top: 35%;
   }
 }
