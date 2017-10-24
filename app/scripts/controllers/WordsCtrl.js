@@ -15,6 +15,8 @@
 
     var that = this;
 
+    this.txtActionNotification = "";
+
     this.searchUserWord = "";
     this.userWords = [];
 
@@ -47,6 +49,29 @@
 
     resetAddSearchVars();
 
+    function addBtnNavResponsivenessToElementScroll(btnNav, element) {
+      element.onscroll = function() {
+        if (element.scrollTop > that.scrollMem) {
+          btnNav.classList.add('hidden');
+        } else {
+          btnNav.classList.remove('hidden');
+        }
+        that.scrollMem = element.scrollTop;
+      }
+    }
+
+    function updateTxtActionNotification(text) {
+      that.txtActionNotification = text;
+      var oldText = text;
+      document.getElementById('action-notification').classList.add('show');
+      setTimeout(function() {
+        // allow element to persist if new notification appears before timeout
+        if (oldText === that.txtActionNotification) {
+          document.getElementById('action-notification').classList.remove('show');
+        }
+      }, 3000);
+    }
+
     this.sortByOrder = function() {
       return (that.sortBy < 2 ) ? '-name' : '-successRate';
     }
@@ -73,16 +98,9 @@
 
     */
     this.attachBtnOpenAddWordResponsiveness = function() {
-      var userWordsBox = document.getElementById('user-words-box');
       var btnNav = document.getElementById('btn-open-add-word');
-      userWordsBox.onscroll = function() {
-        if (userWordsBox.scrollTop > that.scrollMem) {
-          btnNav.style.opacity = '0';
-        } else {
-          btnNav.style.opacity = '1';
-        }
-        that.scrollMem = userWordsBox.scrollTop;
-      }
+      var userWordsBox = document.getElementById('user-words-box');
+      addBtnNavResponsivenessToElementScroll(btnNav, userWordsBox);
     }
 
     this.btnOpenAddWord = function(searchWord) {
@@ -98,16 +116,9 @@
       document.getElementById('add-word-input').focus();
 
       // implement nav button responsiveness
-      var searchResultsBox = document.getElementById('search-results-box');
       var btnNav = document.getElementById('btn-return-to-words');
-      searchResultsBox.onscroll = function() {
-        if (searchResultsBox.scrollTop > that.scrollMem) {
-          btnNav.style.display = '0';
-        } else {
-          btnNav.style.opacity = '1';
-        }
-        that.scrollMem = searchResultsBox.scrollTop;
-      }
+      var searchResultsBox = document.getElementById('search-results-box');
+      addBtnNavResponsivenessToElementScroll(btnNav, searchResultsBox);
 
       // trigger auto-search
       if (searchWord) {
@@ -179,6 +190,7 @@
       // add word
       if (UserWords.addWord(wordObject)) {
         that.searchUserWord = wordObject.name;
+        updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordObject.name : "Added " + wordObject.name);
         that.btnReturnToWords(true); // force return
       }
     }
@@ -202,7 +214,8 @@
     }
 
     this.btnConfirmRemoveWord = function() {
-      UserWords.removeWord(that.viewWord.name)
+      UserWords.removeWord(that.viewWord.name);
+      updateTxtActionNotification("Removed " + that.viewWord.name);
       that.searchUserWord = "";
       this.removeWordFlag = false;
       that.btnCloseViewWordModal();
@@ -219,7 +232,6 @@
 
     this.getWordInfo = function() {
       Words.getWordInfo(that.viewWord.name).then(function(data) {
-        console.log(data)
         var example = null;
         // find example for chosen definition
         for (var i = 0; i < data.results.length; i++) {
@@ -228,12 +240,13 @@
           }
         }
         that.viewWordData = {
-          syllables: data.syllables.list.join(' · '),
+          syllables: data.syllables ? data.syllables.list.join(' · ') : null,
           example: example,
           frequency: data.frequency
         };
       });
     }
+
 
 
     // load 'userWords' as soon as user detected

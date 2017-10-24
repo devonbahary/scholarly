@@ -16,6 +16,26 @@
   overflow: hidden;
 }
 
+#words-content #action-notification {
+  position: fixed;
+  display: inline-block;
+  top: 35%;
+  right: 0;
+  z-index: 2;
+  padding: 6px 12px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  font-size: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#words-content #action-notification.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 #words-content .modal {
   position: fixed;
   height: 100%;
@@ -63,7 +83,13 @@
   width: 66px;
   height: 66px;
   opacity: 1;
-  transition: opacity 0.2s ease;*/
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+#words-content .btn-nav.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 #words-content .word-item {
@@ -134,8 +160,8 @@
 #words-content .modal-header,
 #words-content .modal-footer {
   font-size: 1.5rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
+  height: 3rem;
+  line-height: 3rem;
 }
 
 #words-content .modal-header {

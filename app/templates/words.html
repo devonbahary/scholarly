@@ -10,6 +10,10 @@
   <!-- <ng-include src="'/templates/appnav.html'"></ng-include> -->
   <!-- Words Content -->
   <section id="words-content" class="view-content">
+    <!-- Action Notification -->
+    <div id="action-notification" class="bga-slate">
+      {{ words.txtActionNotification }}
+    </div>
     <!-- Words -->
     <ng-include src="'/templates/words.userwords.html'"
       onload="words.attachBtnOpenAddWordResponsiveness()"></ng-include>
