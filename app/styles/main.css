@@ -121,6 +121,14 @@
   background: rgb(25, 25, 25);
 }
 
+.bg-correct {
+  background: rgb(45, 167, 44);
+}
+
+.bg-wrong {
+  background: rgb(187, 36, 36);
+}
+
 .bga-light {
   background: rgba(225, 225, 225, 0.2);
 }
@@ -135,6 +143,14 @@
 
 .bga-slate {
   background: rgba(25, 25, 25, 0.9);
+}
+
+.bga-correct {
+  background: rgba(120, 219, 119, 0.5);
+}
+
+.bga-wrong {
+  background: rgba(208, 40, 40, 0.5);
 }
 
 .txt-theme {

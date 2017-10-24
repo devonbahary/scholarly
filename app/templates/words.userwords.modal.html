@@ -1,0 +1,74 @@
+<!--
+  scholarly
+    app
+      templates
+        * words.userwords.modal.html
+-->
+
+<!-- View Word Modal -->
+<div class="modal bga-dark" ng-show="words.viewWord">
+  <div class="modal-box v-centered">
+    <!-- Header: Prompt -->
+    <header class="modal-header bg-slate">
+      <div class="modal-header-icon ion-podium txt-theme"></div>
+      <span ng-show="!words.removeWordFlag">View Word</span>
+      <span ng-show="words.removeWordFlag">Remove Word?</span>
+    </header>
+    <!-- Body: Add Word -->
+    <div class="word-item bg-dark" ng-class="{'remove': words.removeWordFlag}">
+      <!-- Word Info -->
+      <div class="word-info">
+        <!-- Word Name -->
+        <header class="word-name bga-dark txt-theme">
+          {{ words.viewWord.name }}
+          <span class="modal-header-icon ion-minus-round txt-wrong"
+            ng-show="words.removeWordFlag"></span>
+        </header>
+        <!-- Word Extras -->
+        <div class="word-details bga-gray" ng-show="words.viewWordData">
+          <div class="syllables">
+            {{ words.viewWordData.syllables }}
+          </div>
+          <div class="example" ng-show="words.viewWordData.example">
+            "{{ words.viewWordData.example }}"
+          </div>
+        </div>
+        <!-- Word Details -->
+        <div class="word-details"
+          ng-class="{'bga-light': !words.removeWordFlag, 'bga-wrong': words.removeWordFlag}">
+          <div class="part-of-speech">
+            {{ words.viewWord.partOfSpeech }}
+          </div>
+          <div class="definition">
+            {{ words.viewWord.definition }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer: Search / Delete Buttons -->
+    <footer class="modal-footer">
+      <!-- Search / Delete -->
+        <!-- Search -->
+        <div class="bg-slate" ng-click="words.btnCloseViewWordModal()"
+          ng-show="!words.removeWordFlag">
+          <div class="ion-arrow-left-c centered"></div>
+        </div>
+        <!-- Remove -->
+        <div class="bg-dark" ng-click="words.btnRemoveWord()"
+          ng-show="!words.removeWordFlag">
+          <div class="ion-minus-round centered"></div>
+        </div>
+      <!-- Confirm Delete / Cancel -->
+        <!-- Confirm Delete -->
+        <div class="bg-wrong" ng-click="words.btnConfirmRemoveWord()"
+          ng-show="words.removeWordFlag">
+          <div class="ion-checkmark-round centered"></div>
+        </div>
+        <!-- Cancel -->
+        <div class="bg-slate" ng-click="words.btnCancelRemoveWord()"
+          ng-show="words.removeWordFlag">
+          <div class="ion-close-round centered"></div>
+        </div>
+    </footer>
+  </div>
+</div>

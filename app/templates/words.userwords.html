@@ -2,9 +2,11 @@
   scholarly
     app
       templates
-        * words.mywords.html
+        * words.userwords.html
 -->
 <section id="words-view" class="sliding-content bga-gray">
+  <!-- View Word Modal -->
+  <ng-include src="'/templates/words.userwords.modal.html'"></ng-include>
   <!-- Search Word Input -->
   <header class="header-word-search">
     <form id="form-user-word-search" autocomplete="off">
@@ -12,7 +14,7 @@
       <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round"
         ng-click="words.clearSearchUserWord()"></div>
       <input type="text" class="bga-dark" autocomplete="off" placeholder="scholarly"
-        ng-model="words.searchUserWord" ng-init="" >
+        ng-model="words.searchUserWord" ng-init="" ng-change="words.updateTxtNoticeSearch()">
     </form>
   </header>
   <!-- User Words Sort Panel -->
@@ -48,13 +50,27 @@
       <li class="word-item bga-gray" ng-repeat="word in words.userWords | filter: words.searchUserWord | orderBy: words.sortByOrder():words.sortByReversed() as filteredSearch">
         <!-- Word Metrics Bar -->
         <div class="word-metrics bga-dark">
-
+          <!-- Metric: Search Word -->
+          <div class="btn-metric" ng-click="words.btnOpenAddWord(word.name)">
+            <div class="centered">
+              <span class="ion-search"></span>
+            </div>
+          </div>
+          <!-- Metric: View Word -->
+          <div class="btn-metric" ng-click="words.btnOpenViewWordModal(word)">
+            <div class="centered">
+              <span class="ion-gear-a"></span>
+            </div>
+          </div>
         </div>
         <!-- Word Info -->
-        <div class="word-info">
+        <div>
           <!-- Word Name -->
-          <header class="word-name bg-dark">
+          <header class="word-name bg-dark txt-theme">
             {{ word.name }}
+            <div class="word-success-rate bga-gray">
+              <span class="ion-flash txt-theme"></span> {{ word.successRate | number: 0 }}%
+            </div>
           </header>
           <!-- Word Details -->
           <div class="word-details">
@@ -72,7 +88,9 @@
         <!-- Word Metrics Bar -->
         <div class="word-metrics info bg-slate"
           ng-click="words.btnOpenAddWord(words.searchUserWord)">
-          <div class="ion-search centered txt-theme"></div>
+          <div>
+            <div class="ion-search centered txt-theme"></div>
+          </div>
         </div>
         <!-- Word Info -->
         <div class="word-info">

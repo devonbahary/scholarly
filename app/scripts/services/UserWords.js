@@ -12,8 +12,9 @@
 */
 
 (function() {
-  function UserWords($firebaseArray) {
+  function UserWords($firebaseArray, $firebaseObject) {
     var UserWords = {};
+
 
     var userWords = null;
 
@@ -31,14 +32,9 @@
         => Returns a '$firebaseArray' of user's collected words.
     */
     UserWords.getWords = function() {
-      // return 'userWords' if already instantiated
-      if (userWords) {
-        return userWords;
-      }
-      // otherwise, request 'userWords', assign, and return
       return $firebaseArray(userWordsRef()).$loaded().then(function(val) {
-        userWords = userWords || val;
-        return val;
+        userWords = val;
+        return userWords;
       });
     }
 
@@ -47,25 +43,67 @@
         => Returns true if 'wordName' already exists in user's database.
     */
     UserWords.hasWord = function(wordName) {
-      // iterate through instantiated 'userWords'
       for (var i = 0; i < userWords.length; i++) {
         if (userWords[i].name === wordName.trim().toLowerCase()) {
           return true;
         }
       }
+
       // if not found, return false
       return false;
     }
 
     /*
+      hasDefForWord(wordName, definition)
+        => Returns true if a matching 'definition' is found for the given 'wordName'
+    */
+    UserWords.hasDefForWord = function(wordName, definition) {
+      for (var i = 0; i < userWords.length; i++) {
+        if (userWords[i].name === wordName.trim().toLowerCase() && userWords[i].definition === definition) {
+          return true;
+        }
+      }
+
+      // return false if failed above conditions
+      return false;
+    }
+
+    /*
+      getDefForWord(wordName)
+        => Returns definition for word in database, or false if word not found.
+    */
+    UserWords.getDefForWord = function(wordName) {
+      for (var i = 0; i < userWords.length; i++) {
+        if (userWords[i].name === wordName.trim().toLowerCase()) {
+          return userWords[i].definition;
+        }
+      }
+
+      // return false if can't find word
+      return false;
+    }
+
+    /*
+      getPartOfSpeechForWord(wordName)
+        => Returns part of speech for word in database, or false if word not
+        found.
+    */
+    UserWords.getPartOfSpeechForWord = function(wordName) {
+      for (var i = 0; i < userWords.length; i++) {
+        if (userWords[i].name === wordName.trim().toLowerCase()) {
+          return userWords[i].partOfSpeech;
+        }
+      }
+
+      // return false if can't find word
+      return false;
+    }
+
+    /*
       addWord(wordObject)
-        => Takes in 'wordObject' and adds it to the database. Returns success boolean.
+        => Takes in 'wordObject' and adds it to the database and returns success boolean.
     */
     UserWords.addWord = function(wordObject) {
-      // return 'false' if word already exists
-      if (UserWords.hasWord(wordObject.name)) {
-        return false;
-      }
       // create new word
       var newWordsRef = userWordsRef().push();
       newWordsRef.set({
@@ -73,10 +111,21 @@
         definition: wordObject.definition,
         partOfSpeech: wordObject.partOfSpeech || '---',
         numSuccess: 0,
-        numAttempts: 0
+        numAttempts: 0,
+        successRate: 0
       });
       // return 'true' for success
       return true;
+    }
+
+    /*
+      removeWord(wordName)
+        => Removes given 'wordName' from the database if it exists.
+    */
+    UserWords.removeWord = function(wordName) {
+      if (UserWords.hasWord(wordName)) {
+        $firebaseObject(userWordsRef().orderByChild('name').equalTo(wordName.trim().toLowerCase())).$remove();
+      }
     }
 
 
@@ -85,5 +134,5 @@
 
   angular
     .module('scholarly')
-    .factory('UserWords', ['$firebaseArray', UserWords]);
+    .factory('UserWords', ['$firebaseArray', '$firebaseObject', UserWords]);
 })();

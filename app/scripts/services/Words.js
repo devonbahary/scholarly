@@ -20,7 +20,7 @@
     };
 
     /*
-      Words.getDefinitions(...)
+      Words.getDefinitions(word)
         => Returns an array of definition objects for the given string argument,
         or the response 'statusText' if the $http request was unsuccessful
     */
@@ -33,6 +33,22 @@
         return response.data.definitions;
       }, function errorCallback(response) {
         return response.statusText;
+      });
+    }
+
+    /*
+      Words.getWordInfo(word)
+        => Returns the word object data for the given word.
+    */
+    Words.getWordInfo = function(word) {
+      return $http({
+        method: 'GET',
+        url: 'https://wordsapiv1.p.mashape.com/words/' + word,
+        headers
+      }).then(function successfulCallback(response) {
+        return response.data;
+      }, function errorCallback(response) {
+        return null;
       });
     }
 

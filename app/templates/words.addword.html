@@ -6,6 +6,8 @@
 -->
 
 <section id="add-word-view" class="sliding-content bga-dark">
+  <!-- Add Word Confirm Modal -->
+  <ng-include src="'/templates/words.addword.modal.html'"></ng-include>
   <!-- Add Word Input -->
   <header class="header-word-search">
     <form id="form-add-word-search" name="formAddWordSearch" autocomplete="off">
@@ -41,13 +43,16 @@
   <div id="search-results-box">
     <ul id="list-search-results">
       <!-- List Item: Definition -->
-      <li class="search-result bga-gray"
+      <li class="word-item"
           ng-repeat="result in words.searchResults"
-          ng-show="!words.searchErrorFlag">
-        <!-- Button: Add Word -->
-        <div class="btn-add-word bg-slate"
-          ng-click="words.btnAddWord(result)">
-          <div class="ion-plus-round centered"></div>
+          ng-show="!words.searchErrorFlag"
+          ng-class="{'bga-light': words.hasDefForWord(result), 'bga-gray': !words.hasDefForWord(result)}">
+        <!-- Button: Open Add Word Modal -->
+        <div class="btn-open-add-word-modal bg-slate"
+          ng-click="words.btnOpenAddWordModal(result)">
+          <div class="centered"
+            ng-class="{'ion-cloud': words.hasDefForWord(result), 'ion-plus-round': !words.hasDefForWord(result)}">
+          </div>
         </div>
         <!-- Word Details -->
         <div class="word-details">
