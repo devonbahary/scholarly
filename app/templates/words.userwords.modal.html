@@ -49,23 +49,23 @@
     <footer class="modal-footer">
       <!-- Search / Delete -->
         <!-- Search -->
-        <div class="bg-slate" ng-click="words.btnCloseViewWordModal()"
+        <div class="btn bg-slate" ng-click="words.btnCloseViewWordModal()"
           ng-show="!words.removeWordFlag">
           <div class="ion-arrow-left-c centered"></div>
         </div>
         <!-- Remove -->
-        <div class="bg-dark" ng-click="words.btnRemoveWord()"
+        <div class="btn bg-dark" ng-click="words.btnRemoveWord()"
           ng-show="!words.removeWordFlag">
           <div class="ion-minus-round centered"></div>
         </div>
       <!-- Confirm Delete / Cancel -->
         <!-- Confirm Delete -->
-        <div class="bg-dark" ng-click="words.btnConfirmRemoveWord()"
+        <div class="btn bg-dark" ng-click="words.btnConfirmRemoveWord()"
           ng-show="words.removeWordFlag">
           <div class="ion-checkmark-round centered txt-theme"></div>
         </div>
         <!-- Cancel -->
-        <div class="bg-slate" ng-click="words.btnCancelRemoveWord()"
+        <div class="btn bg-slate" ng-click="words.btnCancelRemoveWord()"
           ng-show="words.removeWordFlag">
           <div class="ion-close-round centered"></div>
         </div>

@@ -13,7 +13,7 @@
     <form id="form-add-word-search" name="formAddWordSearch" autocomplete="off">
       <input type="text" id="add-word-input" class="bga-dark" name="searchAddWord" autocomplete="off"
         ng-model="words.searchAddWord" placeholder="scholarly" required >
-      <button type="submit" class="ion-search bg-gray"
+      <button type="submit" class="ion-search btn bg-theme"
         ng-click="words.searchWord()"
         ng-disabled="formAddWordSearch.$invalid"></button>
     </form>
@@ -49,7 +49,8 @@
           ng-class="{'bga-light': words.hasDefForWord(result), 'bga-gray': !words.hasDefForWord(result)}">
         <!-- Button: Open Add Word Modal -->
         <div class="btn-open-add-word-modal bg-slate"
-          ng-click="words.btnOpenAddWordModal(result)">
+          ng-click="words.btnOpenAddWordModal(result)"
+          ng-class="{'btn': !words.hasDefForWord(result)}">
           <div class="centered"
             ng-class="{'ion-cloud': words.hasDefForWord(result), 'ion-plus-round': !words.hasDefForWord(result)}">
           </div>
@@ -67,7 +68,7 @@
     </ul>
   </div>
   <!-- Button: Navigation -->
-  <div id="btn-return-to-words" class="btn-nav bg-gray"
+  <div id="btn-return-to-words" class="btn-nav btn bg-gray"
     ng-click="words.btnReturnToWords()">
     <div class="ion-arrow-right-c btn-text centered"></div>
   </div>

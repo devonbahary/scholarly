@@ -149,8 +149,7 @@
 
 #words-content .definition {
   position: relative;
-  width: 90%;
-  left: 10%;
+  padding-left: 10%;
 }
 
 #words-content .modal-box {
@@ -218,11 +217,11 @@
   display: grid;
   grid-template-columns: 75% 25%;
   height: 10%;
-  padding: 6px;
 }
 
 #words-view #btn-sort-user-words {
   border-left: 1px solid rgb(255, 136, 77);
+  padding: 0 6px;
 }
 
 #words-view #user-words-box {
@@ -260,8 +259,7 @@
 }
 
 #words-view .definition.info {
-  width: 100%;
-  left: 0;
+  padding-left: 0;
 }
 
 #words-view .syllables {
@@ -340,6 +338,10 @@
 
 /* MEDIA QUERIES
   ========================================================================== */
+
+/*
+  screen width > 480px (mobile landscape)
+*/
 @media only screen and (min-width: 480px) {
   #words-content .word-item {
     grid-template-columns: 10% 90%;
@@ -348,20 +350,40 @@
   #words-view #user-word-sort-panel {
     grid-template-columns: 75% 25%;
   }
+
+  #words-content .modal-box {
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 
+/*
+  screen height < 568px (mobile landscape)
+*/
+@media only screen and (max-height: 568px) {
+  #words-content .btn-nav {
+    top: 35%;
+  }
+}
+
+/*
+  screen width > 768px (tablet, laptop, etc.)
+*/
 @media only screen and (min-width: 768px) {
   #words-content .word-item {
     grid-template-columns: 5% 95%;
   }
 
-  #words-view #user-word-sort-panel {
-    grid-template-columns: 75% 25%;
+  #words-content .definition {
+    padding-left: 5%;
   }
-}
 
-@media only screen and (max-height: 568px) {
-  #words-content .btn-nav {
-    top: 35%;
+  #words-view #user-word-sort-panel {
+    grid-template-columns: 90% 10%;
+  }
+
+  #words-content .modal-box {
+    width: 40%;
+    margin: 0 auto;
   }
 }

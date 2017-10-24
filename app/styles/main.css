@@ -102,6 +102,10 @@
   text-shadow: 1px 1px black;
 }
 
+.btn {
+
+}
+
 
 /* THEMATIC STYLING
   ========================================================================== */
@@ -186,5 +190,11 @@
 
   #viewport #view-header #header-info {
     left: 15%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .btn:hover {
+    cursor: pointer;
   }
 }

@@ -11,7 +11,7 @@
   <header class="header-word-search">
     <form id="form-user-word-search" autocomplete="off">
       <div id="user-word-search-icon" class="user-word-input-icon ion-search"></div>
-      <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round"
+      <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round btn"
         ng-click="words.clearSearchUserWord()"></div>
       <input type="text" class="bga-dark" autocomplete="off" placeholder="scholarly"
         ng-model="words.searchUserWord" ng-init="" ng-change="words.updateTxtNoticeSearch()">
@@ -24,7 +24,7 @@
         Found <span class="txt-theme">{{ filteredSearch.length }}</span> word<span ng-show="filteredSearch.length === 0 || filteredSearch.length > 1">s</span>.
       </div>
     </div>
-    <div id="btn-sort-user-words" class="bg-dark" ng-click="words.btnSortUserWords()">
+    <div id="btn-sort-user-words" class="bg-dark btn" ng-click="words.btnSortUserWords()">
       <!-- Sort: A-Z --->
       <div class="centered" ng-show="words.sortBy === 0">
         A <span class="ion-arrow-swap"></span> Z
@@ -51,13 +51,13 @@
         <!-- Word Metrics Bar -->
         <div class="word-metrics bga-dark">
           <!-- Metric: Search Word -->
-          <div class="btn-metric" ng-click="words.btnOpenAddWord(word.name)">
+          <div class="btn-metric btn" ng-click="words.btnOpenAddWord(word.name)">
             <div class="centered">
               <span class="ion-search"></span>
             </div>
           </div>
           <!-- Metric: View Word -->
-          <div class="btn-metric" ng-click="words.btnOpenViewWordModal(word)">
+          <div class="btn-metric btn" ng-click="words.btnOpenViewWordModal(word)">
             <div class="centered">
               <span class="ion-gear-a"></span>
             </div>
@@ -86,7 +86,7 @@
       <!-- No Match Found Message -->
       <li class="word-item bga-gray" ng-show="words.userWords.length > 0 && filteredSearch.length === 0">
         <!-- Word Metrics Bar -->
-        <div class="word-metrics info bg-slate"
+        <div class="word-metrics btn info bg-slate"
           ng-click="words.btnOpenAddWord(words.searchUserWord)">
           <div>
             <div class="ion-search centered txt-theme"></div>
@@ -109,7 +109,7 @@
       <!-- No Words Found Message -->
       <li class="word-item bga-gray" ng-show="words.userWords.length === 0">
         <!-- Word Metrics Bar -->
-        <div class="word-metrics info bg-slate"
+        <div class="word-metrics btn info bg-slate"
           ng-click="words.btnOpenAddWord()">
           <div>
             <div class="ion-search centered txt-theme"></div>
@@ -132,7 +132,7 @@
     </ul>
   </div>
   <!-- Button: Navigation -->
-  <div id="btn-open-add-word" class="btn-nav bg-theme"
+  <div id="btn-open-add-word" class="btn-nav btn bg-theme"
     ng-click="words.btnOpenAddWord()">
     <div class="ion-plus-round btn-text centered"></div>
   </div>
