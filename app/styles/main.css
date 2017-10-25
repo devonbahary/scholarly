@@ -183,6 +183,10 @@
 
 /* MEDIA QUERIES
   ========================================================================== */
+
+/*
+  screen width > 480px (mobile landscape)
+*/
 @media only screen and (min-width: 480px) {
   #viewport #view-header #logo-container {
     width: 15%;
@@ -193,8 +197,19 @@
   }
 }
 
+/*
+  screen width > 768px (tablet, laptop, etc.)
+*/
 @media only screen and (min-width: 768px) {
   .btn:hover {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    background: rgba(75, 75, 75, 0.6);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(25, 25, 25, 0.4);
   }
 }

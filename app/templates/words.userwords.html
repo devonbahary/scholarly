@@ -45,7 +45,7 @@
   </div>
   <!-- User Words (may be limited by search result) -->
   <div id="user-words-box">
-    <ul id="list-user-words">
+    <ul class="word-list">
       <!-- List Item: User Word -->
       <li class="word-item bga-gray" ng-repeat="word in words.userWords | filter: words.searchUserWord | orderBy: words.sortByOrder():words.sortByReversed() as filteredSearch">
         <!-- Word Metrics Bar -->

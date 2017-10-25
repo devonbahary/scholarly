@@ -43,6 +43,12 @@
   z-index: 1;
 }
 
+#words-content .word-list {
+  position: relative;
+  height: 100%;
+  list-style: none;
+}
+
 #words-content .modal .word-item {
   display: block;
   position: relative;
@@ -96,7 +102,7 @@
   display: grid;
   grid-template-columns: 15% 85%;
   position: relative;
-  min-height: 30%;
+  min-height: 20%;
   margin-bottom: 6px;
   border: 1px solid gray;
   border-top-right-radius: 12px;
@@ -113,7 +119,7 @@
 #words-content .word-name {
   position: relative;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-style: italic;
   height: 2.5rem;
   line-height: 2.5rem;
@@ -137,7 +143,7 @@
 #words-content .word-details {
   position: relative;
   padding: 6px 12px;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
 
 #words-content .part-of-speech {
@@ -230,12 +236,6 @@
   overflow-y: scroll;
 }
 
-#words-view #list-user-words {
-  position: relative;
-  height: 100%;
-  list-style: none;
-}
-
 #words-view .word-metrics {
   display: grid;
   grid-template-rows: auto;
@@ -324,12 +324,6 @@
   position: relative;
   height: 75%;
   overflow-y: scroll;
-}
-
-#add-word-view #list-search-results {
-  position: relative;
-  height: 100%;
-  list-style: none;
 }
 
 #add-word-view .btn-open-add-word-modal {
