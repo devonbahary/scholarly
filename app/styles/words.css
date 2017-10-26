@@ -9,10 +9,6 @@
 */
 
 #words-content {
-  background-image: url('/assets/images/bg-mobile.jpeg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 25% 0;
   overflow: hidden;
 }
 
@@ -41,6 +37,12 @@
   height: 100%;
   width: 100%;
   z-index: 1;
+}
+
+#words-content .header-bar {
+  position: absolute;
+  width: 90%;
+  bottom: 10%; left: 5%;
 }
 
 #words-content .word-list {
@@ -191,12 +193,6 @@
   left: 0;
 }
 
-#words-view #form-user-word-search {
-  position: absolute;
-  width: 90%;
-  bottom: 10%; left: 5%;
-}
-
 #words-view input[type=text] {
   width: 100%;
   border-radius: 12px;
@@ -292,11 +288,8 @@
 }
 
 #add-word-view #form-add-word-search {
-  position: absolute;
   display: grid;
   grid-template-columns: 90% 10%;
-  width: 90%;
-  bottom: 10%; left: 5%;
 }
 
 #add-word-view input[type=text] {

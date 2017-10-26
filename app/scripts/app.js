@@ -29,6 +29,12 @@
         controllerAs: 'words',
         url: '/#words',
         templateUrl: '/templates/words.html'
+      })
+      .state('quiz', {
+        controller: 'QuizCtrl',
+        controllerAs: 'quiz',
+        url: '/#quiz',
+        templateUrl: '/templates/quiz.html'
       });
   }
 

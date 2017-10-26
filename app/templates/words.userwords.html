@@ -9,7 +9,7 @@
   <ng-include src="'/templates/words.userwords.modal.html'"></ng-include>
   <!-- Search Word Input -->
   <header class="header-word-search">
-    <form id="form-user-word-search" autocomplete="off">
+    <form id="form-user-word-search" class="header-bar" autocomplete="off">
       <div id="user-word-search-icon" class="user-word-input-icon ion-search"></div>
       <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round btn"
         ng-click="words.clearSearchUserWord()"></div>
@@ -27,19 +27,19 @@
     <div id="btn-sort-user-words" class="bg-dark btn" ng-click="words.btnSortUserWords()">
       <!-- Sort: A-Z --->
       <div class="centered" ng-show="words.sortBy === 0">
-        A <span class="ion-arrow-swap"></span> Z
+        A <span class="ion-arrow-swap txt-theme"></span> Z
       </div>
       <!-- Sort: Z-A --->
       <div class="centered" ng-show="words.sortBy === 1">
-        Z <span class="ion-arrow-swap"></span> A
+        Z <span class="ion-arrow-swap txt-theme"></span> A
       </div>
       <!-- Sort: numSuccess (lowest to high) --->
       <div class="centered" ng-show="words.sortBy === 2">
-        <span class="ion-chevron-down txt-wrong"></span> <span class="ion-flash"></span> <span class="ion-chevron-up txt-correct"></span>
+        <span class="ion-chevron-down txt-wrong"></span> <span class="ion-flash txt-theme"></span> <span class="ion-chevron-up txt-correct"></span>
       </div>
       <!-- Sort: numSuccess (highest to low) --->
       <div class="centered" ng-show="words.sortBy === 3">
-        <span class="ion-chevron-up txt-correct"></span> <span class="ion-flash"></span> <span class="ion-chevron-down txt-wrong"></span>
+        <span class="ion-chevron-up txt-correct"></span> <span class="ion-flash txt-theme"></span> <span class="ion-chevron-down txt-wrong"></span>
       </div>
     </div>
   </div>

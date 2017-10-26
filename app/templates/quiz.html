@@ -1,0 +1,42 @@
+<!--
+  scholarly
+    app
+      templates
+        * quiz.html
+-->
+
+<main id="viewport">
+  <!-- App Navigation -->
+  <!-- <ng-include src="'/templates/appnav.html'"></ng-include> -->
+  <!-- Words Content -->
+  <section id="quiz-content" class="view-content bga-dark">
+    <div id="quiz-progress">
+      <div id="progress-bar" class="header-bar bga-gray">
+        <div id="progress-bar-bg"></div>
+        <div id="progress-bar-thumb"></div>
+      </div>
+    </div>
+    <header id="header-quiz-word" class="bga-dark">
+      <div class="word-name v-centered txt-theme">
+        {{ quiz.quizWords[quiz.quizProgIndex].wordName }}
+      </div>
+    </header>
+    <ul class="word-list">
+      <li ng-repeat="answer in quiz.quizWords[quiz.quizProgIndex].multipleChoice" class="word-item">
+        <div class="word-metrics bga-dark">
+          <div class="btn-metric btn">
+            <div class="centered">
+              <span class="ion-arrow-right-a"></span>
+            </div>
+          </div>
+        </div>
+        <div class="connected">
+          <div class="connected-wire"></div><div></div>
+        </div>
+        <div class="word-details bga-gray">
+          {{ answer }}
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>

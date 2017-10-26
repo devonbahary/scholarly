@@ -1,0 +1,87 @@
+/*
+  scholarly
+    styles
+      * quiz.css
+   +---------------------------------------------------------------------------
+    * quiz.css
+      => Styles for the 'quiz' view.
+   ---------------------------------------------------------------------------+
+*/
+
+#quiz-content #quiz-progress {
+  position: relative;
+  width: 100%;
+  height: 15%;
+}
+
+#quiz-content .header-bar {
+  position: absolute;
+  width: 90%;
+  bottom: 10%; left: 5%;
+}
+
+#quiz-content #progress-bar {
+  height: 2.5rem;
+  border-radius: 12px;
+}
+
+#quiz-content .quiz-prog-unit {
+  display: inline-block;
+}
+
+#quiz-content #header-quiz-word {
+  position: relative;
+  height: 10%;
+  border-top-right-radius: 12px;
+}
+
+#quiz-content .word-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-style: italic;
+  padding-left: 12px;
+}
+
+#quiz-content .word-list {
+  position: relative;
+  height: 60%;
+  list-style: none;
+}
+
+
+#quiz-content .word-item {
+  display: grid;
+  grid-template-columns: 15% 5% 80%;
+  position: relative;
+  min-height: 25%;
+  margin-bottom: 6px;
+}
+
+#quiz-content .word-metrics {
+  border: 1px solid gray;
+  border-right: 1px solid rgb(255, 136, 77);
+}
+
+#quiz-content .btn-metric {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+
+#quiz-content .connected {
+  display: grid;
+  grid-template-columns: auto;
+}
+
+#quiz-content .connected-wire {
+  border-bottom: 1px solid rgb(255, 136, 77);
+}
+
+#quiz-content .word-details {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  border: 1px solid gray;
+  border-left: 1px solid rgb(255, 136, 77);
+}

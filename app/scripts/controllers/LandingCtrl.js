@@ -100,7 +100,7 @@
     // EDIT
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        alert('signed in as ' + firebase.auth().currentUser.displayName);
+        // alert('signed in as ' + firebase.auth().currentUser.displayName);
         $state.go('words');
       } else {
         alert('signed out');
