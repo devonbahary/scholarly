@@ -110,6 +110,8 @@
         name: wordObject.name.trim().toLowerCase(),
         definition: wordObject.definition,
         partOfSpeech: wordObject.partOfSpeech || '---',
+        syllables: wordObject.syllables,
+        example: wordObject.example,
         numSuccess: 0,
         numAttempts: 0,
         successRate: 0

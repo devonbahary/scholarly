@@ -149,9 +149,14 @@
       that.searchResults = [];
       that.searchErrorFlag = false;
       that.searchPending = true;
-      Words.getDefinitions(that.searchAddWord).then(function(value) {
-        that.searchResults = value;
-        that.searchErrorFlag = (typeof(value) === 'string');
+      Words.getWord(that.searchAddWord).then(function(response) {
+        // unsuccessful request
+        if (typeof(response) === 'string') {
+          that.searchResults = response;
+          that.searchErrorFlag = true;
+        } else { // successful
+          that.searchResults = response;
+        }
         that.searchPending = false;
       });
       document.getElementById('add-word-input').blur();
@@ -181,28 +186,21 @@
       if (that.pendingWordToReplace) {
         UserWords.removeWord(that.searchAddWord);
       }
-      // create new word object
-      var wordObject = {
-        name: that.searchAddWord,
-        partOfSpeech: that.pendingWordToAdd.partOfSpeech,
-        definition: that.pendingWordToAdd.definition
-      }
       // add word
-      if (UserWords.addWord(wordObject)) {
-        that.searchUserWord = wordObject.name;
-        updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordObject.name : "Added " + wordObject.name);
+      if (UserWords.addWord(that.pendingWordToAdd)) {
+        var wordName = that.pendingWordToAdd.name;
+        that.searchUserWord = wordName;
+        updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordName : "Added " + wordName);
         that.btnReturnToWords(true); // force return
       }
     }
 
     this.btnOpenViewWordModal = function(word) {
       that.viewWord = word;
-      that.getWordInfo();
     }
 
     this.btnCloseViewWordModal = function() {
       that.viewWord = null;
-      that.viewWordData = null;
     }
 
     this.btnRemoveWord = function() {
@@ -228,23 +226,6 @@
     */
     this.hasDefForWord = function(result) {
       return UserWords.hasDefForWord(that.searchAddWord, result.definition);
-    }
-
-    this.getWordInfo = function() {
-      Words.getWordInfo(that.viewWord.name).then(function(data) {
-        var example = null;
-        // find example for chosen definition
-        for (var i = 0; i < data.results.length; i++) {
-          if (data.results[i].definition === that.viewWord.definition) {
-            example = data.results[i].examples ? data.results[i].examples[0] : null; // take first example
-          }
-        }
-        that.viewWordData = {
-          syllables: data.syllables ? data.syllables.list.join(' · ') : null,
-          example: example,
-          frequency: data.frequency
-        };
-      });
     }
 
 

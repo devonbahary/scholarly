@@ -25,12 +25,12 @@
             ng-show="words.removeWordFlag"></span>
         </header>
         <!-- Word Extras -->
-        <div class="word-details bga-gray" ng-show="words.viewWordData">
+        <div class="word-details bga-gray" ng-show="words.viewWord.syllables">
           <div class="syllables">
-            {{ words.viewWordData.syllables }}
+            {{ words.viewWord.syllables }}
           </div>
-          <div class="example" ng-show="words.viewWordData.example">
-            "{{ words.viewWordData.example }}"
+          <div class="example" ng-show="words.viewWord.example">
+            "{{ words.viewWord.example }}"
           </div>
         </div>
         <!-- Word Details -->

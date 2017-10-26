@@ -20,17 +20,30 @@
     };
 
     /*
-      Words.getDefinitions(word)
-        => Returns an array of definition objects for the given string argument,
-        or the response 'statusText' if the $http request was unsuccessful
+      Words.getWord(wordName)
+        => Returns a word object for 'wordName', or the response 'statusText'
+        if the $http request was unsuccessful.
     */
-    Words.getDefinitions = function(word) {
+    Words.getWord = function(wordName) {
       return $http({
         method: 'GET',
-        url: 'https://wordsapiv1.p.mashape.com/words/' + word + '/definitions',
+        url: 'https://wordsapiv1.p.mashape.com/words/' + wordName,
         headers
       }).then(function successfulCallback(response) {
-        return response.data.definitions;
+        var filteredResponse = [];
+        for (var i = 0; i < response.data.results.length; i++) {
+          filteredResponse[i] = {
+            name: wordName,
+            definition: response.data.results[i].definition,
+            partOfSpeech: response.data.results[i].partOfSpeech,
+            synonyms: response.data.results[i].synonyms,
+            example: response.data.results[i].examples ? response.data.results[i].examples[0] : null,
+            syllables: response.data.syllables ? response.data.syllables.list.join(' · ') : null,
+            frequency: response.data.frequency
+          };
+        }
+        console.log(filteredResponse);
+        return filteredResponse;
       }, function errorCallback(response) {
         return response.statusText;
       });
