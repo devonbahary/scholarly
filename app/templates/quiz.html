@@ -14,15 +14,17 @@
       <div id="progress-bar" class="header-bar bga-gray">
         <div id="progress-bar-bg"></div>
         <div id="progress-bar-thumb"></div>
+        <div class="ion-flash bg-theme" ng-click="quiz.btnTest()"></div>
+        quizProgIndex = <span class="ion-checkmark-round" ng-class="{'txt-theme': quiz.instance}"></span>
       </div>
     </div>
     <header id="header-quiz-word" class="bga-dark">
       <div class="word-name v-centered txt-theme">
-        {{ quiz.quizWords[quiz.quizProgIndex].wordName }}
+        <div class="ion-university bg-theme" ng-click="quiz.btnProg()"></div>
       </div>
     </header>
-    <ul class="word-list">
-      <li ng-repeat="answer in quiz.quizWords[quiz.quizProgIndex].multipleChoice" class="word-item">
+    <ul class="word-list" ng-show="false">
+      <li ng-repeat="option in quiz.record[quiz.quizProgIndex].options" class="word-item">
         <div class="word-metrics bga-dark">
           <div class="btn-metric btn">
             <div class="centered">

@@ -16,29 +16,6 @@
       <span ng-show="!words.pendingWordToReplace">Add Word</span>
       <span ng-show="words.pendingWordToReplace">Replace Word?</span>
     </header>
-
-    <!-- Body: Old Word (in event of replace) -->
-    <div class="word-item remove bg-dark" ng-show="words.pendingWordToReplace">
-      <!-- Word Info -->
-      <div class="word-info">
-        <!-- Word Name -->
-        <header class="word-name bga-dark">
-          {{ words.searchAddWord }}
-          <span class="modal-header-icon ion-minus-round txt-wrong"
-            ng-show="words.pendingWordToReplace"></span>
-        </header>
-        <!-- Word Details -->
-        <div class="word-details bga-wrong">
-          <div class="part-of-speech">
-            {{ words.pendingWordToReplacePartOfSpeech }}
-          </div>
-          <div class="definition">
-            {{ words.pendingWordToReplaceDef }}
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Body: Add Word -->
     <div class="word-item bg-dark">
       <!-- Word Info -->
@@ -56,6 +33,27 @@
           </div>
           <div class="definition">
             {{ words.pendingWordToAdd.definition }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Body: Old Word (in event of replace) -->
+    <div class="word-item remove bg-dark" ng-show="words.pendingWordToReplace">
+      <!-- Word Info -->
+      <div class="word-info">
+        <!-- Word Name -->
+        <header class="word-name bga-dark">
+          {{ words.searchAddWord }}
+          <span class="modal-header-icon ion-minus-round txt-wrong"
+            ng-show="words.pendingWordToReplace"></span>
+        </header>
+        <!-- Word Details -->
+        <div class="word-details bga-wrong">
+          <div class="part-of-speech">
+            {{ words.pendingWordToReplacePartOfSpeech }}
+          </div>
+          <div class="definition">
+            {{ words.pendingWordToReplaceDef }}
           </div>
         </div>
       </div>

@@ -11,29 +11,14 @@
 */
 
 (function() {
-  function QuizCtrl() {
-    this.quizProgIndex = 0;
+  function QuizCtrl(Quiz) {
 
-    this.quizLength = 4;
+    var that = this;
 
-    this.quizWords = [
-      {
-        wordName: 'affectation',
-        multipleChoice: [
-          'a headless horse.',
-          'a singing ferret.',
-          'a kind of pasta.',
-          'the noise of sneezing.'
-        ]
-      }
-    ];
-
-    this.getNumber = function(num) {
-      return new Array(num);
-    }
+    this.instance = Quiz.instance;
   }
 
   angular
     .module('scholarly')
-    .controller('QuizCtrl', QuizCtrl);
+    .controller('QuizCtrl', ['Quiz', QuizCtrl]);
 })();

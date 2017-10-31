@@ -42,7 +42,6 @@
             frequency: response.data.frequency
           };
         }
-        console.log(filteredResponse);
         return filteredResponse;
       }, function errorCallback(response) {
         return response.statusText;
@@ -50,18 +49,25 @@
     }
 
     /*
-      Words.getWordInfo(word)
-        => Returns the word object data for the given word.
+      Words.getRandWordForPartOfSpeech(partOfSpeech)
+        => Takes in an optional string 'partOfSpeech' and uses it in a query to
+        Words API to return a random word matching the part of speech.
     */
-    Words.getWordInfo = function(word) {
+    Words.getRandWordForPartOfSpeech = function(partOfSpeech) {
+      var query = "/?random=true" + (partOfSpeech ? '&partOfSpeech=' + partOfSpeech : '');
+
       return $http({
         method: 'GET',
-        url: 'https://wordsapiv1.p.mashape.com/words/' + word,
+        url: 'https://wordsapiv1.p.mashape.com/words' + query,
         headers
       }).then(function successfulCallback(response) {
+        // recursive call if random word selected does not have definition data
+        if (!response.data.results) {
+          return Words.getRandWordForPartOfSpeech(partOfSpeech);
+        }
         return response.data;
       }, function errorCallback(response) {
-        return null;
+        return response.statusText;
       });
     }
 
