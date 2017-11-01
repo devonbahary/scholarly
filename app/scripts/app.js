@@ -32,7 +32,7 @@
       })
       .state('quiz', {
         controller: 'QuizCtrl',
-        controllerAs: 'quiz',
+        controllerAs: 'proctor',
         url: '/#quiz',
         templateUrl: '/templates/quiz.html'
       });

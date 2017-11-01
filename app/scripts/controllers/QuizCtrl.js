@@ -11,14 +11,34 @@
 */
 
 (function() {
-  function QuizCtrl(Quiz) {
+  function QuizCtrl($rootScope, $scope, Quiz) {
 
     var that = this;
 
-    this.instance = Quiz.instance;
+    $scope.quizService = Quiz;
+
+    $scope.inProgress = false;
+
+    this.btnSelectOption = function(option) {
+      Quiz.userSubmitAnswer(option);
+      var quizProg = $rootScope.quiz.progIndex / $rootScope.quiz.size;
+      document.getElementById('progress-bar-thumb').style.width = (quizProg * 100) + '%';
+    }
+
+    // watch quiz load progress and adjust load progress bar accordingly
+    $rootScope.$watch('quiz.questions.length', function(newQuestions) {
+      var loadProg = $scope.quizService.getLoadState();
+      document.getElementById('quiz-load-prog-bar-thumb').style.width =  (loadProg * 100) + '%';
+      if (loadProg === 1) {
+        setTimeout(function() {
+          $scope.inProgress = true;
+          $scope.$apply();
+        }, 400);
+      }
+    });
   }
 
   angular
     .module('scholarly')
-    .controller('QuizCtrl', ['Quiz', QuizCtrl]);
+    .controller('QuizCtrl', ['$rootScope', '$scope', 'Quiz', QuizCtrl]);
 })();

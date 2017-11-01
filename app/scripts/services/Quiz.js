@@ -11,10 +11,16 @@
 */
 
 (function() {
-  function Quiz(Words, $firebaseArray) {
+  function Quiz($rootScope, $firebaseArray, Words) {
     var Quiz = {};
 
     var userWordsByNumSuccess = null;
+
+    $rootScope.quiz = {
+      questions: [],
+      size: 0,
+      progIndex: 0
+    }
 
     /*
       getLessSuccessfulWord()
@@ -85,10 +91,10 @@
 
 
     /*
-      Quiz.buildQuiz(quizSize = 4)
-        => Generates an 'instance' object as a property into the 'Quiz' service
-        retrievable as 'Quiz.instance' with the following structure:
-          Quiz.instance = {
+      Quiz.buildQuiz()
+        => Generates a 'quiz' object into '$rootScope' with the following
+        structure:
+          {
             questions: [
               {
                 word: ...,
@@ -99,24 +105,14 @@
               ...
             ],
             progIndex: number, (progress into quiz)
-            size: number, (size === questions.length when 'generated' === true)
-            generated: boolean (completed state)
+            size: number
           }
     */
-    Quiz.buildQuiz = function(quizSize = 4) {
-      if (userWordsByNumSuccess.length === 0) {
-        Quiz.instance = null;
-      } else {
+    Quiz.buildQuiz = function() {
+      if (userWordsByNumSuccess.length !== 0) {
         // in the event that 'quizSize' > # user words
-        var quizSize = Math.min(userWordsByNumSuccess.length, quizSize);
-
-        // init 'Quiz.instance' object
-        Quiz.instance = {
-          questions: [],
-          size: quizSize,
-          progIndex: 0,
-          generated: false
-        };
+        var quizSize = Math.min(userWordsByNumSuccess.length, quizSize = 4);
+        $rootScope.quiz.size = quizSize;
 
         // select 'quizWords'
         var quizWords = [];
@@ -142,10 +138,9 @@
           var options = [];
           options.push(quizWords[i].definition);
           gatherOptionsForWord(quizWords[i], options).then(function(wordObject) {
-            Quiz.instance.questions.push(wordObject);
-            if (Quiz.instance.questions.length === Quiz.instance.size) {
-              Quiz.instance.generated = true;
-              console.log(Quiz.instance)
+            $rootScope.quiz.questions.push(wordObject);
+            if ($rootScope.quiz.questions.length === $rootScope.quiz.size) {
+              console.log($rootScope.quiz)
             }
           });
         }
@@ -153,20 +148,26 @@
     }
 
     /*
-      Quiz.userAnswerQuestion(optionIndex)
-        => Stores user's answer (optionIndex) to current question in quiz in
-        '..questions[..progIndex].answer' and increments '..progIndex' to
-        move onto next question.
+      Quiz.userSubmitAnswer(optionDef)
+        => Stores user's answer (optionDef) and increments 'quiz.progIndex'
     */
-    Quiz.userAnswerQuestion = function(optionIndex) {
-      // ignore if quiz isn't ready
-      if (!Quiz.instance.generated) {
-        return;
-      }
+    Quiz.userSubmitAnswer = function(optionDef) {
       // record answer
-      Quiz.instance.questions[Quiz.instance.progIndex].userAnswer = optionIndex;
+      $rootScope.quiz.questions[$rootScope.quiz.progIndex].userAnswer = optionDef;
       // increment quiz progress
-      Quiz.instance.progIndex++;
+      $rootScope.quiz.progIndex++;
+    }
+
+    /*
+      Quiz.getLoadState()
+        => Returns the load progress of quiz questions into 'quiz' as a decimal.
+    */
+    Quiz.getLoadState = function() {
+      if ($rootScope.quiz.size !== 0) {
+        return $rootScope.quiz.questions.length / $rootScope.quiz.size;
+      } else {
+        return 0;
+      }
     }
 
 
@@ -190,5 +191,5 @@
 
   angular
     .module('scholarly')
-    .factory('Quiz', ['Words', '$firebaseArray', Quiz]);
+    .factory('Quiz', ['$rootScope', '$firebaseArray', 'Words', Quiz]);
 })();

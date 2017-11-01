@@ -8,25 +8,34 @@
 <main id="viewport">
   <!-- App Navigation -->
   <!-- <ng-include src="'/templates/appnav.html'"></ng-include> -->
-  <!-- Words Content -->
+  <!-- Quiz Content -->
   <section id="quiz-content" class="view-content bga-dark">
-    <div id="quiz-progress">
-      <div id="progress-bar" class="header-bar bga-gray">
-        <div id="progress-bar-bg"></div>
-        <div id="progress-bar-thumb"></div>
-        <div class="ion-flash bg-theme" ng-click="quiz.btnTest()"></div>
-        quizProgIndex = <span class="ion-checkmark-round" ng-class="{'txt-theme': quiz.instance}"></span>
+    <!-- Loading Quiz Modal -->
+    <ng-include src="'/templates/quiz.modal.html'"></ng-include>
+    <div id="quiz-progress" ng-show="inProgress">
+        <div id="progress-bar" class="header-bar bga-gray">
+        <div id="progress-bar-bg" class="bga-dark centered">
+          <div id="progress-bar-thumb" class="bga-correct"></div>
+        </div>
       </div>
     </div>
-    <header id="header-quiz-word" class="bga-dark">
-      <div class="word-name v-centered txt-theme">
-        <div class="ion-university bg-theme" ng-click="quiz.btnProg()"></div>
+    <header id="header-quiz-word" class="bga-dark" ng-show="inProgress">
+      <div class="word-name">
+        <div class="word-text v-centered">
+          {{ quiz.questions[quiz.progIndex].word.name }}
+          <span style="font-size: 50%; opacity: 0.6;">{{ quiz.questions[quiz.progIndex].word.syllables }}</span>
+        </div>
+      </div>
+      <div class="quiz-prog-marker">
+        <div class="centered">
+          <span class="ion-flag txt-theme"></span> {{ quiz.progIndex + 1 }} / {{ quiz.size }}
+        </div>
       </div>
     </header>
-    <ul class="word-list" ng-show="false">
-      <li ng-repeat="option in quiz.record[quiz.quizProgIndex].options" class="word-item">
+    <ul class="word-list" ng-show="inProgress">
+      <li ng-repeat="option in quiz.questions[quiz.progIndex].options" class="word-item">
         <div class="word-metrics bga-dark">
-          <div class="btn-metric btn">
+          <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)">
             <div class="centered">
               <span class="ion-arrow-right-a"></span>
             </div>
@@ -36,7 +45,7 @@
           <div class="connected-wire"></div><div></div>
         </div>
         <div class="word-details bga-gray">
-          {{ answer }}
+          {{ option }}
         </div>
       </li>
     </ul>
