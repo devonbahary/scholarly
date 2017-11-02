@@ -100,7 +100,7 @@
     // EDIT
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        $state.go('words');
+        $state.go('quiz');
       } else {
         alert('signed out');
       }

@@ -83,23 +83,6 @@
   border: 1px solid rgb(255, 136, 77);
 }
 
-#words-content .btn-nav {
-  display: inline-block;
-  position: absolute;
-  right: 5%; bottom: 0vh;
-  border-radius: 100%;
-  width: 66px;
-  height: 66px;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.2s ease, visibility 0.2s;
-}
-
-#words-content .btn-nav.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
 #words-content .word-item {
   display: grid;
   grid-template-columns: 15% 85%;
@@ -186,6 +169,39 @@
   text-shadow: 1px 1px black;
 }
 
+#words-content #responsive-screen-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#words-content .btn-nav {
+  display: inline-block;
+  position: absolute;
+  bottom: 10%;
+  border-radius: 100%;
+  width: 66px;
+  height: 66px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s ease, visibility 0.2s, right 0.4s ease;
+}
+
+#words-content .btn-nav.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#words-content #btn-open-add-word {
+  right: 5%;
+}
+
+#words-content #btn-return-to-words {
+  right: 105%;
+}
 
 /* words view
   ========================================================================== */
@@ -277,7 +293,7 @@
   left: -100%;
 }
 
-#header-info #btn-return-to-words {
+/*#header-info #btn-return-to-words {
   display: inline-block;
   position: absolute;
   right: 100%;
@@ -285,7 +301,7 @@
   height: 100%;
   opacity: 0.9;
   transition: right 0.4s ease;
-}
+}*/
 
 #add-word-view #form-add-word-search {
   display: grid;
@@ -347,9 +363,9 @@
 /*
   screen height < 568px (mobile landscape)
 */
-@media only screen and (max-height: 568px) {
+@media only screen and (min-width: 480px) and (orientation: landscape){
   #words-content .btn-nav {
-    bottom: 35%;
+    /*bottom: 40%;*/
   }
 }
 

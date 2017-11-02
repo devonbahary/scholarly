@@ -114,6 +114,8 @@
       document.getElementById('words-view').style.left = '100%';
       document.getElementById('add-word-view').style.left = '0';
       document.getElementById('add-word-input').focus();
+      document.getElementById('btn-open-add-word').style.right = "-95%";
+      document.getElementById('btn-return-to-words').style.right = '5%';
 
       // implement nav button responsiveness
       var btnNav = document.getElementById('btn-return-to-words');
@@ -136,6 +138,8 @@
       document.getElementById('words-view').style.left = '0';
       document.getElementById('add-word-view').style.left = '-100%';
       document.getElementById('form-add-word-search').reset();
+      document.getElementById('btn-return-to-words').style.right = '105%';
+      document.getElementById('btn-open-add-word').style.right = '5%';
       that.scrollMem = 0;
       resetAddSearchVars();
 

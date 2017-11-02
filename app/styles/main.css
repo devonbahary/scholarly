@@ -56,14 +56,14 @@
   text-shadow: 1px 1px black;
 }
 
-#viewport #view-header #header-info {
+/*#viewport #view-header #header-info {
   position: absolute;
   left: 20%;
   right: 0;
   height: 100%;
   font-size: 1.5rem;
   padding-left: 12px;
-}
+}*/
 
 #viewport .view-content {
   position: absolute;
