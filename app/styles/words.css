@@ -86,7 +86,7 @@
 #words-content .btn-nav {
   display: inline-block;
   position: absolute;
-  right: 5%; top: 75%;
+  right: 5%; bottom: 0vh;
   border-radius: 100%;
   width: 66px;
   height: 66px;
@@ -349,7 +349,7 @@
 */
 @media only screen and (max-height: 568px) {
   #words-content .btn-nav {
-    top: 35%;
+    bottom: 35%;
   }
 }
 

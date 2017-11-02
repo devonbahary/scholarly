@@ -27,13 +27,13 @@
       .state('words', {
         controller: 'WordsCtrl',
         controllerAs: 'words',
-        url: '/#words',
+        url: '/words',
         templateUrl: '/templates/words.html'
       })
       .state('quiz', {
         controller: 'QuizCtrl',
         controllerAs: 'proctor',
-        url: '/#quiz',
+        url: '/quiz',
         templateUrl: '/templates/quiz.html'
       });
   }
