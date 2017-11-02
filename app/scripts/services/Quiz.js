@@ -11,15 +11,22 @@
 */
 
 (function() {
-  function Quiz($rootScope, $firebaseArray, Words) {
+  function Quiz($rootScope, $firebaseArray, Words, UserWords) {
     var Quiz = {};
 
     var userWordsByNumSuccess = null;
 
-    $rootScope.quiz = {
-      questions: [],
-      size: 0,
-      progIndex: 0
+    initQuiz();
+
+    function initQuiz() {
+      $rootScope.quiz = {
+        questions: [],
+        size: 0,
+        progIndex: 0,
+        // determined after quiz completion in 'calcResults()'
+        incorrectQuestionIndices: [],
+        total: 0
+      }
     }
 
     /*
@@ -45,8 +52,8 @@
       gatherOptionsForWord(word, options)
         => Takes in an 'options' array and 'word' and returns a promise that
         will resolve into a question object with properties 'word' (the original
-        word object) and 'options' (the original 'options' array with filled
-        options).
+        word object), 'options' (the original 'options' array with filled
+        options), and 'userAnswer' for future answer recording.
     */
     function gatherOptionsForWord(word, options) {
       var numOptions = 4; // hard-coded 4 multiple choice options
@@ -89,9 +96,33 @@
       return array;
     }
 
+    /*
+      calcResults()
+        => Populates the 'incorrectQuestionIndices' array of '$rootScope.quiz'
+        with the indices of questions answered wrong and determines a quiz
+        'total'.
+    */
+    function calcResults() {
+      // iterate through question objects in '$rootScope.quiz',
+      for (var i = 0; i < $rootScope.quiz.size; i++) {
+        var answer = $rootScope.quiz.questions[i].word.definition;
+        var userAnswer = $rootScope.quiz.questions[i].userAnswer;
+        // update word stats based on answer success
+        if (answer === userAnswer) {
+          UserWords.updateWordStats($rootScope.quiz.questions[i].word, true);
+        } else {
+          // if wrong, record index for post-quiz display
+          $rootScope.quiz.incorrectQuestionIndices.push(i);
+          UserWords.updateWordStats($rootScope.quiz.questions[i].word, false);
+        }
+      }
+      // calculate quiz total
+      $rootScope.quiz.total = $rootScope.quiz.size - $rootScope.quiz.incorrectQuestionIndices.length;
+    }
+
 
     /*
-      Quiz.buildQuiz()
+      buildQuiz()
         => Generates a 'quiz' object into '$rootScope' with the following
         structure:
           {
@@ -105,10 +136,11 @@
               ...
             ],
             progIndex: number, (progress into quiz)
-            size: number
+            size: number,
+            ...
           }
     */
-    Quiz.buildQuiz = function() {
+    function buildQuiz() {
       if (userWordsByNumSuccess.length !== 0) {
         // in the event that 'quizSize' > # user words
         var quizSize = Math.min(userWordsByNumSuccess.length, quizSize = 4);
@@ -139,9 +171,6 @@
           options.push(quizWords[i].definition);
           gatherOptionsForWord(quizWords[i], options).then(function(wordObject) {
             $rootScope.quiz.questions.push(wordObject);
-            if ($rootScope.quiz.questions.length === $rootScope.quiz.size) {
-              console.log($rootScope.quiz)
-            }
           });
         }
       }
@@ -149,13 +178,22 @@
 
     /*
       Quiz.userSubmitAnswer(optionDef)
-        => Stores user's answer (optionDef) and increments 'quiz.progIndex'
+        => Stores user's answer (optionDef) and increments 'quiz.progIndex',
+        returns a boolean representing quiz complete status.
     */
     Quiz.userSubmitAnswer = function(optionDef) {
       // record answer
       $rootScope.quiz.questions[$rootScope.quiz.progIndex].userAnswer = optionDef;
       // increment quiz progress
       $rootScope.quiz.progIndex++;
+      // quiz complete?
+      if ($rootScope.quiz.progIndex === $rootScope.quiz.size) {
+        calcResults();
+        return true;
+      } else {
+        return false;
+      }
+
     }
 
     /*
@@ -171,6 +209,36 @@
     }
 
 
+    /*
+      Quiz.reset()
+        =>
+    */
+    Quiz.reset = function() {
+      // for each quiz question..
+      for (var i = 0; i < $rootScope.quiz.size; i++) {
+        // ..reshuffle definition options
+        $rootScope.quiz.questions[i].options = shuffleArray($rootScope.quiz.questions[i].options);
+        // ..erase user answer
+        $rootScope.quiz.questions[i].userAnswer = null;
+      }
+      // reshuffle quiz question order
+      $rootScope.quiz.questions = shuffleArray($rootScope.quiz.questions);
+      // start quiz from beginning
+      $rootScope.quiz.progIndex = 0;
+      $rootScope.quiz.total = 0;
+      $rootScope.quiz.incorrectQuestionIndices = [];
+    }
+
+    /*
+      Quiz.newQuiz()
+        => Rebuilds the quiz object for use in a new quiz.
+    */
+    Quiz.newQuiz = function() {
+      initQuiz();
+      buildQuiz();
+    }
+
+
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -180,7 +248,7 @@
         $firebaseArray(ref).$loaded().then(function(userWords) {
           userWordsByNumSuccess = userWords;
           // then init quiz
-          Quiz.buildQuiz();
+          buildQuiz();
         });
 
       }
@@ -191,5 +259,5 @@
 
   angular
     .module('scholarly')
-    .factory('Quiz', ['$rootScope', '$firebaseArray', 'Words', Quiz]);
+    .factory('Quiz', ['$rootScope', '$firebaseArray', 'Words', 'UserWords', Quiz]);
 })();

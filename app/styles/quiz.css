@@ -20,6 +20,7 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
   padding: 6px;
+  box-shadow: 1px 1px 80px black;
 }
 
 #quiz-content .modal #quiz-load-prog-bar {
@@ -53,49 +54,95 @@
 }
 
 #quiz-content #progress-bar-bg {
+  position: relative;
   height: 50%;
   width: 90%;
   border-radius: 12px;
 }
 
 #quiz-content #progress-bar-thumb {
+  position: absolute;
   height: 100%;
   width: 0;
   transition: width 0.4s ease-out;
   border-radius: 12px;
 }
 
+#quiz-content #prog-txt {
+  text-align: center;
+  width: 100%;
+}
+
 #quiz-content #header-quiz-word {
   position: relative;
-  display: grid;
-  grid-template-columns: 80% 20%;
   height: 10%;
   border-top-right-radius: 12px;
 }
 
-#quiz-content .quiz-prog-marker {
+#quiz-content .header-item-quiz-in-prog {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0;
+}
+
+#quiz-content .icon-and-txt {
+  display: grid;
+  grid-template-columns: 15% 85%;
+}
+
+#quiz-content .header-icon {
+  font-size: 2rem;
+}
+
+#quiz-content .header-txt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+#quiz-content .txt-feedback {
+  position: relative;
+  left: 5%;
+  opacity: 0.9;
+}
+
+#quiz-content #quiz-prog-marker {
+  display: none;
   border-left: 1px solid gray;
 }
 
-#quiz-content .word-name {
+#quiz-content #word-name {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   font-style: italic;
   padding-left: 12px;
 }
 
-#quiz-content .word-list {
+#quiz-content #syllables {
+  font-size: 50%;
+  opacity: 0.6;
+  padding-left: 12px;
+}
+
+#quiz-content #word-list-box {
   position: relative;
-  height: 60%;
+  height: 75%;
+  overflow-y: scroll;
+}
+
+#quiz-content #word-list {
+  position: relative;
+  height: 100%;
   list-style: none;
 }
 
 
-#quiz-content .word-item {
+#quiz-content .option-item {
   display: grid;
   grid-template-columns: 15% 5% 80%;
   position: relative;
-  height: 25%;
+  height: 20%;
   margin-bottom: 6px;
 }
 
@@ -124,7 +171,111 @@
   position: relative;
   padding: 6px 12px;
   font-size: 1.2rem;
-  border: 1px solid gray;
-  border-left: 1px solid rgb(255, 136, 77);
+  /*border-left: 1px solid rgb(255, 136, 77);*/
   overflow-y: scroll;
+}
+
+#quiz-content .word-details.option {
+  border: 1px solid gray;
+}
+
+#quiz-content .word-item {
+  position: relative;
+  min-height: 20%;
+  margin-bottom: 6px;
+  border-top-right-radius: 12px;
+  border: 1px solid gray;
+}
+
+#quiz-content .word-item:first-child {
+  margin-top: 6px;
+}
+
+#quiz-content .word-name {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding-left: 12px;
+  border-top-right-radius: 12px;
+}
+
+#quiz-content .word-success-rate {
+  position: absolute;
+  display: inline-block;
+  font-size: 1rem;
+  right: 12px;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 6px;
+  border-radius: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#quiz-content .txt-success-rate {
+  opacity: 0.8;
+}
+
+#quiz-content .word-details {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 1rem;
+}
+
+#quiz-content .part-of-speech {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 80%;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+#quiz-content .definition {
+  position: relative;
+  padding-left: 10%;
+}
+
+#quiz-content #container-btns {
+  position: absolute;
+  right: 0;
+  bottom: 10%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 1rem;
+  padding: 12px 5vw 12px 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#quiz-content #container-btns.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#quiz-content .btn-nav {
+  position: relative;
+}
+
+/* MEDIA QUERIES
+  ========================================================================== */
+/*
+  screen width > 768px (tablet, laptop, etc.)
+*/
+@media only screen and (min-width: 768px) {
+  #quiz-content #header-item-quiz-in-prog {
+    grid-template-columns: 90% 10%;
+  }
+
+  #quiz-content #quiz-prog-marker {
+    display: block;
+  }
+
+  #quiz-content .word-item {
+    grid-template-columns: 10% 5% 85%;
+  }
 }

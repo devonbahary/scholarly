@@ -52,10 +52,10 @@
 }
 
 #words-content .modal .word-item {
-  display: block;
+  display: block; /* ? */
   position: relative;
   min-height: 30%;
-  margin: 0;
+  margin: 0; /* ? */
   border: 1px solid gray;
   border-top-right-radius: 12px;
 }
@@ -178,21 +178,7 @@
 }
 
 #words-content .btn-nav {
-  display: inline-block;
-  position: absolute;
   bottom: 10%;
-  border-radius: 100%;
-  width: 66px;
-  height: 66px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transition: opacity 0.2s ease, visibility 0.2s, right 0.4s ease;
-}
-
-#words-content .btn-nav.hidden {
-  opacity: 0;
-  visibility: hidden;
 }
 
 #words-content #btn-open-add-word {
@@ -357,15 +343,6 @@
   #words-content .modal-box {
     width: 60%;
     margin: 0 auto;
-  }
-}
-
-/*
-  screen height < 568px (mobile landscape)
-*/
-@media only screen and (min-width: 480px) and (orientation: landscape){
-  #words-content .btn-nav {
-    /*bottom: 40%;*/
   }
 }
 

@@ -78,7 +78,6 @@
           return userWords[i].definition;
         }
       }
-
       // return false if can't find word
       return false;
     }
@@ -114,11 +113,34 @@
         example: wordObject.example,
         numSuccess: 0,
         numAttempts: 0,
-        successRate: 0
+        successRate: 0,
+        streak: 0
       });
       // return 'true' for success
       return true;
     }
+
+
+    /*
+      @func updateWordStats(...)
+      @desc Updates the firebase 'user-words/uid' with the results of the
+      success of the argument word
+      @param {object}, {boolean}
+    */
+    UserWords.updateWordStats = function(word, success) {
+      // update 'user-words'
+      var newNumAttempts = word.numAttempts + 1;
+      var newNumSuccess = success ? word.numSuccess + 1 : word.numSuccess;
+      var newSuccessRate = newNumSuccess / newNumAttempts * 100;
+      var newStreak = success ? word.streak + 1 : 0
+      userWordsRef().child(word.$id).update({
+        numAttempts: newNumAttempts,
+        numSuccess: newNumSuccess,
+        successRate: newSuccessRate,
+        streak: newStreak
+      });
+    };
+
 
     /*
       removeWord(wordName)

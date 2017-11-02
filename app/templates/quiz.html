@@ -10,44 +10,129 @@
   <!-- <ng-include src="'/templates/appnav.html'"></ng-include> -->
   <!-- Quiz Content -->
   <section id="quiz-content" class="view-content bga-dark">
+    <!-- Button: Navigation -->
+    <div id="responsive-screen-overlay">
+      <div id="container-btns" class="bga-dark" ng-show="complete">
+        <!-- Button: Replay -->
+        <div id="btn-replay" class="btn-nav btn bg-gray"
+          ng-click="proctor.btnReplay()">
+          <div class="ion-android-refresh btn-text centered"></div>
+        </div>
+        <!-- Button: Next Quiz -->
+        <div id="btn-next" class="btn-nav btn bg-theme"
+          ng-click="proctor.btnNext()">
+          <div class="ion-arrow-right-b btn-text centered"></div>
+        </div>
+      </div>
+    </div>
     <!-- Loading Quiz Modal -->
     <ng-include src="'/templates/quiz.modal.html'"></ng-include>
     <div id="quiz-progress" ng-show="inProgress">
         <div id="progress-bar" class="header-bar">
         <div id="progress-bar-bg" class="bga-dark centered">
-          <div id="progress-bar-thumb" class="bga-correct"></div>
+          <div id="progress-bar-thumb" class="bga-prog"
+            ng-class="{'bga-prog': !complete,
+              'bga-wrong': complete && (quiz.total / quiz.size < .333),
+              'bga-moderate': complete && (quiz.total / quiz.size >= .333) && (quiz.total / quiz.size < .666),
+              'bga-correct': complete && (quiz.total / quiz.size > .666)}"></div>
+          <div id="prog-txt">
+            <span ng-show="!complete">{{ quiz.progIndex }} / {{ quiz.size }}</span>
+            <span ng-show="complete">{{ quiz.total }} / {{ quiz.size }}</span>
+          </div>
         </div>
       </div>
     </div>
     <header id="header-quiz-word" class="bga-dark" ng-show="inProgress">
-      <div class="word-name">
-        <div class="word-text v-centered">
-          {{ quiz.questions[quiz.progIndex].word.name }}
-          <span style="font-size: 50%; opacity: 0.6;">{{ quiz.questions[quiz.progIndex].word.syllables }}</span>
-        </div>
-      </div>
-      <div class="quiz-prog-marker">
-        <div class="centered">
-          <span class="ion-flag txt-theme"></span> {{ quiz.progIndex + 1 }} / {{ quiz.size }}
-        </div>
-      </div>
-    </header>
-    <ul class="word-list" ng-show="inProgress">
-      <li ng-repeat="option in quiz.questions[quiz.progIndex].options" class="word-item">
-        <div class="word-metrics bga-dark">
-          <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)">
-            <div class="centered">
-              <span class="ion-arrow-right-a"></span>
+      <!-- Header Item: Quiz In Progress -->
+      <div class="header-item-quiz-in-prog" ng-show="!complete">
+        <div class="icon-and-txt" ng-show="!complete">
+          <div class="header-icon">
+            <div class="ion-university txt-theme centered"></div>
+          </div>
+          <div class="header-txt">
+            <div class="v-centered">
+              {{ quiz.questions[quiz.progIndex].word.name }}
+              <div id="syllables">{{ quiz.questions[quiz.progIndex].word.syllables }}</div>
             </div>
           </div>
         </div>
-        <div class="connected">
-          <div class="connected-wire"></div><div></div>
+        <div id="quiz-prog-marker">
+          <div class="centered">
+            <span class="ion-flag txt-theme"></span> {{ quiz.progIndex + 1 }} / {{ quiz.size }}
+          </div>
         </div>
-        <div class="word-details bga-gray">
-          {{ option }}
+      </div>
+      <div class="header-item-quiz-in-prog">
+        <!-- Header Item: Quiz Complete -->
+        <div class="icon-and-txt" ng-show="complete">
+          <div class="header-icon">
+            <div class="ion-podium txt-theme centered"></div>
+          </div>
+          <div>
+            <div class="v-centered">
+              You got <span class="txt-theme">{{ quiz.total }}</span> out of <span class="txt-theme">{{ quiz.size }}</span> correct.
+            </div>
+          </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </header>
+    <div id="word-list-box">
+      <ul id="word-list">
+        <!-- Question Definition Options (Quiz In Progress) -->
+        <li ng-repeat="option in quiz.questions[quiz.progIndex].options" class="option-item"
+          ng-show="inProgress">
+          <div class="word-metrics bga-dark">
+            <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)">
+              <div class="centered">
+                <!-- <span class="ion-arrow-right-a"></span> -->
+                <span ng-show="$index === 0">A</span>
+                <span ng-show="$index === 1">B</span>
+                <span ng-show="$index === 2">C</span>
+                <span ng-show="$index === 3">D</span>
+              </div>
+            </div>
+          </div>
+          <div class="connected">
+            <div class="connected-wire"></div><div></div>
+          </div>
+          <div class="word-details option bga-gray">
+            {{ option }}
+          </div>
+        </li>
+        <!-- Question Answers (Quiz Complete) -->
+        <li ng-repeat="question in quiz.questions" class="word-item bga-gray" ng-show="complete">
+          <!-- Word Name -->
+          <header class="word-name bga-dark txt-theme">
+            {{ question.word.name }}
+            <div class="word-success-rate bga-gray">
+              <span ng-class="{'ion-chevron-up txt-correct': !quiz.incorrectQuestionIndices.includes($index),
+                'ion-chevron-down txt-wrong': quiz.incorrectQuestionIndices.includes($index)}">
+              </span>
+              <span class="ion-flash txt-theme"></span> <span class="txt-success-rate">{{ question.word.successRate | number: 0 }}%</span>
+            </div>
+          </header>
+          <!-- Word Details (Correct) -->
+          <div class="word-details"
+            ng-class="{'bga-light': quiz.incorrectQuestionIndices.includes($index),
+              'bga-correct': !quiz.incorrectQuestionIndices.includes($index)}">
+            <div class="part-of-speech">
+              {{ question.word.partOfSpeech }}
+            </div>
+            <div class="definition">
+              {{ question.word.definition }}
+            </div>
+          </div>
+          <!-- Word Details (Incorrect) -->
+          <div class="word-details bga-wrong" ng-show="quiz.incorrectQuestionIndices.includes($index)">
+            <div class="part-of-speech">
+              {{ question.word.partOfSpeech }}
+            </div>
+            <div class="definition">
+              {{ question.userAnswer }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
 </main>

@@ -106,6 +106,31 @@
   text-shadow: 1px 1px black;
 }
 
+#responsive-screen-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-nav {
+  display: inline-block;
+  position: absolute;
+  border-radius: 100%;
+  width: 66px;
+  height: 66px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s ease, visibility 0.2s ease, right 0.4s ease;
+}
+
+.btn-nav.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 
 /* THEMATIC STYLING
   ========================================================================== */
@@ -155,6 +180,14 @@
 
 .bga-wrong {
   background: rgba(208, 40, 40, 0.5);
+}
+
+.bga-moderate {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+.bga-prog {
+  background: rgba(60, 203, 59, 0.5);
 }
 
 .txt-theme {
