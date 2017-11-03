@@ -127,7 +127,7 @@
 
 #quiz-content #word-list-box {
   position: relative;
-  height: 75%;
+  height: 65%;
   overflow-y: scroll;
 }
 
@@ -175,7 +175,7 @@
   overflow-y: scroll;
 }
 
-#quiz-content .word-details.option {
+#quiz-content .word-details {
   border: 1px solid gray;
 }
 
@@ -184,7 +184,6 @@
   min-height: 20%;
   margin-bottom: 6px;
   border-top-right-radius: 12px;
-  border: 1px solid gray;
 }
 
 #quiz-content .word-item:first-child {

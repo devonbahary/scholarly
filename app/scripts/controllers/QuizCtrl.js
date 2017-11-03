@@ -12,6 +12,11 @@
 
 (function() {
   function QuizCtrl($rootScope, $scope, $state, Quiz) {
+    // on revisit to QuizCtrl, make sure to build new quiz if one already exists
+    // in Quiz.js
+    if ($rootScope.quiz.size > 0) {
+      Quiz.newQuiz();
+    }
 
     var that = this;
 

@@ -83,6 +83,12 @@
   border: 1px solid rgb(255, 136, 77);
 }
 
+#words-content .list-box {
+  position: relative;
+  height: 65%;
+  overflow-y: scroll;
+}
+
 #words-content .word-item {
   display: grid;
   grid-template-columns: 15% 85%;
@@ -178,7 +184,7 @@
 }
 
 #words-content .btn-nav {
-  bottom: 10%;
+  bottom: 15%;
 }
 
 #words-content #btn-open-add-word {
@@ -226,12 +232,6 @@
 #words-view #btn-sort-user-words {
   border-left: 1px solid rgb(255, 136, 77);
   padding: 0 6px;
-}
-
-#words-view #user-words-box {
-  position: relative;
-  height: 75%;
-  overflow-y: scroll;
 }
 
 #words-view .word-metrics {
@@ -313,12 +313,6 @@
 #add-word-view #add-word-search-feedback {
   position: relative;
   height: 10%;
-}
-
-#add-word-view #search-results-box {
-  position: relative;
-  height: 75%;
-  overflow-y: scroll;
 }
 
 #add-word-view .btn-open-add-word-modal {

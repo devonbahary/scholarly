@@ -131,6 +131,27 @@
   visibility: hidden;
 }
 
+/* MAIN NAV
+  ========================================================================== */
+#main-nav {
+  position: fixed;
+  right: 0; bottom: 0; left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 10%;
+  padding: 12px;
+  z-index: 4;
+}
+
+#main-nav .main-nav-item {
+  font-size: 1.5rem;
+  border-right: 1px solid gray;
+}
+
+#main-nav .main-nav-item:last-child {
+  border-right: none;
+}
+
 
 /* THEMATIC STYLING
   ========================================================================== */

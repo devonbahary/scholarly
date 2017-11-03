@@ -1,0 +1,21 @@
+<!--
+  scholarly
+    app
+      templates
+        * mainnav.html
+-->
+
+<section id="main-nav" class="bg-slate" ng-controller="MainNavCtrl as nav">
+  <div class="main-nav-item" ng-click="nav.btnGoToWords()">
+    <div class="ion-university centered" ng-class="{'txt-theme': nav.currentStateIs('words')}">
+    </div>
+  </div>
+  <div class="main-nav-item emphasis" ng-click="nav.btnGoToQuiz()">
+    <div class="ion-flash centered" ng-class="{'txt-theme': nav.currentStateIs('quiz')}">
+    </div>
+  </div>
+  <div class="main-nav-item" ng-click="nav.btnGoToUser()">
+    <div class="ion-person centered" ng-class="{'txt-theme': nav.currentStateIs('account')}">
+    </div>
+  </div>
+</section>
