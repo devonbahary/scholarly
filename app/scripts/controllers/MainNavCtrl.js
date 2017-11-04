@@ -12,6 +12,10 @@
 
 (function() {
   function MainNavCtrl($state) {
+    var that = this;
+
+    this.openSignOut = false;
+
     this.btnGoToWords = function() {
       $state.go('words');
     }
@@ -20,8 +24,16 @@
       $state.go('quiz', {}, {reload: true});
     }
 
-    this.btnGoToUser = function() {
+    this.btnOpenSignOut = function() {
+      that.openSignOut = true;
+    }
+
+    this.btnSignOut = function() {
       firebase.auth().signOut();
+    }
+
+    this.btnCloseSignOutModal = function() {
+      that.openSignOut = false;
     }
 
     this.currentStateIs = function(name) {

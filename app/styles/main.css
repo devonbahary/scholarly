@@ -134,6 +134,45 @@
   border-right: none;
 }
 
+#main-nav-modal {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+}
+
+#main-nav-modal .modal-box {
+  box-shadow: 1px 1px 80px black;
+}
+
+#main-nav-modal .modal-header,
+#main-nav-modal .modal-footer-2 {
+  font-size: 1.5rem;
+  height: 3rem;
+  line-height: 3rem;
+}
+
+#main-nav-modal .modal-header {
+  text-align: center;
+}
+
+#main-nav-modal .modal-header-icon {
+  position: absolute;
+  right: 12px;
+}
+
+#main-nav-modal .body {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+#main-nav-modal .modal-footer-2 {
+  display: grid;
+  text-shadow: 1px 1px black;
+  grid-template-columns: 1fr 1fr;
+}
+
 
 /* THEMATIC STYLING
   ========================================================================== */

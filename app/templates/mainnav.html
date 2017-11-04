@@ -4,8 +4,33 @@
       templates
         * mainnav.html
 -->
-
 <section id="main-nav" class="bg-slate" ng-controller="MainNavCtrl as nav">
+  <!-- Sign Out Modal -->
+  <div id="main-nav-modal" class="bga-dark" ng-show="nav.openSignOut">
+    <div class="modal-box v-centered">
+      <!-- Header: Prompt -->
+      <header class="modal-header bg-slate">
+        <div class="modal-header-icon ion-person txt-theme"></div>
+        Sign Out
+      </header>
+      <!-- Body: Sign Out -->
+      <div class="body bg-dark">
+        Sign out of current session?
+      </div>
+      <!-- Footer: Sign Out / Close Buttons -->
+      <footer class="modal-footer-2">
+        <!-- Sign Out -->
+        <div class="btn bg-slate" ng-click="nav.btnSignOut()">
+          <div class="ion-log-out centered txt-theme"></div>
+        </div>
+        <!-- Close -->
+        <div class="btn bg-darker" ng-click="nav.btnCloseSignOutModal()">
+          <div class="ion-close-round centered"></div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
   <div class="main-nav-item" ng-click="nav.btnGoToWords()">
     <div class="ion-university centered" ng-class="{'txt-theme': nav.currentStateIs('words')}">
     </div>
@@ -14,7 +39,7 @@
     <div class="ion-flash centered" ng-class="{'txt-theme': nav.currentStateIs('quiz')}">
     </div>
   </div>
-  <div class="main-nav-item" ng-click="nav.btnGoToUser()">
+  <div class="main-nav-item" ng-click="nav.btnOpenSignOut()">
     <div class="ion-person centered" ng-class="{'txt-theme': nav.currentStateIs('account')}">
     </div>
   </div>
