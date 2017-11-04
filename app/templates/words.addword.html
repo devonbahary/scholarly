@@ -48,7 +48,7 @@
           ng-show="!words.searchErrorFlag"
           ng-class="{'bga-light': words.hasDefForWord(result), 'bga-gray': !words.hasDefForWord(result)}">
         <!-- Button: Open Add Word Modal -->
-        <div class="btn-open-add-word-modal bg-slate"
+        <div class="btn-add-word-search-item bg-slate"
           ng-click="words.btnOpenAddWordModal(result)"
           ng-class="{'btn': !words.hasDefForWord(result)}">
           <div class="centered"
@@ -62,6 +62,33 @@
           </div>
           <div class="definition">
             {{ result.definition }}
+          </div>
+        </div>
+      </li>
+      <!-- List Item: Custom Definition -->
+      <li class="word-item bga-gray" ng-show="!words.searchPending">
+        <!-- Button: Open Edit Word Modal -->
+        <div class="btn-add-word-search-item btn bg-slate"
+          ng-click="words.btnOpenEditWordModal(true)">
+          <div class="ion-edit centered">
+          </div>
+        </div>
+        <!-- Word Details (when search word exists && custom) -->
+        <div class="word-details" ng-show="words.searchWordThatAlreadyExists && words.searchWordThatAlreadyExists.custom">
+          <div class="part-of-speech">
+            {{ words.searchWordThatAlreadyExists.partOfSpeech }}
+          </div>
+          <div class="definition">
+            {{ words.searchWordThatAlreadyExists.definition }}
+          </div>
+        </div>
+        <!-- Word Details (when search word doesn't exist or it does and !custom)-->
+        <div class="word-details" ng-show="!words.searchWordThatAlreadyExists || !words.searchWordThatAlreadyExists.custom">
+          <div class="part-of-speech">
+            edit
+          </div>
+          <div class="definition">
+            write your own definition
           </div>
         </div>
       </li>

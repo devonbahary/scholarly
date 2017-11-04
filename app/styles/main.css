@@ -149,6 +149,10 @@
   background: rgb(50, 50, 50);
 }
 
+.bg-darker {
+  background: rgb(37, 37, 37);
+}
+
 .bg-slate {
   background: rgb(25, 25, 25);
 }

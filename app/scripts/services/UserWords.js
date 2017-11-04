@@ -70,7 +70,7 @@
 
     /*
       getDefForWord(wordName)
-        => Returns definition for word in database, or false if word not found.
+        => Returns definition for word in database, or null if word not found.
     */
     UserWords.getDefForWord = function(wordName) {
       for (var i = 0; i < userWords.length; i++) {
@@ -78,13 +78,13 @@
           return userWords[i].definition;
         }
       }
-      // return false if can't find word
-      return false;
+      // return null if can't find word
+      return null;
     }
 
     /*
       getPartOfSpeechForWord(wordName)
-        => Returns part of speech for word in database, or false if word not
+        => Returns part of speech for word in database, or null if word not
         found.
     */
     UserWords.getPartOfSpeechForWord = function(wordName) {
@@ -94,8 +94,19 @@
         }
       }
 
+      // return null if can't find word
+      return null;
+    }
+
+
+    UserWords.getWordObjectForName = function(wordName) {
+      for (var i = 0; i < userWords.length; i++) {
+        if (userWords[i].name === wordName.trim().toLowerCase()) {
+          return userWords[i];
+        }
+      }
       // return false if can't find word
-      return false;
+      return null;
     }
 
     /*
@@ -105,12 +116,15 @@
     UserWords.addWord = function(wordObject) {
       // create new word
       var newWordsRef = userWordsRef().push();
+      var custom = wordObject.custom ? wordObject.custom : false;
+      console.log('custom = ' + custom)
       newWordsRef.set({
         name: wordObject.name.trim().toLowerCase(),
         definition: wordObject.definition,
         partOfSpeech: wordObject.partOfSpeech,
-        syllables: wordObject.syllables,
-        example: wordObject.example,
+        syllables: wordObject.syllables ? wordObject.syllables : "",
+        example: wordObject.example ? wordObject.example : "",
+        custom: wordObject.custom ? wordObject.custom : false,
         numSuccess: 0,
         numAttempts: 0,
         successRate: 0,

@@ -15,6 +15,7 @@
     var that = this;
 
     this.txtActionNotification = "";
+    this.txtActionNotificationId = 0;
 
     this.searchUserWord = "";
     this.userWords = [];
@@ -27,6 +28,12 @@
     this.viewWord = null;
     this.viewWordData = null;
     this.removeWordFlag = false;
+
+    this.editWord = null;
+    that.searchWordThatAlreadyExists = null;
+
+    this.partsOfSpeech = Words.getPartsOfSpeech();
+
 
     /*
       0 => alpha A-Z
@@ -61,14 +68,24 @@
 
     function updateTxtActionNotification(text) {
       that.txtActionNotification = text;
-      var oldText = text;
+      that.txtActionNotificationId++;
+      var oldId = that.txtActionNotificationId;
       document.getElementById('action-notification').classList.add('show');
       setTimeout(function() {
         // allow element to persist if new notification appears before timeout
-        if (oldText === that.txtActionNotification) {
+        if (oldId === that.txtActionNotificationId) {
           document.getElementById('action-notification').classList.remove('show');
         }
       }, 3000);
+    }
+
+    function noChangeWithEdit() {
+      if (that.pendingWordToAdd) {
+        return false;
+      } else {
+        return (that.editWordDef === that.pendingWordToReplaceDef) &&
+          (that.editWordPartOfSpeech === that.pendingWordToReplacePartOfSpeech);
+      }
     }
 
     this.sortByOrder = function() {
@@ -128,11 +145,7 @@
       }
     }
 
-    this.btnReturnToWords = function(force = false) {
-      if (!force && document.getElementById('btn-return-to-words').style.opacity === '0') {
-        return;
-      }
-
+    this.btnReturnToWords = function() {
       // transition view
       document.getElementById('words-view').style.left = '0';
       document.getElementById('add-word-view').style.left = '-100%';
@@ -161,6 +174,7 @@
           that.searchResults = response;
         }
         that.searchPending = false;
+        that.searchWordThatAlreadyExists = UserWords.getWordObjectForName(that.searchAddWord);
       });
       document.getElementById('add-word-input').blur();
     }
@@ -194,7 +208,7 @@
         var wordName = that.pendingWordToAdd.name;
         that.searchUserWord = wordName;
         updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordName : "Added " + wordName);
-        that.btnReturnToWords(true); // force return
+        that.btnReturnToWords();
       }
     }
 
@@ -204,6 +218,70 @@
 
     this.btnCloseViewWordModal = function() {
       that.viewWord = null;
+    }
+
+    this.btnOpenEditWordModal = function(addingCustom = false) {
+      if (addingCustom && !UserWords.hasWord(that.searchAddWord)) {
+        that.editWord = {
+          name: that.searchAddWord
+        };
+      } else if (addingCustom && UserWords.hasWord(that.searchAddWord)){
+        that.editWord = {
+          name: that.searchAddWord
+        };
+        that.pendingWordToReplace = true;
+        that.pendingWordToReplaceDef = UserWords.getDefForWord(that.searchAddWord);
+        that.pendingWordToReplacePartOfSpeech = UserWords.getPartOfSpeechForWord(that.searchAddWord);
+      } else {
+        that.editWord = that.viewWord ? that.viewWord : that.pendingWordToAdd;
+        that.pendingWordToReplace = true;
+        if (that.pendingWordToAdd) {
+          that.pendingWordToReplaceDef = that.pendingWordToAdd.definition;
+          that.pendingWordToReplacePartOfSpeech = that.pendingWordToAdd.partOfSpeech;
+        } else {
+          that.pendingWordToReplaceDef = that.editWord.definition;
+          that.pendingWordToReplacePartOfSpeech = that.editWord.partOfSpeech;
+        }
+
+      }
+      // edit word attributes
+      that.editWordDef = that.pendingWordToReplaceDef;
+      that.editWordPartOfSpeech = that.pendingWordToReplacePartOfSpeech;
+    }
+
+    this.btnCloseEditWordModal = function() {
+      that.editWord = null;
+      /* ? */
+      that.pendingWordToAdd = null;
+      that.pendingWordToReplace = false;
+      that.pendingWordToReplacePartOfSpeech = null;
+      that.pendingWordToReplaceDef = null;
+    }
+
+    this.btnEditWord = function() {
+      if (noChangeWithEdit()) {
+        return;
+      }
+      // remove word first if it already exists with a different definition
+      if (that.pendingWordToReplace) {
+        UserWords.removeWord(that.editWord.name);
+      }
+      // add word
+      var editWordObject = {
+        name: that.editWord.name,
+        definition: that.editWordDef,
+        partOfSpeech: that.editWordPartOfSpeech,
+        syllables: that.editWord.syllables,
+        example: that.editWord.example,
+        custom: that.pendingWordToAdd ? (that.pendingWordToAdd.definition === that.editWordDef ? false : true) : true,
+      }
+      if (UserWords.addWord(editWordObject)) {
+        that.searchUserWord = that.editWord.name;
+        updateTxtActionNotification((that.pendingWordToReplace ? "Edited " : "Added ") + that.editWord.name);
+        that.btnReturnToWords();
+      }
+      that.viewWord = editWordObject;
+      that.btnCloseEditWordModal();
     }
 
     this.btnRemoveWord = function() {
@@ -230,7 +308,6 @@
     this.hasDefForWord = function(result) {
       return UserWords.hasDefForWord(that.searchAddWord, result.definition);
     }
-
 
 
     // load 'userWords' as soon as user detected

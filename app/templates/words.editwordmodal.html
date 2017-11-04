@@ -2,19 +2,17 @@
   scholarly
     app
       templates
-        * words.addword.modal.html
+        * words.editwordmodal.html
 -->
 
-<!-- Add Word Confirm Modal -->
+<!-- Edit Word Modal -->
 <div class="modal bga-dark"
-  ng-show="words.pendingWordToAdd && !words.editWord">
+  ng-show="words.editWord">
   <div class="modal-box v-centered">
     <!-- Header: Prompt -->
     <header class="modal-header bg-slate">
-      <div class="modal-header-icon txt-theme"
-        ng-class="{'ion-plus-round': !words.pendingWordToReplace, 'ion-arrow-swap': words.pendingWordToReplace}"></div>
-      <span ng-show="!words.pendingWordToReplace">Add Word</span>
-      <span ng-show="words.pendingWordToReplace">Replace Word?</span>
+      <div class="ion-edit modal-header-icon txt-theme"></div>
+      Edit Word
     </header>
     <!-- Body: Old Word (in event of replace) -->
     <div class="word-item remove bg-dark" ng-show="words.pendingWordToReplace">
@@ -22,11 +20,11 @@
       <div class="word-info">
         <!-- Word Name -->
         <header class="word-name bga-dark">
-          {{ words.searchAddWord }}
+          {{ words.editWord.name }}
           <span class="modal-header-icon ion-minus-round txt-wrong"></span>
         </header>
         <!-- Word Details -->
-        <div class="word-details bga-wrong">
+        <div class="word-details bga-light">
           <div class="part-of-speech">
             {{ words.pendingWordToReplacePartOfSpeech }}
           </div>
@@ -36,39 +34,34 @@
         </div>
       </div>
     </div>
-    <!-- Body: Add Word -->
+    <!-- Body: Edit Word -->
     <div class="word-item bg-dark">
       <!-- Word Info -->
       <div class="word-info">
         <!-- Word Name -->
         <header class="word-name bga-dark">
-          {{ words.searchAddWord }}
+          {{ words.editWord.name }}
           <span class="modal-header-icon ion-plus-round txt-correct"
             ng-show="words.pendingWordToReplace"></span>
         </header>
         <!-- Word Details -->
-        <div class="word-details bga-correct">
-          <div class="part-of-speech">
-            {{ words.pendingWordToAdd.partOfSpeech }}
-          </div>
-          <div class="definition">
-            {{ words.pendingWordToAdd.definition }}
-          </div>
-        </div>
+        <form name="editWord" class="word-details">
+          <select id="select-edit-word" class="part-of-speech bg-slate"
+            ng-model="words.editWordPartOfSpeech"
+            ng-options="partOfSpeech for partOfSpeech in words.partsOfSpeech" required>
+          </select>
+          <textarea rows="4" id="textarea-def" class="definition bg-slate" ng-model="words.editWordDef" required></textarea>
+        </form>
       </div>
     </div>
-    <!-- Footer: Confirm / Edit / Cancel Buttons -->
-    <footer class="modal-footer-3">
+    <!-- Footer: Confirm / Cancel Buttons -->
+    <footer class="modal-footer-2">
       <!-- Confirm -->
-      <div class="btn bg-slate" ng-click="words.btnAddWord()">
-        <div class="ion-plus-round centered txt-theme"></div>
-      </div>
-      <!-- Edit -->
-      <div class="btn bg-darker" ng-click="words.btnOpenEditWordModal()">
-        <div class="ion-edit centered"></div>
-      </div>
+      <button type="submit" form="editWord" id="btn-edit-word" class="btn bg-slate" ng-click="words.btnEditWord()" value="" ng-disabled="editWord.$invalid">
+        <div class="ion-edit txt-theme"></div>
+      </button>
       <!-- Cancel -->
-      <div class="btn bg-dark" ng-click="words.btnCloseAddWordModal()">
+      <div class="btn bg-dark" ng-click="words.btnCloseEditWordModal()">
         <div class="ion-close-round centered"></div>
       </div>
     </footer>

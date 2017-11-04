@@ -17,7 +17,7 @@
   display: inline-block;
   top: 50%;
   right: 0;
-  z-index: 2;
+  z-index: 3;
   padding: 6px 12px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -36,7 +36,7 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 
 #words-content .header-bar {
@@ -93,7 +93,7 @@
   display: grid;
   grid-template-columns: 15% 85%;
   position: relative;
-  min-height: 20%;
+  min-height: 25%;
   margin-bottom: 6px;
   border: 1px solid gray;
   border-top-right-radius: 12px;
@@ -154,7 +154,8 @@
 }
 
 #words-content .modal-header,
-#words-content .modal-footer {
+#words-content .modal-footer-2,
+#words-content .modal-footer-3 {
   font-size: 1.5rem;
   height: 3rem;
   line-height: 3rem;
@@ -169,10 +170,18 @@
   right: 12px;
 }
 
-#words-content .modal-footer {
+#words-content .modal-footer-2,
+#words-content .modal-footer-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   text-shadow: 1px 1px black;
+}
+
+#words-content .modal-footer-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+#words-content .modal-footer-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 #words-content .btn-nav {
@@ -195,6 +204,40 @@
 
 #words-content #btn-return-to-words {
   right: 105%;
+}
+
+#words-content #select-edit-word {
+  display: block;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+#words-content #select-edit-word:focus {
+  border: 1px solid rgb(255, 136, 77);
+}
+
+#words-content #textarea-def {
+  padding-left: 5%;
+  font-size: 1rem;
+  width: 100%;
+  resize: none;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 6px;
+}
+
+#words-content #textarea-def:focus {
+  border: 1px solid rgb(255, 136, 77)
+}
+
+#words-content #btn-edit-word {
+  line-height: 3rem;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+}
+
+#words-content #edit-word-disclosure {
+  font-size: 60%;
 }
 
 /* words view
@@ -317,7 +360,7 @@
   height: 10%;
 }
 
-#add-word-view .btn-open-add-word-modal {
+#add-word-view .btn-add-word-search-item {
   border-right: 1px solid rgb(255, 136, 77);
 }
 
@@ -348,6 +391,7 @@
 @media only screen and (min-width: 768px) {
   #words-content .word-item {
     grid-template-columns: 5% 95%;
+    min-height: 20%;
   }
 
   #words-content .definition {

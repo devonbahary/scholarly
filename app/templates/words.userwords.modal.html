@@ -6,7 +6,7 @@
 -->
 
 <!-- View Word Modal -->
-<div class="modal bga-dark" ng-show="words.viewWord">
+<div class="modal bga-dark" ng-show="words.viewWord && !words.editWord">
   <div class="modal-box v-centered">
     <!-- Header: Prompt -->
     <header class="modal-header bg-slate">
@@ -45,30 +45,31 @@
         </div>
       </div>
     </div>
-    <!-- Footer: Search / Delete Buttons -->
-    <footer class="modal-footer">
-      <!-- Search / Delete -->
-        <!-- Search -->
-        <div class="btn bg-slate" ng-click="words.btnCloseViewWordModal()"
-          ng-show="!words.removeWordFlag">
-          <div class="ion-arrow-left-c centered"></div>
-        </div>
-        <!-- Remove -->
-        <div class="btn bg-dark" ng-click="words.btnRemoveWord()"
-          ng-show="!words.removeWordFlag">
-          <div class="ion-minus-round centered"></div>
-        </div>
-      <!-- Confirm Delete / Cancel -->
-        <!-- Confirm Delete -->
-        <div class="btn bg-dark" ng-click="words.btnConfirmRemoveWord()"
-          ng-show="words.removeWordFlag">
-          <div class="ion-checkmark-round centered txt-theme"></div>
-        </div>
-        <!-- Cancel -->
-        <div class="btn bg-slate" ng-click="words.btnCancelRemoveWord()"
-          ng-show="words.removeWordFlag">
-          <div class="ion-close-round centered"></div>
-        </div>
+    <!-- Footer: Remove / Edit / Close Buttons -->
+    <footer class="modal-footer-3" ng-show="!words.removeWordFlag">
+      <!-- Remove -->
+      <div class="btn bg-slate" ng-click="words.btnRemoveWord()">
+        <div class="ion-trash-a centered"></div>
+      </div>
+      <!-- Edit -->
+      <div class="btn bg-darker" ng-click="words.btnOpenEditWordModal()">
+        <div class="ion-edit centered"></div>
+      </div>
+      <!-- Close -->
+      <div class="btn bg-dark" ng-click="words.btnCloseViewWordModal()">
+        <div class="ion-close-round centered"></div>
+      </div>
+    </footer>
+    <!-- Footer (Remove): Confirm Remove / Cancel -->
+    <footer class="modal-footer-2" ng-show="words.removeWordFlag">
+      <!-- Confirm Delete -->
+      <div class="btn bg-slate" ng-click="words.btnConfirmRemoveWord()">
+        <div class="ion-trash-a centered txt-theme"></div>
+      </div>
+      <!-- Cancel -->
+      <div class="btn bg-dark" ng-click="words.btnCancelRemoveWord()">
+        <div class="ion-close-round centered"></div>
+      </div>
     </footer>
   </div>
 </div>

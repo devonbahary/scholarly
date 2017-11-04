@@ -8,19 +8,18 @@
 <main id="viewport">
   <!-- Words Content -->
   <section id="words-content" class="view-content">
-    <!-- Button: Navigation -->
-    <!-- <div id="responsive-screen-overlay"> -->
-      <!-- Button: Open Add Word View -->
-      <div id="btn-open-add-word" class="btn-nav btn bg-theme"
-        ng-click="words.btnOpenAddWord()">
-        <div class="ion-plus-round btn-text centered"></div>
-      </div>
-      <!-- Button: Return To Words View -->
-      <div id="btn-return-to-words" class="btn-nav btn bg-gray"
-        ng-click="words.btnReturnToWords()">
-        <div class="ion-arrow-right-c btn-text centered"></div>
-      </div>
-    <!-- </div> -->
+    <!-- Edit Word Modal -->
+    <ng-include src="'/templates/words.editwordmodal.html'"></ng-include>
+    <!-- Button: Open Add Word View -->
+    <div id="btn-open-add-word" class="btn-nav btn bg-theme"
+      ng-click="words.btnOpenAddWord()">
+      <div class="ion-plus-round btn-text centered"></div>
+    </div>
+    <!-- Button: Return To Words View -->
+    <div id="btn-return-to-words" class="btn-nav btn bg-gray"
+      ng-click="words.btnReturnToWords()">
+      <div class="ion-arrow-right-c btn-text centered"></div>
+    </div>
     <!-- Action Notification -->
     <div id="action-notification" class="bga-slate">
       {{ words.txtActionNotification }}

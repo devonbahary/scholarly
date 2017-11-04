@@ -25,11 +25,21 @@
         if the $http request was unsuccessful.
     */
     Words.getWord = function(wordName) {
+      // $http call for word data
       return $http({
         method: 'GET',
         url: 'https://wordsapiv1.p.mashape.com/words/' + wordName,
         headers
-      }).then(function successfulCallback(response) {
+      }).then(function(response) {
+        return successfulCallback(response)
+      }, function(response) {
+        return errorCallback(response)
+      });
+      // success return function
+      function successfulCallback(response) {
+        if (!response.data.results) {
+          return errorCallback({statusText: 'Not Found'});
+        }
         var filteredResponse = [];
         for (var i = 0; i < response.data.results.length; i++) {
           filteredResponse[i] = {
@@ -43,9 +53,11 @@
           };
         }
         return filteredResponse;
-      }, function errorCallback(response) {
+      }
+      // error return function
+      function errorCallback(response) {
         return response.statusText;
-      });
+      }
     }
 
     /*
@@ -69,6 +81,23 @@
       }, function errorCallback(response) {
         return response.statusText;
       });
+    }
+
+    /*
+      Words.getPartsOfSpeech()
+        => Returns an array containing strings for each part of speech.
+    */
+    Words.getPartsOfSpeech = function() {
+      return [
+        "noun",
+        "pronoun",
+        "verb",
+        "adverb",
+        "adjective",
+        "conjunction",
+        "preposition",
+        "interjection"
+      ];
     }
 
     return Words;
