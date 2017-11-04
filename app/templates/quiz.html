@@ -6,27 +6,24 @@
 -->
 
 <main id="viewport">
-  <!-- App Navigation -->
-  <!-- <ng-include src="'/templates/appnav.html'"></ng-include> -->
   <!-- Quiz Content -->
   <section id="quiz-content" class="view-content bga-dark">
-    <!-- Button: Navigation -->
-    <div id="responsive-screen-overlay">
-      <div id="container-btns" class="bga-dark" ng-show="complete">
-        <!-- Button: Replay -->
-        <div id="btn-replay" class="btn-nav btn bg-gray"
-          ng-click="proctor.btnReplay()">
-          <div class="ion-android-refresh btn-text centered"></div>
-        </div>
-        <!-- Button: Next Quiz -->
-        <div id="btn-next" class="btn-nav btn bg-theme"
-          ng-click="proctor.btnNext()">
-          <div class="ion-arrow-right-b btn-text centered"></div>
-        </div>
-      </div>
-    </div>
     <!-- Loading Quiz Modal -->
     <ng-include src="'/templates/quiz.modal.html'"></ng-include>
+    <!-- Button: Navigation -->
+    <div id="container-btns" class="bga-dark" ng-show="complete">
+      <!-- Button: Replay -->
+      <div id="btn-replay" class="btn-nav btn bg-gray"
+        ng-click="proctor.btnReplay()">
+        <div class="ion-android-refresh btn-text centered"></div>
+      </div>
+      <!-- Button: Next Quiz -->
+      <div id="btn-next" class="btn-nav btn bg-theme"
+        ng-click="proctor.btnNext()">
+        <div class="ion-arrow-right-b btn-text centered"></div>
+      </div>
+    </div>
+    <!-- Quiz Progress Bar -->
     <div id="quiz-progress" ng-show="inProgress">
         <div id="progress-bar" class="header-bar">
         <div id="progress-bar-bg" class="bga-dark centered">
@@ -45,7 +42,7 @@
     <header id="header-quiz-word" class="bga-dark" ng-show="inProgress">
       <!-- Header Item: Quiz In Progress -->
       <div class="header-item-quiz-in-prog" ng-show="!complete">
-        <div class="icon-and-txt" ng-show="!complete">
+        <div class="icon-and-txt">
           <div class="header-icon">
             <div class="ion-university txt-theme centered"></div>
           </div>
@@ -62,9 +59,9 @@
           </div>
         </div>
       </div>
-      <div class="header-item-quiz-in-prog">
-        <!-- Header Item: Quiz Complete -->
-        <div class="icon-and-txt" ng-show="complete">
+      <!-- Header Item: Quiz Complete -->
+      <div class="header-item-quiz-in-prog" ng-show="complete">
+        <div class="icon-and-txt">
           <div class="header-icon">
             <div class="ion-podium txt-theme centered"></div>
           </div>
