@@ -80,7 +80,7 @@
       <ul id="word-list">
         <!-- Question Definition Options (Quiz In Progress) -->
         <li ng-repeat="option in quiz.questions[quiz.progIndex].options" class="option-item"
-          ng-show="inProgress">
+          ng-show="inProgress && !complete">
           <div class="word-metrics bga-dark">
             <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)">
               <div class="centered">

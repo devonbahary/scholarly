@@ -12,19 +12,20 @@
 
 (function() {
   function QuizCtrl($rootScope, $scope, $state, Quiz) {
-    // on revisit to QuizCtrl, make sure to build new quiz if one already exists
-    // in Quiz.js
-    if ($rootScope.quiz.size > 0) {
-      Quiz.newQuiz();
-    }
-
     var that = this;
+
 
     this.scrollMem = 0;
 
     $scope.inProgress = false;
-
     $scope.complete = false;
+
+    // handling when quiz is revisited
+    if ($rootScope.quiz.progIndex > 0) {
+      Quiz.newQuiz(); // create new quiz if quiz was unfinished
+    } else if (Quiz.getLoadState() === 1) {
+      $scope.inProgress = true;
+    }
 
     /*
       this.btnSelectOption(option)

@@ -12,7 +12,6 @@
 
 (function() {
   function WordsCtrl(UserWords, Words, $scope, $firebaseArray, $http) {
-
     var that = this;
 
     this.txtActionNotification = "";
