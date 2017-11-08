@@ -4,7 +4,7 @@
       templates
         * mainnav.html
 -->
-<section id="main-nav" class="bga-slate" ng-controller="MainNavCtrl as nav">
+<section id="main-nav" class="bg-slate bga-slate-desktop" ng-controller="MainNavCtrl as nav">
   <!-- Sign Out Modal -->
   <div id="main-nav-modal" class="bga-dark" ng-show="nav.openSignOut">
     <div class="modal-box centered">
@@ -31,34 +31,39 @@
     </div>
   </div>
 
+  <!-- (Desktop) Main Nav Header -->
+  <header id="main-nav-header" class="bg-slate">
+    <div class="ion-university txt-theme centered"></div>
+  </header>
   <!-- Btn: Words -->
-  <div class="main-nav-item bg-slate" ng-click="nav.btnGoToWords()">
+  <div class="main-nav-item btn bg-slate" ng-click="nav.btnGoToWords()" ng-class="{'bga-light-desktop': nav.currentStateIs('words')}">
     <!-- Main Nav Item Content: Mobile -->
-    <div class="ion-university centered mobile" ng-class="{'txt-theme': nav.currentStateIs('words')}">
+    <div class="ion-cloud centered mobile" ng-class="{'txt-theme': nav.currentStateIs('words')}">
     </div>
     <!-- Main Nav Item Content: Desktop -->
-    <div class="desktop btn">
-      <span class="ion-university" ng-class="{'txt-theme': nav.currentStateIs('words')}"></span> <span class="txt-menu">Words</span>
+    <div class="desktop">
+      <span class="ion-cloud" ng-class="{'txt-theme': nav.currentStateIs('words')}"></span> <span class="txt-menu" ng-class="{active: nav.currentStateIs('words')}">Words</span>
     </div>
   </div>
   <!-- Btn: Quiz -->
-  <div class="main-nav-item bg-slate" ng-click="nav.btnGoToQuiz()">
+  <div class="main-nav-item btn bg-slate" ng-click="nav.btnGoToQuiz()" ng-class="{'bga-light-desktop': nav.currentStateIs('quiz')}">
     <!-- Main Nav Item Content: Mobile -->
     <div class="ion-flash centered mobile" ng-class="{'txt-theme': nav.currentStateIs('quiz')}">
     </div>
     <!-- Main Nav Item Content: Desktop -->
-    <div class="desktop btn">
-      <span class="ion-flash" ng-class="{'txt-theme': nav.currentStateIs('quiz')}"></span> <span class="txt-menu">Quiz</span>
+    <div class="desktop">
+      <span class="ion-flash" ng-class="{'txt-theme': nav.currentStateIs('quiz')}"></span>
+      <span class="txt-menu" ng-class="{active: nav.currentStateIs('quiz')}">Quiz</span>
     </div>
   </div>
   <!-- Btn: Account -->
-  <div class="main-nav-item bg-slate" ng-click="nav.btnOpenSignOut()">
+  <div class="main-nav-item btn bg-slate" ng-click="nav.btnOpenSignOut()" ng-class="{'bga-light-desktop': nav.currentStateIs('account')}">
     <!-- Main Nav Item Content: Mobile -->
     <div class="ion-person centered mobile" ng-class="{'txt-theme': nav.currentStateIs('account')}">
     </div>
     <!-- Main Nav Item Content: Desktop -->
-    <div class="desktop btn">
-      <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('account')}"></span> <span class="txt-menu">Sign Out</span>
+    <div class="desktop">
+      <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('account')}"></span> <span class="txt-menu" ng-class="{active: nav.currentStateIs('account')}">Sign Out</span>
     </div>
   </div>
 </section>
