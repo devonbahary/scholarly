@@ -4,10 +4,10 @@
       templates
         * mainnav.html
 -->
-<section id="main-nav" class="bg-slate" ng-controller="MainNavCtrl as nav">
+<section id="main-nav" class="bga-slate" ng-controller="MainNavCtrl as nav">
   <!-- Sign Out Modal -->
   <div id="main-nav-modal" class="bga-dark" ng-show="nav.openSignOut">
-    <div class="modal-box v-centered">
+    <div class="modal-box centered">
       <!-- Header: Prompt -->
       <header class="modal-header bg-slate">
         <div class="modal-header-icon ion-person txt-theme"></div>
@@ -31,16 +31,34 @@
     </div>
   </div>
 
-  <div class="main-nav-item" ng-click="nav.btnGoToWords()">
-    <div class="ion-university centered" ng-class="{'txt-theme': nav.currentStateIs('words')}">
+  <!-- Btn: Words -->
+  <div class="main-nav-item bg-slate" ng-click="nav.btnGoToWords()">
+    <!-- Main Nav Item Content: Mobile -->
+    <div class="ion-university centered mobile" ng-class="{'txt-theme': nav.currentStateIs('words')}">
+    </div>
+    <!-- Main Nav Item Content: Desktop -->
+    <div class="desktop btn">
+      <span class="ion-university" ng-class="{'txt-theme': nav.currentStateIs('words')}"></span> <span class="txt-menu">Words</span>
     </div>
   </div>
-  <div class="main-nav-item emphasis" ng-click="nav.btnGoToQuiz()">
-    <div class="ion-flash centered" ng-class="{'txt-theme': nav.currentStateIs('quiz')}">
+  <!-- Btn: Quiz -->
+  <div class="main-nav-item bg-slate" ng-click="nav.btnGoToQuiz()">
+    <!-- Main Nav Item Content: Mobile -->
+    <div class="ion-flash centered mobile" ng-class="{'txt-theme': nav.currentStateIs('quiz')}">
+    </div>
+    <!-- Main Nav Item Content: Desktop -->
+    <div class="desktop btn">
+      <span class="ion-flash" ng-class="{'txt-theme': nav.currentStateIs('quiz')}"></span> <span class="txt-menu">Quiz</span>
     </div>
   </div>
-  <div class="main-nav-item" ng-click="nav.btnOpenSignOut()">
-    <div class="ion-person centered" ng-class="{'txt-theme': nav.currentStateIs('account')}">
+  <!-- Btn: Account -->
+  <div class="main-nav-item bg-slate" ng-click="nav.btnOpenSignOut()">
+    <!-- Main Nav Item Content: Mobile -->
+    <div class="ion-person centered mobile" ng-class="{'txt-theme': nav.currentStateIs('account')}">
+    </div>
+    <!-- Main Nav Item Content: Desktop -->
+    <div class="desktop btn">
+      <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('account')}"></span> <span class="txt-menu">Sign Out</span>
     </div>
   </div>
 </section>

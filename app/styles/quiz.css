@@ -282,6 +282,10 @@
   screen width > 768px (tablet, laptop, etc.)
 */
 @media only screen and (min-width: 768px) {
+  #quiz-content .modal {
+    width: 80%;
+  }
+
   #quiz-content .modal .modal-box {
     width: 40%;
     border-radius: 12px;

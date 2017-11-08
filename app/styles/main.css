@@ -50,33 +50,9 @@
   z-index: 1;
 }
 
-#viewport #view-header #logo {
-  font-size: 3rem;
-  padding: 6px 12px;
-  text-shadow: 1px 1px black;
-}
-
-/*#viewport #view-header #header-info {
-  position: absolute;
-  left: 20%;
-  right: 0;
-  height: 100%;
-  font-size: 1.5rem;
-  padding-left: 12px;
-}*/
-
 #viewport .view-content {
   position: absolute;
   height: 100%;
-  width: 100%;
-}
-
-#app-nav {
-  background: rgb(50, 50, 50);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  position: absolute;
-  height: 10%;
   width: 100%;
 }
 
@@ -134,9 +110,12 @@
   border-right: none;
 }
 
+#main-nav .main-nav-item .desktop {
+  display: none;
+}
+
 #main-nav-modal {
   position: fixed;
-  top: 0;
   height: 100vh;
   width: 100vw;
   z-index: 2;
@@ -280,6 +259,49 @@
   screen width > 768px (tablet, laptop, etc.)
 */
 @media only screen and (min-width: 768px) {
+  #viewport .view-content {
+    margin-left: 20%;
+    width: 80%;
+  }
+
+  #main-nav {
+    position: fixed;
+    width: 20%;
+    display: block;
+    height: 100%;
+    padding: 12px;
+    z-index: 4;
+    padding: 0;
+  }
+
+  #main-nav-modal .modal-box {
+    box-shadow: 1px 1px 80px black;
+    width: 60%;
+  }
+
+  #main-nav .main-nav-item {
+    font-size: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid gray;
+  }
+
+  #main-nav .main-nav-item .mobile {
+    display: none;
+  }
+
+  #main-nav .main-nav-item .desktop {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    text-align: center;
+    line-height: 1.5rem;
+  }
+
+  #main-nav .main-nav-item .desktop .txt-menu {
+    font-size: 60%;
+    text-align: left;
+  }
+
+
   .btn:hover {
     cursor: pointer;
   }

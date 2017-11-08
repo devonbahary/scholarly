@@ -324,16 +324,6 @@
   left: -100%;
 }
 
-/*#header-info #btn-return-to-words {
-  display: inline-block;
-  position: absolute;
-  right: 100%;
-  width: 66px;
-  height: 100%;
-  opacity: 0.9;
-  transition: right 0.4s ease;
-}*/
-
 #add-word-view #form-add-word-search {
   display: grid;
   grid-template-columns: 90% 10%;
@@ -389,6 +379,9 @@
   screen width > 768px (tablet, laptop, etc.)
 */
 @media only screen and (min-width: 768px) {
+  #words-content .btn-nav {
+    bottom: 5%;
+  }
   #words-content .word-item {
     grid-template-columns: 5% 95%;
     min-height: 20%;
@@ -402,8 +395,16 @@
     grid-template-columns: 90% 10%;
   }
 
+  #words-content .modal {
+    width: 80%;
+  }
+
   #words-content .modal-box {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
+  }
+
+  #words-content .list-box {
+    height: 75%;
   }
 }
