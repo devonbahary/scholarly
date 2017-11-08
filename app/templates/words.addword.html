@@ -66,7 +66,7 @@
         </div>
       </li>
       <!-- List Item: Custom Definition -->
-      <li class="word-item bga-gray" ng-show="!words.searchPending">
+      <li class="word-item bga-gray" ng-show="words.showCustomWordOption()">
         <!-- Button: Open Edit Word Modal -->
         <div class="btn-add-word-search-item btn bg-slate"
           ng-click="words.btnOpenEditWordModal(true)">

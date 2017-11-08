@@ -310,6 +310,17 @@
     }
 
 
+    /*
+      showCustomWordOption()
+        => Returns true if the user has searched the API for a word definition
+        and the search bar input isn't empty.
+    */
+    this.showCustomWordOption = function() {
+      return !that.searchPending && that.searchAddWord &&
+        (that.searchResults.length > 0 || that.searchErrorFlag);
+    }
+
+
     // load 'userWords' as soon as user detected
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
