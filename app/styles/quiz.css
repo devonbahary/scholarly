@@ -35,6 +35,7 @@
   height: 100%;
   width: 0;
   border-radius: 12px;
+  -webkit-transition: width 0.2s ease-out;
   transition: width 0.2s ease-out;
 }
 
@@ -66,6 +67,7 @@
   position: absolute;
   height: 100%;
   width: 0;
+  -webkit-transition: width 0.4s ease-out;
   transition: width 0.4s ease-out;
   border-radius: 12px;
 }
@@ -251,6 +253,7 @@
   border-bottom-left-radius: 12px;
   visibility: visible;
   opacity: 1;
+  -webkit-transition: opacity 0.2s ease, visibility 0.2s ease;
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
@@ -287,12 +290,21 @@
   }
 
   #quiz-content .modal .modal-box {
-    width: 40%;
+    width: 60%;
     border-radius: 12px;
   }
 
   #quiz-content #quiz-prog-marker {
     display: block;
+  }
+
+  #quiz-content #word-list-box {
+    height: 75%;
+  }
+
+  #quiz-content #container-btns {
+    bottom: 0;
+    padding: 12px;
   }
 
   #quiz-content .word-item {

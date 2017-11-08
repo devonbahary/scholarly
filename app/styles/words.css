@@ -24,6 +24,7 @@
   font-size: 1.5rem;
   opacity: 0;
   visibility: hidden;
+  -webkit-transition: opacity 1s ease, visibility 1s ease;
   transition: opacity 1s ease, visibility 1s ease;
 }
 
@@ -104,7 +105,7 @@
 }
 
 #words-content .word-item.remove {
-  opacity: 0.8;
+  /*opacity: 0.8;*/
 }
 
 #words-content .word-name {
@@ -153,6 +154,11 @@
   box-shadow: 1px 1px 80px black;
 }
 
+#words-content .modal-box.centered {
+  box-shadow: 1px 1px 80px black;
+  text-align: left;
+}
+
 #words-content .modal-header,
 #words-content .modal-footer-2,
 #words-content .modal-footer-3 {
@@ -190,6 +196,7 @@
   z-index: 1;
   opacity: 1;
   visibility: visible;
+  -webkit-transition: opacity 0.2s ease, visibility 0.2s ease, right 0.4s ease;
   transition: opacity 0.2s ease, visibility 0.2s ease, right 0.4s ease;
 }
 
@@ -214,6 +221,7 @@
 
 #words-content #select-edit-word:focus {
   border: 1px solid rgb(255, 136, 77);
+  outline: none;
 }
 
 #words-content #textarea-def {
@@ -223,6 +231,7 @@
   resize: none;
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 6px;
+  outline: none;
 }
 
 #words-content #textarea-def:focus {
@@ -371,7 +380,6 @@
 
   #words-content .modal-box {
     width: 60%;
-    margin: 0 auto;
   }
 }
 
@@ -401,7 +409,6 @@
 
   #words-content .modal-box {
     width: 60%;
-    margin: 0 auto;
   }
 
   #words-content .list-box {
