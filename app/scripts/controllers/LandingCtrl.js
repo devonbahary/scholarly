@@ -12,6 +12,16 @@
 
 (function() {
   function LandingCtrl($scope, $state, $http) {
+
+    var that = this;
+
+    this.openForgotEmailModal = false;
+    this.sendingEmailPasswordReset = false;
+
+    $scope.emailForgot = "";
+    $scope.forgotPasswordErrorMsg = null;
+    $scope.forgotPasswordSuccess = false;
+
     /*
       resetForms()
         => Initializes form ng-models 'logInUser', 'signUpUser', + 'inputError'.
@@ -94,6 +104,36 @@
           });
         }
       });
+    }
+
+
+    this.btnOpenForgotPasswordModal = function() {
+      that.openForgotEmailModal = true;
+    }
+
+    this.btnForgotPassword = function() {
+      var email = $scope.emailForgot;
+      $scope.emailForgot = "";
+      that.sendingEmailPasswordReset = true;
+      $scope.forgotPasswordSuccess = false;
+      $scope.forgotPasswordErrorMsg = null;
+      firebase.auth().sendPasswordResetEmail(email).then(function() {
+        $scope.forgotPasswordSuccess = true;
+        that.sendingEmailPasswordReset = false;
+        $scope.$apply();
+      }).catch(function(error) {
+        $scope.forgotPasswordErrorMsg = error.message;
+        that.sendingEmailPasswordReset = false;
+        $scope.$apply();
+      });
+    }
+
+    this.btnCloseForgotPasswordModal = function() {
+      that.openForgotEmailModal = false;
+      document.getElementById('modal-forgot-password').reset();
+      $scope.emailForgot = "";
+      $scope.forgotPasswordSuccess = false;
+      $scope.forgotPasswordErrorMsg = null;
     }
 
 
