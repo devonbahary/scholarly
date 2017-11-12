@@ -2,11 +2,11 @@
   scholarly
     app
       templates
-        * quiz.modal.html
+        * quiz.loadingmodal.html
 -->
 
 <!-- Quiz Loading Modal -->
-<div class="modal bga-dark" ng-show="!inProgress">
+<div id="load-modal" class="modal bga-dark" ng-show="proctor.userWords.words.length > 0 && !inProgress">
   <div class="modal-box centered bg-slate">
     <header>
       Loading..

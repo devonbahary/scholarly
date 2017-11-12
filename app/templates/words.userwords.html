@@ -84,7 +84,7 @@
         </div>
       </li>
       <!-- No Match Found Message -->
-      <li class="word-item bga-gray" ng-show="words.userWords.length > 0 && filteredSearch.length === 0">
+      <li class="word-item info bga-gray" ng-show="words.searchUserWord && filteredSearch.length === 0">
         <!-- Word Metrics Bar -->
         <div class="word-metrics btn info bg-slate"
           ng-click="words.btnOpenAddWord(words.searchUserWord)">
@@ -107,7 +107,7 @@
         </div>
       </li>
       <!-- No Words Found Message -->
-      <li class="word-item bga-gray" ng-show="words.userWords.length === 0">
+      <li class="word-item info bga-gray" ng-show="!words.searchUserWord && words.userWords.words.length === 0">
         <!-- Word Metrics Bar -->
         <div class="word-metrics btn info bg-slate"
           ng-click="words.btnOpenAddWord()">

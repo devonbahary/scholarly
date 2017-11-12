@@ -11,7 +11,7 @@
 */
 
 (function() {
-  function WordsCtrl(UserWords, Words, Quiz, $scope, $firebaseArray, $http) {
+  function WordsCtrl(UserWords, Words, Quiz, $scope, $firebaseArray, $http, $stateParams) {
     var that = this;
 
     this.txtActionNotification = "";
@@ -321,9 +321,16 @@
         (that.searchResults.length > 0 || that.searchErrorFlag);
     }
 
+    // if transitioning from Quiz search prompt, open up addWord 
+    if ($stateParams.addWordTrigger) {
+      setTimeout(function() {
+        that.btnOpenAddWord();
+      }, 200);
+    }
+
   }
 
   angular
     .module('scholarly')
-    .controller('WordsCtrl', ['UserWords', 'Words', 'Quiz', '$scope', '$firebaseArray', '$http', WordsCtrl]);
+    .controller('WordsCtrl', ['UserWords', 'Words', 'Quiz', '$scope', '$firebaseArray', '$http', '$stateParams', WordsCtrl]);
 })();

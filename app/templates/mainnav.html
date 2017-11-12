@@ -4,6 +4,7 @@
       templates
         * mainnav.html
 -->
+
 <section id="main-nav" class="bg-slate bga-slate-desktop" ng-controller="MainNavCtrl as nav">
   <!-- Sign Out Modal -->
   <div id="main-nav-modal" class="bga-dark" ng-show="nav.openSignOut">
@@ -57,7 +58,7 @@
     </div>
   </div>
   <!-- Btn: Account -->
-  <div class="main-nav-item btn bg-slate" ng-click="nav.btnOpenSignOut()" ng-class="{'bga-light-desktop': nav.currentStateIs('account')}">
+  <div class="main-nav-item last btn bg-slate" ng-click="nav.btnOpenSignOut()" ng-class="{'bga-light-desktop': nav.currentStateIs('account')}">
     <!-- Main Nav Item Content: Mobile -->
     <div class="ion-person centered mobile" ng-class="{'txt-theme': nav.currentStateIs('account')}">
     </div>
@@ -66,4 +67,5 @@
       <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('account')}"></span> <span class="txt-menu" ng-class="{active: nav.currentStateIs('account')}">Sign Out</span>
     </div>
   </div>
+  <ng-include src="'/templates/displaynameheader.html'"></ng-include>
 </section>

@@ -8,8 +8,10 @@
 <main id="viewport">
   <!-- Quiz Content -->
   <section id="quiz-content" class="view-content bga-dark">
+    <!-- No Words Modal -->
+    <ng-include src="'/templates/quiz.nowordsmodal.html'"></ng-include>
     <!-- Loading Quiz Modal -->
-    <ng-include src="'/templates/quiz.modal.html'"></ng-include>
+    <ng-include src="'/templates/quiz.loadingmodal.html'"></ng-include>
     <!-- Button: Navigation -->
     <div id="container-btns" class="bga-dark" ng-show="complete">
       <!-- Button: Replay -->

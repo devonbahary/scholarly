@@ -1,0 +1,24 @@
+<!--
+  scholarly
+    app
+      templates
+        * quiz.nowordsmodal.html
+-->
+
+<!-- Quiz No Words Modal -->
+<div id="no-words-modal" class="modal bga-dark" ng-show="proctor.userWords.words.length === 0">
+  <div class="modal-box centered">
+    <div class="btn-metric btn info bg-slate"
+      ng-click="proctor.btnOpenAddWord()">
+        <div class="ion-search centered txt-theme"></div>
+    </div>
+    <div class="word-info bga-light">
+      <header class="word-name info bg-dark">
+        <span class="ion-alert-circled txt-theme"></span> No words found.
+      </header>
+      <div class="definition">
+        Search our database to start adding words.
+      </div>
+    </div>
+  </div>
+</div>

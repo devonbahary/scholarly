@@ -16,13 +16,40 @@
 }
 
 #quiz-content .modal .modal-box {
-  height: 3rem;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  padding: 6px;
   /* producing BUGS
   -webkit-box-shadow: 1px 1px 80px 0 black;
   box-shadow: 1px 1px 80px 0 black; */
+}
+
+#quiz-content #load-modal .modal-box {
+  height: 3rem;
+  grid-template-rows: 1fr 1fr;
+  padding: 6px;
+}
+
+#quiz-content #no-words-modal .modal-box {
+  grid-template-columns: 15% 85%;
+  height: 15%;
+  text-align: left;
+}
+#quiz-content #no-words-modal .word-info {
+  border-top-right-radius: 12px;
+}
+
+#quiz-content #no-words-modal .word-name {
+  font-family: 'Work Sans', sans-serif;
+  font-style: normal;
+  border-top-right-radius: 12px;
+}
+
+#quiz-content #no-words-modal .definition {
+  text-align: left;
+  padding: 6px 12px;
+}
+
+#quiz-content #no-words-modal .btn-metric {
+  border: 1px solid rgb(255, 136, 77);
 }
 
 #quiz-content .modal #quiz-load-prog-bar {

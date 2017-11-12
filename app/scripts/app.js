@@ -28,7 +28,10 @@
         controller: 'WordsCtrl',
         controllerAs: 'words',
         url: '/words',
-        templateUrl: '/templates/words.html'
+        templateUrl: '/templates/words.html',
+        params: {
+          addWordTrigger: false
+        }
       })
       .state('quiz', {
         controller: 'QuizCtrl',

@@ -29,6 +29,16 @@
       }
     }
 
+    function initWordsByNumSuccess() {
+      var uid = firebase.auth().currentUser.uid;
+      var ref = firebase.database().ref('user-words/' + uid).orderByChild('numSuccess');
+      $firebaseArray(ref).$loaded().then(function(userWords) {
+        userWordsByNumSuccess = userWords;
+        // then init quiz
+        buildQuiz();
+      });
+    }
+
     /*
       getLessSuccessfulWord()
         => Returns a random word from user's database in the bottom half of
@@ -246,19 +256,18 @@
       }
     });
 
+    $rootScope.$on('userWordsChanged', function() {
+      initQuiz();
+      // init user words 
+      initWordsByNumSuccess();
+    });
+
 
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // init user words
-        var uid = firebase.auth().currentUser.uid;
-        var ref = firebase.database().ref('user-words/' + uid).orderByChild('numSuccess');
-        $firebaseArray(ref).$loaded().then(function(userWords) {
-          userWordsByNumSuccess = userWords;
-          // then init quiz
-          buildQuiz();
-        });
-
+        initWordsByNumSuccess();
       }
     });
 

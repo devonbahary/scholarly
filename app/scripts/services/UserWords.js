@@ -12,7 +12,7 @@
 */
 
 (function() {
-  function UserWords($firebaseArray, $firebaseObject) {
+  function UserWords($rootScope, $firebaseArray, $firebaseObject) {
     var UserWords = {};
 
 
@@ -122,7 +122,6 @@
       // create new word
       var newWordsRef = userWordsRef().push();
       var custom = wordObject.custom ? wordObject.custom : false;
-      console.log('custom = ' + custom)
       newWordsRef.set({
         name: wordObject.name.trim().toLowerCase(),
         definition: wordObject.definition,
@@ -135,6 +134,7 @@
         successRate: 0,
         streak: 0
       });
+      $rootScope.$emit('userWordsChanged');
       // return 'true' for success
       return true;
     }
@@ -168,12 +168,15 @@
     UserWords.removeWord = function(wordName) {
       if (UserWords.hasWord(wordName)) {
         $firebaseObject(userWordsRef().orderByChild('name').equalTo(wordName.trim().toLowerCase())).$remove();
+        $rootScope.$emit('userWordsChanged');
       }
     }
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         UserWords.getWords();
+      } else {
+        UserWords.words = null;
       }
     });
 
@@ -183,5 +186,5 @@
 
   angular
     .module('scholarly')
-    .factory('UserWords', ['$firebaseArray', '$firebaseObject', UserWords]);
+    .factory('UserWords', ['$rootScope', '$firebaseArray', '$firebaseObject', UserWords]);
 })();

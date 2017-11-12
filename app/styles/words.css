@@ -104,6 +104,10 @@
   margin-top: 6px;
 }
 
+#words-content .word-item.info {
+  margin-top: 6px;
+}
+
 #words-content .word-item.remove {
   /*opacity: 0.8;*/
 }

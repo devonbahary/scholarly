@@ -89,6 +89,14 @@
   height: 66px;
 }
 
+/* HEADER DISPLAY NAME
+  ========================================================================== */
+#header-display-name {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2.5rem;
+}
+
 /* MAIN NAV
   ========================================================================== */
 #main-nav {
@@ -110,7 +118,7 @@
   border-right: 1px solid gray;
 }
 
-#main-nav .main-nav-item:last-child {
+#main-nav .main-nav-item.last {
   border-right: none;
 }
 

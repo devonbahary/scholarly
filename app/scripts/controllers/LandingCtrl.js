@@ -11,7 +11,7 @@
 */
 
 (function() {
-  function LandingCtrl($scope, $state, $http) {
+  function LandingCtrl($scope, $state, $http, User) {
 
     var that = this;
 
@@ -99,14 +99,11 @@
       displayName = that.signUpUser.displayName;
       email = that.signUpUser.email;
       password = that.signUpUser.password;
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-        that.inputError = error.message;
-      }).then(function(user) {
-        if (user) {
-          user.updateProfile({
-            displayName: displayName
-          });
-        }
+      User.createUser(email, password, displayName).then(function resolve(val) {
+
+      }, function reject(errorMessage) {
+        that.inputError = errorMessage;
+        $scope.$apply();
       });
     }
 
@@ -121,12 +118,12 @@
       that.sendingEmailPasswordReset = true;
       that.forgotPasswordSuccess = false;
       that.forgotPasswordErrorMsg = null;
-      firebase.auth().sendPasswordResetEmail(email).then(function() {
+      User.sendPasswordReset(email).then(function resolve() {
         that.forgotPasswordSuccess = true;
         that.sendingEmailPasswordReset = false;
         $scope.$apply();
-      }).catch(function(error) {
-        that.forgotPasswordErrorMsg = error.message;
+      }, function reject(errorMessage) {
+        that.forgotPasswordErrorMsg = errorMessage;
         that.sendingEmailPasswordReset = false;
         $scope.$apply();
       });
@@ -160,5 +157,5 @@
 
   angular
     .module('scholarly')
-    .controller('LandingCtrl', ['$scope', '$state', '$http', LandingCtrl]);
+    .controller('LandingCtrl', ['$scope', '$state', '$http', 'User', LandingCtrl]);
 })();

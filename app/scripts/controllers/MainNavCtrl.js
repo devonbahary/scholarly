@@ -11,9 +11,10 @@
 */
 
 (function() {
-  function MainNavCtrl($state) {
+  function MainNavCtrl($state, UserWords) {
     var that = this;
 
+    this.user = null;
     this.openSignOut = false;
 
     this.btnGoToWords = function() {
@@ -41,7 +42,9 @@
     }
 
     firebase.auth().onAuthStateChanged(function(user) {
-      if (!user) {
+      if (user) {
+        that.user = user;
+      } else {
         $state.go('landing');
       }
     });
@@ -49,5 +52,5 @@
 
   angular
     .module('scholarly')
-    .controller('MainNavCtrl', ['$state', MainNavCtrl]);
+    .controller('MainNavCtrl', ['$state', 'UserWords', MainNavCtrl]);
 })();

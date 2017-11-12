@@ -11,9 +11,10 @@
 */
 
 (function() {
-  function QuizCtrl($rootScope, $scope, $state, Quiz) {
+  function QuizCtrl($rootScope, $scope, $state, Quiz, UserWords) {
     var that = this;
 
+    this.userWords = UserWords;
 
     this.scrollMem = 0;
 
@@ -60,6 +61,10 @@
       $state.go($state.current, {}, {reload: true});
     }
 
+    this.btnOpenAddWord = function() {
+      $state.go('words', {addWordTrigger: true});
+    }
+
     // watch quiz load progress and adjust load progress bar accordingly
     $rootScope.$watch('quiz.questions.length', function(newQuestions) {
       var loadProg = Quiz.getLoadState();
@@ -90,5 +95,5 @@
 
   angular
     .module('scholarly')
-    .controller('QuizCtrl', ['$rootScope', '$scope', '$state', 'Quiz', QuizCtrl]);
+    .controller('QuizCtrl', ['$rootScope', '$scope', '$state', 'Quiz', 'UserWords', QuizCtrl]);
 })();
