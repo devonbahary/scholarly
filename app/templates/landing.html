@@ -7,30 +7,7 @@
 
 <main id="landing-content">
   <!-- Forgot Email Modal -->
-  <form id="modal-forgot-password" name="forgotPassword" class="bga-gray" ng-show="landing.openForgotEmailModal">
-    <div id="modal-box" class="bg-gray centered">
-      <header id="modal-header" class="bg-slate">
-        Reset Password
-      </header>
-      <div id="reset-instructions">
-        <span ng-show="!forgotPasswordErrorMsg && !forgotPasswordSuccess">Type in your Scholarly account email and we'll send you instructions to reset your password.</span>
-        <span ng-show="forgotPasswordErrorMsg"><span class="ion-alert-circled txt-warning"></span> {{ forgotPasswordErrorMsg }}</span>
-        <span ng-show="forgotPasswordSuccess">Email sent! Check your email to reset your password.</span>
-      </div>
-      <div id="modal-body" ng-show="!landing.sendingEmailPasswordReset && !forgotPasswordSuccess">
-        <input type="email" placeholder="email address" ng-model="emailForgot" required>
-      </div>
-      <footer id="modal-footer">
-        <button type="submit" value="" ng-click="landing.btnForgotPassword()" ng-disabled="forgotPassword.$invalid"
-          ng-class="{'bg-theme active': forgotPassword.$valid, 'bg-slate inactive': forgotPassword.$invalid}">
-          <div class="ion-email"></div>
-        </button>
-        <div class="bg-dark" ng-click="landing.btnCloseForgotPasswordModal()">
-          <div class="ion-close-round centered"></div>
-        </div>
-      </footer>
-    </div>
-  </form>
+  <ng-include src="'/templates/landing.passwordreset.html'"></ng-include>
   <div class="overlay bga-gray"></div>
   <!-- Welcome -->
   <section id="welcome-view" class="sliding-content">

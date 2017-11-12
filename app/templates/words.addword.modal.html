@@ -7,8 +7,9 @@
 
 <!-- Add Word Confirm Modal -->
 <div class="modal bga-dark"
-  ng-show="words.pendingWordToAdd && !words.editWord">
-  <div class="modal-box centered">
+  ng-show="words.pendingWordToAdd && !words.editWord"
+  ng-click="words.btnCloseAddWordModal()">
+  <div class="modal-box centered" onclick="event.stopPropagation();">
     <!-- Header: Prompt -->
     <header class="modal-header bg-slate">
       <div class="modal-header-icon txt-theme"

@@ -6,8 +6,9 @@
 -->
 
 <!-- View Word Modal -->
-<div class="modal bga-dark" ng-show="words.viewWord && !words.editWord">
-  <div class="modal-box centered">
+<div class="modal bga-dark" ng-show="words.viewWord && !words.editWord"
+  ng-click="words.btnCloseViewWordModal()">
+  <div class="modal-box centered" onclick="event.stopPropagation();">
     <!-- Header: Prompt -->
     <header class="modal-header bg-slate">
       <div class="modal-header-icon ion-podium txt-theme"></div>

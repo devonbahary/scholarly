@@ -12,13 +12,13 @@
       <header class="logo-title">
         <div class="logo ion-university bg-theme"></div>
       </header>
-      <div class="input-error" ng-show="inputError">
-        <span class="ion-alert-circled txt-warning"></span> {{ inputError }}
+      <div class="input-error" ng-show="landing.inputError">
+        <span class="ion-alert-circled txt-warning"></span> {{ landing.inputError }}
       </div>
       <div ng-class="{'border-error': inputError}">
-        <input type="text" class="border-round-top" placeholder="display name" name="signUpDisplay" ng-model = "signUpUser.displayName" required>
-        <input type="email" placeholder="email address" name="signUpEmail" ng-model="signUpUser.email" required>
-        <input type="password" class="border-round-bottom" placeholder="password" name="signUpPassword" ng-model="signUpUser.password" required>
+        <input type="text" class="border-round-top" placeholder="display name" name="signUpDisplay" ng-model = "landing.signUpUser.displayName" required>
+        <input type="email" placeholder="email address" name="signUpEmail" ng-model="landing.signUpUser.email" required>
+        <input type="password" class="border-round-bottom" placeholder="password" name="signUpPassword" ng-model="landing.signUpUser.password" required>
       </div>
     </div>
   </section>

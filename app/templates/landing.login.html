@@ -12,12 +12,12 @@
       <header class="logo-title">
         <div class="logo ion-university bg-theme"></div>
       </header>
-      <div class="input-error" ng-show="inputError">
-        <span class="ion-alert-circled txt-warning"></span> {{ inputError }}
+      <div class="input-error" ng-show="landing.inputError">
+        <span class="ion-alert-circled txt-warning"></span> {{ landing.inputError }}
       </div>
       <div ng-class="{'border-error': inputError}">
-        <input type="email" class="border-round-top" placeholder="email address" name="logInEmail" ng-model="logInUser.email" required>
-        <input type="password" class="border-round-bottom" placeholder="password" name="logInPassword" ng-model="logInUser.password" required>
+        <input type="email" class="border-round-top" placeholder="email address" name="logInEmail" ng-model="landing.logInUser.email" required>
+        <input type="password" class="border-round-bottom" placeholder="password" name="logInPassword" ng-model="landing.logInUser.password" required>
       </div>
       <div id="forgot-email" ng-click="landing.btnOpenForgotPasswordModal()">
         Forgot your password?

@@ -11,14 +11,14 @@
 */
 
 (function() {
-  function WordsCtrl(UserWords, Words, $scope, $firebaseArray, $http) {
+  function WordsCtrl(UserWords, Words, Quiz, $scope, $firebaseArray, $http) {
     var that = this;
 
     this.txtActionNotification = "";
     this.txtActionNotificationId = 0;
 
     this.searchUserWord = "";
-    this.userWords = [];
+    this.userWords = UserWords;
 
     this.pendingWordToAdd = null;
     this.pendingWordToReplace = false;
@@ -30,7 +30,7 @@
     this.removeWordFlag = false;
 
     this.editWord = null;
-    that.searchWordThatAlreadyExists = null;
+    this.searchWordThatAlreadyExists = null;
 
     this.partsOfSpeech = Words.getPartsOfSpeech();
 
@@ -218,6 +218,7 @@
 
     this.btnCloseViewWordModal = function() {
       that.viewWord = null;
+      that.btnCancelRemoveWord();
     }
 
     this.btnOpenEditWordModal = function(addingCustom = false) {
@@ -320,19 +321,9 @@
         (that.searchResults.length > 0 || that.searchErrorFlag);
     }
 
-
-    // load 'userWords' as soon as user detected
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        UserWords.getWords().then(function(val) {
-          that.userWords = val;
-        });
-      }
-    })
-
   }
 
   angular
     .module('scholarly')
-    .controller('WordsCtrl', ['UserWords', 'Words', '$scope', '$firebaseArray', '$http', WordsCtrl]);
+    .controller('WordsCtrl', ['UserWords', 'Words', 'Quiz', '$scope', '$firebaseArray', '$http', WordsCtrl]);
 })();

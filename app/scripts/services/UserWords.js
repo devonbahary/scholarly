@@ -16,7 +16,7 @@
     var UserWords = {};
 
 
-    var userWords = null;
+    UserWords.words = null;
 
     /*
       userWordsRef()
@@ -29,13 +29,18 @@
 
     /*
       getWords()
-        => Returns a '$firebaseArray' of user's collected words.
+        => Returns the user's words from the database.
     */
     UserWords.getWords = function() {
-      return $firebaseArray(userWordsRef()).$loaded().then(function(val) {
-        userWords = val;
-        return userWords;
-      });
+      if (UserWords.words) {
+        return Promise.resolve(UserWords.words);
+      } else {
+        return $firebaseArray(userWordsRef()).$loaded().then(function(words) {
+          UserWords.words = words;
+          return UserWords.words;
+        });
+      }
+
     }
 
     /*
@@ -43,8 +48,8 @@
         => Returns true if 'wordName' already exists in user's database.
     */
     UserWords.hasWord = function(wordName) {
-      for (var i = 0; i < userWords.length; i++) {
-        if (userWords[i].name === wordName.trim().toLowerCase()) {
+      for (var i = 0; i < UserWords.words.length; i++) {
+        if (UserWords.words[i].name === wordName.trim().toLowerCase()) {
           return true;
         }
       }
@@ -58,8 +63,8 @@
         => Returns true if a matching 'definition' is found for the given 'wordName'
     */
     UserWords.hasDefForWord = function(wordName, definition) {
-      for (var i = 0; i < userWords.length; i++) {
-        if (userWords[i].name === wordName.trim().toLowerCase() && userWords[i].definition === definition) {
+      for (var i = 0; i < UserWords.words.length; i++) {
+        if (UserWords.words[i].name === wordName.trim().toLowerCase() && UserWords.words[i].definition === definition) {
           return true;
         }
       }
@@ -73,9 +78,9 @@
         => Returns definition for word in database, or null if word not found.
     */
     UserWords.getDefForWord = function(wordName) {
-      for (var i = 0; i < userWords.length; i++) {
-        if (userWords[i].name === wordName.trim().toLowerCase()) {
-          return userWords[i].definition;
+      for (var i = 0; i < UserWords.words.length; i++) {
+        if (UserWords.words[i].name === wordName.trim().toLowerCase()) {
+          return UserWords.words[i].definition;
         }
       }
       // return null if can't find word
@@ -88,9 +93,9 @@
         found.
     */
     UserWords.getPartOfSpeechForWord = function(wordName) {
-      for (var i = 0; i < userWords.length; i++) {
-        if (userWords[i].name === wordName.trim().toLowerCase()) {
-          return userWords[i].partOfSpeech;
+      for (var i = 0; i < UserWords.words.length; i++) {
+        if (UserWords.words[i].name === wordName.trim().toLowerCase()) {
+          return UserWords.words[i].partOfSpeech;
         }
       }
 
@@ -100,9 +105,9 @@
 
 
     UserWords.getWordObjectForName = function(wordName) {
-      for (var i = 0; i < userWords.length; i++) {
-        if (userWords[i].name === wordName.trim().toLowerCase()) {
-          return userWords[i];
+      for (var i = 0; i < UserWords.words.length; i++) {
+        if (UserWords.words[i].name === wordName.trim().toLowerCase()) {
+          return UserWords.words[i];
         }
       }
       // return false if can't find word
@@ -165,6 +170,12 @@
         $firebaseObject(userWordsRef().orderByChild('name').equalTo(wordName.trim().toLowerCase())).$remove();
       }
     }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        UserWords.getWords();
+      }
+    });
 
 
     return UserWords;

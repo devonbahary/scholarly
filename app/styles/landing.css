@@ -194,6 +194,13 @@
   font-size: 1.5rem;
 }
 
+#landing-content #modal-footer.success {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
 #landing-content #modal-footer button {
   font-size: 1.5rem;
   line-height: 3rem;

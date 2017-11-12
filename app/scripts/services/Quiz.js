@@ -238,6 +238,14 @@
       buildQuiz();
     }
 
+    // seize opportunities while the user isn't engaged with the Quiz state to
+    // load a new one to prevent excessive loading screens
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if ($rootScope.quiz.progIndex > 0) {
+        Quiz.newQuiz();
+      }
+    });
+
 
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {

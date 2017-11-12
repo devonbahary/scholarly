@@ -15,12 +15,16 @@
 
     var that = this;
 
+
+
+    /*
+      Password reset via email
+    */
     this.openForgotEmailModal = false;
     this.sendingEmailPasswordReset = false;
-
-    $scope.emailForgot = "";
-    $scope.forgotPasswordErrorMsg = null;
-    $scope.forgotPasswordSuccess = false;
+    this.emailForgot = "";
+    this.forgotPasswordErrorMsg = null;
+    this.forgotPasswordSuccess = false;
 
     /*
       resetForms()
@@ -28,18 +32,18 @@
     */
     function resetForms() {
       // log in form
-      $scope.logInUser = {
+      that.logInUser = {
         email: '',
         password: ''
       };
       // sign up form
-      $scope.signUpUser = {
+      that.signUpUser = {
         displayName: '',
         email: '',
         password: ''
       };
       // contains error message || false
-      $scope.inputError = false;
+      that.inputError = false;
     }
 
     resetForms();
@@ -80,10 +84,10 @@
         => Log in with validated log in form input; display error message.
     */
     this.btnLogIn = function() {
-      email = $scope.logInUser.email;
-      password = $scope.logInUser.password;
+      email = that.logInUser.email;
+      password = that.logInUser.password;
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        $scope.inputError = error.message;
+        that.inputError = error.message;
       });
     }
 
@@ -92,11 +96,11 @@
         => Sign up with validated sign up form input; display error message.
     */
     this.btnSignUp = function() {
-      displayName = $scope.signUpUser.displayName;
-      email = $scope.signUpUser.email;
-      password = $scope.signUpUser.password;
+      displayName = that.signUpUser.displayName;
+      email = that.signUpUser.email;
+      password = that.signUpUser.password;
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-        $scope.inputError = error.message;
+        that.inputError = error.message;
       }).then(function(user) {
         if (user) {
           user.updateProfile({
@@ -112,17 +116,17 @@
     }
 
     this.btnForgotPassword = function() {
-      var email = $scope.emailForgot;
-      $scope.emailForgot = "";
+      var email = that.emailForgot;
+      that.emailForgot = "";
       that.sendingEmailPasswordReset = true;
-      $scope.forgotPasswordSuccess = false;
-      $scope.forgotPasswordErrorMsg = null;
+      that.forgotPasswordSuccess = false;
+      that.forgotPasswordErrorMsg = null;
       firebase.auth().sendPasswordResetEmail(email).then(function() {
-        $scope.forgotPasswordSuccess = true;
+        that.forgotPasswordSuccess = true;
         that.sendingEmailPasswordReset = false;
         $scope.$apply();
       }).catch(function(error) {
-        $scope.forgotPasswordErrorMsg = error.message;
+        that.forgotPasswordErrorMsg = error.message;
         that.sendingEmailPasswordReset = false;
         $scope.$apply();
       });
@@ -131,9 +135,17 @@
     this.btnCloseForgotPasswordModal = function() {
       that.openForgotEmailModal = false;
       document.getElementById('modal-forgot-password').reset();
-      $scope.emailForgot = "";
-      $scope.forgotPasswordSuccess = false;
-      $scope.forgotPasswordErrorMsg = null;
+      that.emailForgot = "";
+      that.forgotPasswordSuccess = false;
+      that.forgotPasswordErrorMsg = null;
+    }
+
+    this.showPasswordResetPrompt = function() {
+      return !that.sendingEmailPasswordReset && !that.forgotPasswordErrorMsg && !that.forgotPasswordSuccess;
+    }
+
+    this.showPasswordResetRequest = function() {
+      return that.sendingEmailPasswordReset && !that.forgotPasswordErrorMsg && !that.forgotPasswordSuccess;
     }
 
 
