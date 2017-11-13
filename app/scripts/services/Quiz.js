@@ -30,6 +30,7 @@
     }
 
     function initWordsByNumSuccess() {
+      initQuiz();
       var uid = firebase.auth().currentUser.uid;
       var ref = firebase.database().ref('user-words/' + uid).orderByChild('numSuccess');
       $firebaseArray(ref).$loaded().then(function(userWords) {
@@ -258,7 +259,7 @@
 
     $rootScope.$on('userWordsChanged', function() {
       initQuiz();
-      // init user words 
+      // init user words
       initWordsByNumSuccess();
     });
 
@@ -266,6 +267,7 @@
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        console.log('user')
         // init user words
         initWordsByNumSuccess();
       }
