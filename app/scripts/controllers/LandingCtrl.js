@@ -89,6 +89,8 @@
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         that.inputError = error.message;
       });
+      document.getElementById('input-log-in-email').blur();
+      document.getElementById('input-log-in-password').blur();
     }
 
     /*
@@ -105,6 +107,9 @@
         that.inputError = errorMessage;
         $scope.$apply();
       });
+      document.getElementById('input-sign-up-display-name').blur();
+      document.getElementById('input-sign-up-email').blur();
+      document.getElementById('input-sign-up-password').blur();
     }
 
 

@@ -16,9 +16,9 @@
         <span class="ion-alert-circled txt-warning"></span> {{ landing.inputError }}
       </div>
       <div ng-class="{'border-error': inputError}">
-        <input type="text" class="border-round-top" placeholder="display name" name="signUpDisplay" ng-model = "landing.signUpUser.displayName" required>
-        <input type="email" placeholder="email address" name="signUpEmail" ng-model="landing.signUpUser.email" required>
-        <input type="password" class="border-round-bottom" placeholder="password" name="signUpPassword" ng-model="landing.signUpUser.password" required>
+        <input type="text" id="input-sign-up-display-name" class="border-round-top" placeholder="display name" name="signUpDisplay" ng-model = "landing.signUpUser.displayName" required>
+        <input type="email" id="input-sign-up-email" placeholder="email address" name="signUpEmail" ng-model="landing.signUpUser.email" required>
+        <input type="password" id="input-sign-up-password" class="border-round-bottom" placeholder="password" name="signUpPassword" ng-model="landing.signUpUser.password" required>
       </div>
     </div>
   </section>
