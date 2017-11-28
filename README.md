@@ -1,6 +1,7 @@
 
-<img src="/app/assets/images/logo.png">
-<h1>Scholarly</h1>
+<img src="/app/assets/images/logo.png" style="">
+
+<h1 style="text-align: center;">Scholarly</h1>
 
 A web app for mastering your vocabulary!
 
