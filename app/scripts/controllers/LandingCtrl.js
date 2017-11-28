@@ -155,6 +155,8 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         $state.go('words');
+      } else {
+        $state.go('landing')
       }
     });
 
