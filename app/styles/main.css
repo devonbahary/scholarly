@@ -283,6 +283,7 @@
 
   #main-nav {
     position: fixed;
+    top: 2.5rem;
     width: 20%;
     display: block;
     height: 100%;

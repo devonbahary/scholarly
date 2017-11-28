@@ -63,7 +63,7 @@
 
 #words-content .header-word-search {
   position: relative;
-  height: 15%;
+  height: 20%;
 }
 
 #words-content .txt-feedback {
@@ -86,7 +86,7 @@
 
 #words-content .list-box {
   position: relative;
-  height: 65%;
+  height: 60%;
   overflow-y: scroll;
 }
 
@@ -416,6 +416,6 @@
   }
 
   #words-content .list-box {
-    height: 75%;
+    height: 70%;
   }
 }
