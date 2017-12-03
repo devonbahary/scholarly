@@ -222,4 +222,12 @@
   #landing-content #modal-box {
     width: 60%;
   }
+
+  #landing-content .input-content {
+    padding: 0 20%;
+  }
+
+  #landing-content .btn-submit {
+    padding: 0 20%;
+  }
 }

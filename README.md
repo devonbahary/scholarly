@@ -5,7 +5,7 @@
 
 A web app for mastering your vocabulary!
 
-<img src="/app/assets/gifs/quiz.gif">
+<img src="/app/assets/gifs/exampledesktop.gif">
 
 
 ## Getting Started  

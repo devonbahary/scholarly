@@ -334,7 +334,7 @@
     padding: 12px;
   }
 
-  #quiz-content .word-item {
+  #quiz-content .option-item {
     grid-template-columns: 10% 5% 85%;
   }
 }

@@ -272,8 +272,14 @@
   opacity: 0.8;
 }
 
-#words-view #user-word-search-icon {
+#words-view #btn-user-word-search-icon {
   left: 12px;
+  background: none;
+  border: none;
+}
+
+#words-view #btn-user-word-search-icon:focus {
+  outline: none;
 }
 
 #words-view #btn-clear-user-word-search {

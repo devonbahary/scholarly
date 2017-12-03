@@ -10,7 +10,8 @@
   <!-- Search Word Input -->
   <header class="header-word-search">
     <form id="form-user-word-search" class="header-bar" autocomplete="off">
-      <div id="user-word-search-icon" class="user-word-input-icon ion-search"></div>
+      <button type="submit" id="btn-user-word-search-icon" class="user-word-input-icon ion-search"
+        ng-click="words.btnOpenAddWord(words.searchUserWord)"></button>
       <div id="btn-clear-user-word-search" class="user-word-input-icon ion-close-round btn"
         ng-click="words.clearSearchUserWord()"></div>
       <input type="text" class="bga-dark" autocomplete="off" placeholder="scholarly"
@@ -20,7 +21,10 @@
   <!-- User Words Sort Panel -->
   <div id="user-word-sort-panel" class="bga-slate">
     <div>
-      <div class="txt-feedback v-centered">
+      <div class="txt-feedback v-centered" ng-show="!filteredSearch">
+        Loading your words..
+      </div>
+      <div class="txt-feedback v-centered" ng-show="filteredSearch">
         Found <span class="txt-theme">{{ filteredSearch.length }}</span> word<span ng-show="filteredSearch.length === 0 || filteredSearch.length > 1">s</span>.
       </div>
     </div>
@@ -51,13 +55,17 @@
         <!-- Word Metrics Bar -->
         <div class="word-metrics bga-dark">
           <!-- Metric: Search Word -->
-          <div class="btn-metric btn" ng-click="words.btnOpenAddWord(word.name)">
+          <div class="btn-metric btn" ng-click="words.btnOpenAddWord(word.name)"
+            ng-mouseenter="hoverSearch = true" ng-mouseleave="hoverSearch = false"
+            ng-class="{'bg-light': hoverSearch}">
             <div class="centered">
               <span class="ion-search"></span>
             </div>
           </div>
           <!-- Metric: View Word -->
-          <div class="btn-metric btn" ng-click="words.btnOpenViewWordModal(word)">
+          <div class="btn-metric btn" ng-click="words.btnOpenViewWordModal(word)"
+            ng-mouseenter="hoverEdit = true" ng-mouseleave="hoverEdit = false"
+            ng-class="{'bg-light': hoverEdit}">
             <div class="centered">
               <span class="ion-gear-a"></span>
             </div>

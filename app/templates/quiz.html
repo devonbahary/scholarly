@@ -81,7 +81,9 @@
         <li ng-repeat="option in quiz.questions[quiz.progIndex].options" class="option-item"
           ng-show="inProgress && !complete">
           <div class="word-metrics bga-dark">
-            <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)">
+            <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)"
+               ng-mouseenter="hover = true" ng-mouseleave="hover = false"
+               ng-class="{'bg-light': hover}">
               <div class="centered">
                 <!-- <span class="ion-arrow-right-a"></span> -->
                 <span ng-show="$index === 0">A</span>
