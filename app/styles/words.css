@@ -92,8 +92,8 @@
 
 #words-content .word-item {
   display: grid;
+  grid-template-rows: 1fr;
   grid-template-columns: 15% 85%;
-  position: relative;
   min-height: 25%;
   margin-bottom: 6px;
   border: 1px solid gray;
@@ -309,9 +309,6 @@
 }
 
 #words-view .btn-metric {
-  position: relative;
-  height: 100%;
-  width: 100%;
   border-bottom: 1px solid gray;
 }
 
@@ -375,6 +372,7 @@
 
 /* MEDIA QUERIES
   ========================================================================== */
+
 
 /*
   screen width > 480px (mobile landscape)

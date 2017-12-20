@@ -188,14 +188,6 @@
   background: rgb(25, 25, 25);
 }
 
-.bg-correct {
-  background: rgb(45, 167, 44);
-}
-
-.bg-wrong {
-  background: rgb(187, 36, 36);
-}
-
 .bga-light {
   background: rgba(225, 225, 225, 0.2);
 }

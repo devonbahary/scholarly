@@ -28,7 +28,7 @@
     <!-- Quiz Progress Bar -->
     <div id="quiz-progress" ng-show="inProgress">
         <div id="progress-bar" class="header-bar">
-        <div id="progress-bar-bg" class="bga-dark centered">
+        <div id="progress-bar-bg" class="bga-gray centered">
           <div id="progress-bar-thumb" class="bga-prog"
             ng-class="{'bga-prog': !complete,
               'bga-wrong': complete && (quiz.total / quiz.size < .333),
@@ -82,8 +82,8 @@
           ng-show="inProgress && !complete">
           <div class="word-metrics bga-dark">
             <div class="btn-metric btn" ng-click="proctor.btnSelectOption(option)"
-               ng-mouseenter="hover = true" ng-mouseleave="hover = false"
-               ng-class="{'bg-light': hover}">
+               ng-mouseenter="highlight = true" ng-mouseleave="highlight = false"
+               ng-class="{'bg-light': highlight}">
               <div class="centered">
                 <!-- <span class="ion-arrow-right-a"></span> -->
                 <span ng-show="$index === 0">A</span>
@@ -112,26 +112,28 @@
               <span class="ion-flash txt-theme"></span> <span class="txt-success-rate">{{ question.word.successRate | number: 0 }}%</span>
             </div>
           </header>
-          <!-- Word Details (Correct) -->
-          <div class="word-details"
-            ng-class="{'bga-light': quiz.incorrectQuestionIndices.includes($index),
-              'bga-correct': !quiz.incorrectQuestionIndices.includes($index)}">
-            <div class="part-of-speech">
-              {{ question.word.partOfSpeech }}
+          <section id="answers-container">
+            <!-- Word Details (Correct) -->
+            <div class="word-details"
+              ng-class="{'bga-light': quiz.incorrectQuestionIndices.includes($index),
+                'bga-correct': !quiz.incorrectQuestionIndices.includes($index)}">
+              <div class="part-of-speech">
+                {{ question.word.partOfSpeech }}
+              </div>
+              <div class="definition">
+                {{ question.word.definition }}
+              </div>
             </div>
-            <div class="definition">
-              {{ question.word.definition }}
+            <!-- Word Details (Incorrect) -->
+            <div class="word-details bga-wrong wrong" ng-show="quiz.incorrectQuestionIndices.includes($index)">
+              <div class="part-of-speech">
+                {{ question.word.partOfSpeech }}
+              </div>
+              <div class="definition">
+                {{ question.userAnswer }}
+              </div>
             </div>
-          </div>
-          <!-- Word Details (Incorrect) -->
-          <div class="word-details bga-wrong" ng-show="quiz.incorrectQuestionIndices.includes($index)">
-            <div class="part-of-speech">
-              {{ question.word.partOfSpeech }}
-            </div>
-            <div class="definition">
-              {{ question.userAnswer }}
-            </div>
-          </div>
+          </section>
         </li>
       </ul>
     </div>

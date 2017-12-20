@@ -100,6 +100,7 @@
 }
 
 #quiz-content #prog-txt {
+  position: absolute;
   text-align: center;
   width: 100%;
 }
@@ -108,6 +109,7 @@
   position: relative;
   height: 10%;
   border-top-right-radius: 12px;
+  border-bottom: 1px solid rgb(255, 136, 77);
 }
 
 #quiz-content .header-item-quiz-in-prog {
@@ -182,6 +184,10 @@
   border-right: 1px solid rgb(255, 136, 77);
 }
 
+#quiz-content .word-metrics:first-child {
+  border-top: none;
+}
+
 #quiz-content .btn-metric {
   position: relative;
   height: 100%;
@@ -198,20 +204,10 @@
   border-bottom: 1px solid rgb(255, 136, 77);
 }
 
-#quiz-content .word-details {
-  position: relative;
-  padding: 6px 12px;
-  font-size: 1.2rem;
-  /*border-left: 1px solid rgb(255, 136, 77);*/
-  overflow-y: scroll;
-}
-
-#quiz-content .word-details {
-  border: 1px solid gray;
-}
-
 #quiz-content .word-item {
   position: relative;
+  display: grid;
+  grid-template-rows: 2.5rem 1fr;
   min-height: 20%;
   margin-bottom: 6px;
   border-top-right-radius: 12px;
@@ -221,12 +217,26 @@
   margin-top: 6px;
 }
 
+#quiz-content #answers-container {
+  display: grid;
+}
+
+#quiz-content .word-details {
+  padding: 6px 12px;
+  font-size: 1rem;
+  overflow-y: scroll;
+}
+
+#quiz-content .word-details.wrong {
+  border-top: 1px solid black;
+}
+
+
 #quiz-content .word-name {
   position: relative;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.2rem;
   font-style: italic;
-  height: 2.5rem;
   line-height: 2.5rem;
   padding-left: 12px;
   border-top-right-radius: 12px;
@@ -247,12 +257,6 @@
 
 #quiz-content .txt-success-rate {
   opacity: 0.8;
-}
-
-#quiz-content .word-details {
-  position: relative;
-  padding: 6px 12px;
-  font-size: 1rem;
 }
 
 #quiz-content .part-of-speech {
