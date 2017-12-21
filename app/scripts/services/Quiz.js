@@ -267,7 +267,6 @@
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('user')
         // init user words
         initWordsByNumSuccess();
       }

@@ -12,11 +12,12 @@
 */
 
 (function() {
-  function UserWords($rootScope, $firebaseArray, $firebaseObject) {
+  function UserWords($rootScope, $firebaseArray, $firebaseObject, Words) {
     var UserWords = {};
 
 
     UserWords.words = null;
+    UserWords.wordSuggestion = null;
 
     /*
       userWordsRef()
@@ -40,7 +41,26 @@
           return UserWords.words;
         });
       }
+    }
 
+    /*
+      getWordSuggestion()
+        => Assigns 'wordSuggestion' from a random call to the Words service.
+    */
+    UserWords.getWordSuggestion = function() {
+        UserWords.wordSuggestion = null; // reset
+        // assign random suggestion
+        $firebaseArray(userWordsRef()).$loaded().then(function(words) {
+            var randomSample = words[Math.floor(Math.random() * words.length)].name;
+            Words.getWordSimilarTo(randomSample).then(function(value) {
+                if (UserWords.hasWord(value.name)) {
+                    // recursive call if word already exists in database
+                    UserWords.getWordSuggestion();
+                } else {
+                    UserWords.wordSuggestion = value;
+                }
+            });
+        });
     }
 
     /*
@@ -53,7 +73,6 @@
           return true;
         }
       }
-
       // if not found, return false
       return false;
     }
@@ -116,7 +135,7 @@
 
     /*
       addWord(wordObject)
-        => Takes in 'wordObject' and adds it to the database and returns success boolean.
+        => Takes in 'wordObject' and adds it to the database.
     */
     UserWords.addWord = function(wordObject) {
       // create new word
@@ -135,8 +154,6 @@
         streak: 0
       });
       $rootScope.$emit('userWordsChanged');
-      // return 'true' for success
-      return true;
     }
 
 
@@ -175,6 +192,7 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         UserWords.getWords();
+        UserWords.getWordSuggestion();
       } else {
         UserWords.words = null;
       }
@@ -186,5 +204,5 @@
 
   angular
     .module('scholarly')
-    .factory('UserWords', ['$rootScope', '$firebaseArray', '$firebaseObject', UserWords]);
+    .factory('UserWords', ['$rootScope', '$firebaseArray', '$firebaseObject', 'Words', UserWords]);
 })();

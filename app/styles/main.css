@@ -224,6 +224,10 @@
   background: rgba(60, 203, 59, 0.5);
 }
 
+.bga-theme {
+  background: rgba(255,85,0, 0.5);
+}
+
 .txt-theme {
   color: rgb(255, 136, 77) !important;
 }

@@ -198,18 +198,36 @@
       that.pendingWordToReplaceDef = null;
     }
 
+    /*
+      btnAddWord()
+        => Adds the word in the addWord view, removing its existing form in the
+        user's database if it already exists.
+    */
     this.btnAddWord = function() {
       // remove word first if it already exists with a different definition
       if (that.pendingWordToReplace) {
         UserWords.removeWord(that.searchAddWord);
       }
-      // add word
-      if (UserWords.addWord(that.pendingWordToAdd)) {
-        var wordName = that.pendingWordToAdd.name;
+      // add word from addWord view
+      UserWords.addWord(that.pendingWordToAdd)
+      var wordName = that.pendingWordToAdd.name;
+      that.searchUserWord = wordName;
+      updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordName : "Added " + wordName);
+      that.btnReturnToWords();
+    }
+
+    /*
+      btnAddWordSuggestion()
+        => Adds the word suggestion from the view word modal, refreshing the
+        word suggestion in the process.
+    */
+    this.btnAddWordSuggestion = function() {
+        UserWords.addWord(that.viewWord);
+        var wordName = that.viewWord.name;
         that.searchUserWord = wordName;
-        updateTxtActionNotification(that.pendingWordToReplace ? "Replaced " + wordName : "Added " + wordName);
-        that.btnReturnToWords();
-      }
+        updateTxtActionNotification("Added " + wordName);
+        that.btnRefreshSuggestion();
+        that.btnCloseViewWordModal();
     }
 
     this.btnOpenViewWordModal = function(word) {
@@ -301,6 +319,16 @@
       that.btnCloseViewWordModal();
     }
 
+
+    /*
+      btnRefreshSuggestion()
+        => Refreshes the wordSuggestion in UserWords, removing the current
+        suggestion + fetching a new one.
+    */
+    this.btnRefreshSuggestion = function() {
+      UserWords.getWordSuggestion();
+    }
+
     /*
       hasDefForWord(result)
         => Returns true if a database match for 'that.searchAddWord' and
@@ -321,7 +349,7 @@
         (that.searchResults.length > 0 || that.searchErrorFlag);
     }
 
-    // if transitioning from Quiz search prompt, open up addWord 
+    // if transitioning from Quiz search prompt, open up addWord
     if ($stateParams.addWordTrigger) {
       setTimeout(function() {
         that.btnOpenAddWord();

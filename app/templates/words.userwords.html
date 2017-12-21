@@ -50,6 +50,54 @@
   <!-- User Words (may be limited by search result) -->
   <div id="user-words-box" class="list-box">
     <ul class="word-list">
+      <!-- List Item: Word Suggestion -->
+      <li id="suggestion" class="word-item bga-gray" ng-show="!closeSuggestion && !words.searchUserWord">
+        <!-- Word Metrics Bar -->
+        <div class="word-metrics suggestion bga-gray">
+          <!-- Metric: Refresh Suggestion -->
+          <div class="btn-metric btn" ng-click="words.btnRefreshSuggestion()"
+            ng-mouseenter="hoverSearchSuggest = true" ng-mouseleave="hoverSearchSuggest = false"
+            ng-class="{'bg-light': hoverSearchSuggest}">
+            <div class="centered">
+              <span class="ion-refresh"></span>
+            </div>
+          </div>
+          <!-- Metric: Add Word -->
+          <div class="btn-metric btn" ng-click="words.btnOpenViewWordModal(words.userWords.wordSuggestion)"
+            ng-mouseenter="hoverEditSuggest = true" ng-mouseleave="hoverEditSuggest = false"
+            ng-class="{'bg-light': hoverEditSuggest}">
+            <div class="centered">
+              <span class="ion-plus-round txt-theme"></span>
+            </div>
+          </div>
+        </div>
+        <!-- Word Info -->
+        <div>
+          <!-- Word Suggestion Name -->
+          <header class="word-name bga-gray">
+            {{ words.userWords.wordSuggestion.name }}
+            <span id="suggestion-info" class="bga-theme" ng-show="!words.userWords.wordSuggestion || words.userWords.wordSuggestion.name.length < 18">Suggestion</span>
+            <div class="word-success-rate suggestion"
+              ng-class="{'bga-gray': !hoverCloseSuggestion, 'bga-light': hoverCloseSuggestion}"
+              ng-mouseenter="hoverCloseSuggestion = true" ng-mouseleave="hoverCloseSuggestion = false"
+              ng-click="closeSuggestion = true">
+              <span class="ion-close-round btn"></span>
+            </div>
+          </header>
+          <!-- Word Suggestion Details -->
+          <div class="word-details">
+            <div class="part-of-speech">
+              {{ words.userWords.wordSuggestion.partOfSpeech }}
+            </div>
+            <div class="definition">
+              {{ words.userWords.wordSuggestion.definition }}
+              <span ng-show="!words.userWords.wordSuggestion">
+                Looking for a new word..
+              </span>
+            </div>
+          </div>
+        </div>
+      </li>
       <!-- List Item: User Word -->
       <li class="word-item bga-gray" ng-repeat="word in words.userWords.words | filter: words.searchUserWord | orderBy: words.sortByOrder():words.sortByReversed() as filteredSearch">
         <!-- Word Metrics Bar -->
@@ -91,7 +139,7 @@
           </div>
         </div>
       </li>
-      <!-- No Match Found Message -->
+      <!-- List Item: No Match Found Message -->
       <li class="word-item info bga-gray" ng-show="words.searchUserWord && filteredSearch.length === 0">
         <!-- Word Metrics Bar -->
         <div class="word-metrics btn info bg-slate"
@@ -114,7 +162,7 @@
           </div>
         </div>
       </li>
-      <!-- No Words Found Message -->
+      <!-- List Item: No Words Found Message -->
       <li class="word-item info bga-gray" ng-show="!words.searchUserWord && words.userWords.words.length === 0">
         <!-- Word Metrics Bar -->
         <div class="word-metrics btn info bg-slate"

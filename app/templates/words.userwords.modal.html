@@ -46,10 +46,14 @@
         </div>
       </div>
     </div>
-    <!-- Footer: Remove / Edit / Close Buttons -->
+    <!-- Footer: (Add/Remove) / Edit / Close Buttons -->
     <footer class="modal-footer-3" ng-show="!words.removeWordFlag">
+      <!-- Add -->
+      <div class="btn bg-slate" ng-click="words.btnAddWordSuggestion()" ng-show="words.viewWord && !words.userWords.hasWord(words.viewWord.name)">
+        <div class="ion-plus-round centered"></div>
+      </div>
       <!-- Remove -->
-      <div class="btn bg-slate" ng-click="words.btnRemoveWord()">
+      <div class="btn bg-slate" ng-click="words.btnRemoveWord()" ng-show="words.viewWord && words.userWords.hasWord(words.viewWord.name)">
         <div class="ion-trash-a centered"></div>
       </div>
       <!-- Edit -->

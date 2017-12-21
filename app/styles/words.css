@@ -100,16 +100,16 @@
   border-top-right-radius: 12px;
 }
 
-#words-content .word-item:first-child {
+#words-content #suggestion.word-item {
+  margin-top: 6px;
+}
+
+#words-content .word-item:nth-child(2) {
   margin-top: 6px;
 }
 
 #words-content .word-item.info {
   margin-top: 6px;
-}
-
-#words-content .word-item.remove {
-  /*opacity: 0.8;*/
 }
 
 #words-content .word-name {
@@ -123,6 +123,17 @@
   border-top-right-radius: 12px;
 }
 
+#words-content #suggestion-info {
+  font-size: 1rem;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 6px;
+  margin-left: 6px;
+  border-radius: 6px;
+  font-family: 'Work Sans', sans-serif;
+  font-style: normal;
+}
+
 #words-content .word-success-rate {
   position: absolute;
   display: inline-block;
@@ -134,6 +145,10 @@
   border-radius: 6px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+#words-content .word-success-rate.suggestion {
+  padding: 0 12px;
 }
 
 #words-content .word-details {
@@ -302,6 +317,11 @@
   display: grid;
   grid-template-rows: auto;
   border-right: 1px solid rgb(255, 136, 77);
+}
+
+#words-view .word-metrics.suggestion {
+  border-right: 1px solid gray;
+  opacity: 0.7;
 }
 
 #words-view .word-metrics.info {
