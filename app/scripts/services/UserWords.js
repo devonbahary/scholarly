@@ -51,15 +51,26 @@
         UserWords.wordSuggestion = null; // reset
         // assign random suggestion
         $firebaseArray(userWordsRef()).$loaded().then(function(words) {
-            var randomSample = words[Math.floor(Math.random() * words.length)].name;
-            Words.getWordSimilarTo(randomSample).then(function(value) {
+            if (words.length > 0) {
+              var randomSample = words[Math.floor(Math.random() * words.length)].name;
+              Words.getWordSimilarTo(randomSample).then(function(value) {
                 if (UserWords.hasWord(value.name)) {
+                  // recursive call if word already exists in database
+                  UserWords.getWordSuggestion();
+                } else {
+                  UserWords.wordSuggestion = value;
+                }
+              });
+            } else {
+                Words.getRandomWord().then(function(value) {
+                  if (UserWords.hasWord(value.name)) {
                     // recursive call if word already exists in database
                     UserWords.getWordSuggestion();
-                } else {
+                  } else {
                     UserWords.wordSuggestion = value;
-                }
-            });
+                  }
+                });
+            }
         });
     }
 
