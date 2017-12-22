@@ -51,7 +51,6 @@
             user.updateProfile({
               displayName: displayName
             });
-            User.createUserProfile();
           }
           resolve();
         });
@@ -102,6 +101,12 @@
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        // create user profile data if !exists
+        userProfileRef().once('value').then(function(snapshot) {
+          if (!snapshot.val()) {
+            User.createUserProfile();
+          }
+        });
         User.getUserProfile();
       } else {
         User.userProfile = null;

@@ -79,8 +79,12 @@
       }, 3000);
     }
 
-    function noChangeWithEdit() {
-      if (that.pendingWordToAdd) {
+    /*
+      noChangeWithEdit
+        => Returns the change status of a word in the edit modal.
+    */
+    this.noChangeWithEdit = function() {
+      if (that.pendingWordToAdd || (that.viewWord && !UserWords.hasWord(that.viewWord.name))) {
         return false;
       } else {
         return (that.editWordDef === that.pendingWordToReplaceDef) &&
@@ -278,7 +282,7 @@
     }
 
     this.btnEditWord = function() {
-      if (noChangeWithEdit()) {
+      if (this.noChangeWithEdit()) {
         return;
       }
       // remove word first if it already exists with a different definition
@@ -294,11 +298,11 @@
         example: that.editWord.example,
         custom: that.pendingWordToAdd ? (that.pendingWordToAdd.definition === that.editWordDef ? false : true) : true,
       }
-      if (UserWords.addWord(editWordObject)) {
-        that.searchUserWord = that.editWord.name;
-        updateTxtActionNotification((that.pendingWordToReplace ? "Edited " : "Added ") + that.editWord.name);
-        that.btnReturnToWords();
-      }
+      UserWords.addWord(editWordObject);
+      that.searchUserWord = that.editWord.name;
+      updateTxtActionNotification((that.pendingWordToReplace ? "Edited " : "Added ") + that.editWord.name);
+      that.btnReturnToWords();
+
       that.viewWord = editWordObject;
       that.btnCloseEditWordModal();
     }

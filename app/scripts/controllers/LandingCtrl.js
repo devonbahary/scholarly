@@ -88,6 +88,7 @@
       password = that.logInUser.password;
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         that.inputError = error.message;
+        $scope.$apply();
       });
       document.getElementById('input-log-in-email').blur();
       document.getElementById('input-log-in-password').blur();

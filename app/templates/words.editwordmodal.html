@@ -59,7 +59,7 @@
     <footer class="modal-footer-2">
       <!-- Confirm -->
       <button type="submit" form="editWord" id="btn-edit-word" class="btn bg-slate" ng-click="words.btnEditWord()" value="" ng-disabled="editWord.$invalid">
-        <div class="ion-edit txt-theme"></div>
+        <div class="ion-edit" ng-class="{'txt-theme': !words.noChangeWithEdit() && editWord.$valid}"></div>
       </button>
       <!-- Cancel -->
       <div class="btn bg-dark" ng-click="words.btnCloseEditWordModal()">
