@@ -75,10 +75,16 @@
       // wait a moment at full load progress before beginning quiz
       if (loadProg === 1) {
         setTimeout(function() {
-          $scope.inProgress = true;
-          $scope.$apply();
+          if (Quiz.getLoadState() === 1) {
+            $scope.inProgress = true;
+            $scope.$apply();
+          }
         }, 400);
       }
+    });
+
+    $rootScope.$on('quizLengthChanged', function() {
+      $scope.inProgress = false;
     });
 
     var scrollElement = document.getElementById('word-list-box')

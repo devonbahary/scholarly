@@ -38,6 +38,12 @@
         controllerAs: 'proctor',
         url: '/quiz',
         templateUrl: '/templates/quiz.html'
+      })
+      .state('user', {
+        controller: 'UserCtrl',
+        controllerAs: 'user',
+        url: '/user',
+        templateUrl: '/templates/user.html'
       });
   }
 

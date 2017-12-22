@@ -1,0 +1,33 @@
+<!--
+  scholarly
+    app
+      templates
+        * user.signout.html
+-->
+
+
+<!-- Sign Out Modal -->
+<div id="main-nav-modal" class="bga-dark" ng-show="user.openSignOut">
+  <div class="modal-box centered">
+    <!-- Header: Prompt -->
+    <header class="modal-header bg-slate">
+      <div class="modal-header-icon ion-person txt-theme"></div>
+      Sign Out
+    </header>
+    <!-- Body: Sign Out -->
+    <div class="body bg-dark">
+      Sign out of current session?
+    </div>
+    <!-- Footer: Sign Out / Close Buttons -->
+    <footer class="modal-footer-2">
+      <!-- Sign Out -->
+      <div class="btn bg-slate" ng-click="nav.btnSignOut()">
+        <div class="ion-log-out centered txt-theme"></div>
+      </div>
+      <!-- Close -->
+      <div class="btn bg-darker" ng-click="nav.btnCloseSignOutModal()">
+        <div class="ion-close-round centered"></div>
+      </div>
+    </footer>
+  </div>
+</div>

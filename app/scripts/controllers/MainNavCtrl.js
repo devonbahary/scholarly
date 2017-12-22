@@ -17,12 +17,28 @@
     this.user = null;
     this.openSignOut = false;
 
+    /*
+      btnGoToWords()
+        => Loads 'words' state.
+    */
     this.btnGoToWords = function() {
       $state.go('words');
     }
 
+    /*
+      btnGoToQuiz()
+        => Loads 'quiz' state.
+    */
     this.btnGoToQuiz = function() {
       $state.go('quiz', {}, {reload: true});
+    }
+
+    /*
+      btnGoToUser()
+        => Loads 'user' state.
+    */
+    this.btnGoToUser = function() {
+      $state.go('user');
     }
 
     this.btnOpenSignOut = function() {

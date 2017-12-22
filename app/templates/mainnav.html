@@ -57,14 +57,14 @@
       <span class="txt-menu" ng-class="{active: nav.currentStateIs('quiz')}">Quiz</span>
     </div>
   </div>
-  <!-- Btn: Account -->
-  <div class="main-nav-item last btn bg-slate" ng-click="nav.btnOpenSignOut()" ng-class="{'bga-light-desktop': nav.currentStateIs('account')}">
+  <!-- Btn: User -->
+  <div class="main-nav-item last btn bg-slate" ng-click="nav.btnGoToUser()" ng-class="{'bga-light-desktop': nav.currentStateIs('user')}">
     <!-- Main Nav Item Content: Mobile -->
-    <div class="ion-person centered mobile" ng-class="{'txt-theme': nav.currentStateIs('account')}">
+    <div class="ion-person centered mobile" ng-class="{'txt-theme': nav.currentStateIs('user')}">
     </div>
     <!-- Main Nav Item Content: Desktop -->
     <div class="desktop">
-      <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('account')}"></span> <span class="txt-menu" ng-class="{active: nav.currentStateIs('account')}">Sign Out</span>
+      <span class="ion-person" ng-class="{'txt-theme': nav.currentStateIs('user')}"></span> <span class="txt-menu" ng-class="{active: nav.currentStateIs('user')}">User</span>
     </div>
   </div>
   <ng-include src="'/templates/displaynameheader.html'"></ng-include>

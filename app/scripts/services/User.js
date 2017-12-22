@@ -12,9 +12,30 @@
 */
 
 (function() {
-  function User() {
+  function User($firebaseObject, $rootScope) {
     var User = {};
 
+    User.userProfile = null;
+
+    /*
+      userProfileRef()
+        => Returns the firebase reference to the profile data for current user.
+    */
+    function userProfileRef() {
+      var uid = firebase.auth().currentUser.uid;
+      return firebase.database().ref('user-profiles/' + uid);
+    }
+
+    User.getUserProfile = function() {
+      if (User.userProfile) {
+        return Promise.resolve(User.userProfile);
+      } else {
+        return $firebaseObject(userProfileRef()).$loaded().then(function(userProfile) {
+          User.userProfile = userProfile;
+          return userProfile;
+        });
+      }
+    }
 
     /*
       User.createUser()
@@ -30,12 +51,42 @@
             user.updateProfile({
               displayName: displayName
             });
+            User.createUserProfile();
           }
           resolve();
         });
       });
     }
 
+
+    /*
+      User.createUserProfile()
+        => Creates a new user profile in the database to store user information.
+    */
+    User.createUserProfile = function() {
+      userProfileRef().set({
+        settingQuizLength: 4,
+        settingQuizBuffering: true
+      });
+    }
+
+    /*
+      User.updateSettings()
+        => Takes the existing userProfile object (modified from the view) and
+        updates the database userProfile object with its properties.
+    */
+    User.updateSettings = function() {
+      var newProfile = User.userProfile;
+      userProfileRef().once('value').then(function(snapshot) {
+        if (snapshot.val().settingQuizLength !== newProfile.settingQuizLength) {
+          $rootScope.$emit('quizLengthChanged');
+        }
+      });
+      userProfileRef().update({
+        settingQuizLength: newProfile.settingQuizLength,
+        settingQuizBuffering: newProfile.settingQuizBuffering
+      });
+    }
 
     /*
     */
@@ -49,10 +100,18 @@
       });
     }
 
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        User.getUserProfile();
+      } else {
+        User.userProfile = null;
+      }
+    });
+
     return User;
   }
 
   angular
     .module('scholarly')
-    .factory('User', User);
+    .factory('User', ['$firebaseObject', '$rootScope', User]);
 })();

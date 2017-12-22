@@ -11,10 +11,11 @@
 */
 
 (function() {
-  function Quiz($rootScope, $firebaseArray, Words, UserWords) {
+  function Quiz($rootScope, $firebaseArray, Words, UserWords, User) {
     var Quiz = {};
 
     var userWordsByNumSuccess = null;
+    var settingQuizLength = null;
 
     initQuiz();
 
@@ -154,36 +155,39 @@
     function buildQuiz() {
       if (userWordsByNumSuccess.length !== 0) {
         // in the event that 'quizSize' > # user words
-        var quizSize = Math.min(userWordsByNumSuccess.length, quizSize = 4);
-        $rootScope.quiz.size = quizSize;
+        User.getUserProfile().then(function(userProfile) {
+          var settingQuizLength = userProfile.settingQuizLength;
+          var quizSize = Math.min(userWordsByNumSuccess.length, settingQuizLength);
+          $rootScope.quiz.size = quizSize;
 
-        // select 'quizWords'
-        var quizWords = [];
-        // first half from least successful words
-        while (quizWords.length < quizSize / 2) {
-          var randWord = getLessSuccessfulWord();
-          if (!quizWords.includes(randWord)) {
-            quizWords.push(randWord);
+          // select 'quizWords'
+          var quizWords = [];
+          // first half from least successful words
+          while (quizWords.length < quizSize / 2) {
+            var randWord = getLessSuccessfulWord();
+            if (!quizWords.includes(randWord)) {
+              quizWords.push(randWord);
+            }
           }
-        }
-        // second half at random
-        while (quizWords.length < quizSize) {
-          var randWord = getRandWord();
-          if (!quizWords.includes(randWord)) {
-            quizWords.push(randWord);
+          // second half at random
+          while (quizWords.length < quizSize) {
+            var randWord = getRandWord();
+            if (!quizWords.includes(randWord)) {
+              quizWords.push(randWord);
+            }
           }
-        }
 
-        quizWords = shuffleArray(quizWords);
+          quizWords = shuffleArray(quizWords);
 
-        // gather options for each 'quizWord' and populate 'questions'
-        for (var i = 0; i < quizSize; i++) {
-          var options = [];
-          options.push(quizWords[i].definition);
-          gatherOptionsForWord(quizWords[i], options).then(function(wordObject) {
-            $rootScope.quiz.questions.push(wordObject);
-          });
-        }
+          // gather options for each 'quizWord' and populate 'questions'
+          for (var i = 0; i < quizSize; i++) {
+            var options = [];
+            options.push(quizWords[i].definition);
+            gatherOptionsForWord(quizWords[i], options).then(function(wordObject) {
+              $rootScope.quiz.questions.push(wordObject);
+            });
+          }
+        });
       }
     }
 
@@ -212,11 +216,7 @@
         => Returns the load progress of quiz questions into 'quiz' as a decimal.
     */
     Quiz.getLoadState = function() {
-      if ($rootScope.quiz.size !== 0) {
-        return $rootScope.quiz.questions.length / $rootScope.quiz.size;
-      } else {
-        return 0;
-      }
+      return $rootScope.quiz.size !== 0 ? ($rootScope.quiz.questions.length / $rootScope.quiz.size) : 0;
     }
 
 
@@ -257,12 +257,21 @@
       }
     });
 
+    /*
+      => Detect change in userWords from UserWords.js + rebuild Quiz + words
+    */
     $rootScope.$on('userWordsChanged', function() {
       initQuiz();
       // init user words
       initWordsByNumSuccess();
     });
 
+    /*
+      => Detect change in quizLength from User.js + rebuild Quiz
+    */
+    $rootScope.$on('quizLengthChanged', function() {
+      Quiz.newQuiz();
+    });
 
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
@@ -277,5 +286,5 @@
 
   angular
     .module('scholarly')
-    .factory('Quiz', ['$rootScope', '$firebaseArray', 'Words', 'UserWords', Quiz]);
+    .factory('Quiz', ['$rootScope', '$firebaseArray', 'Words', 'UserWords', 'User', Quiz]);
 })();

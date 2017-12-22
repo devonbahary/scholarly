@@ -1,0 +1,68 @@
+<!--
+  scholarly
+    app
+      templates
+        * user.html
+-->
+
+<main id="viewport">
+  <!-- User Content -->
+  <section id="user-content" class="view-content bga-dark">
+    <section id="settings-container">
+      <!-- Setting: Quiz Length -->
+      <div class="setting">
+        <!-- Header -->
+        <header class="setting-header bg-slate">
+          <div class="setting-icon">
+            <span class="ion-levels txt-theme"></span>
+          </div>
+          <div class="setting-title">
+            Quiz Length
+          </div>
+        </header>
+        <!-- Body -->
+        <div class="setting-body bga-dark">
+          Adjust the slider to change the length of your quizzes.
+          <div id="quiz-length-slider-container" class="setting-item">
+            <!-- Slider -->
+            <input type="range" min="2" max="10" id="input-slider-quiz-length" name="quizLength" class='bga-light v-centered' ng-model="user.user.userProfile.settingQuizLength">
+            <div id="model-quiz-length-container">
+              <div id="model-quiz-length" class="bga-gray">{{ user.user.userProfile.settingQuizLength }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Setting: Quiz Buffering -->
+      <div class="setting">
+        <!-- Header -->
+        <header class="setting-header bg-slate">
+          <div class="setting-icon">
+            <span class="ion-upload txt-theme"></span>
+          </div>
+          <div class="setting-title">
+            Quiz Buffering
+          </div>
+        </header>
+        <!-- Body -->
+        <div class="setting-body bga-dark">
+          <div id="setting-quiz-buffering-container" class="setting-item">
+            <div id="setting-quiz-buffering-instructional">
+              Enable/disable quiz buffering so a new quiz is always ready before you finish your current one.
+            </div>
+            <div>
+              <label id="quiz-buffering-switch" class='bga-light btn'>
+                <input type="checkbox" ng-model="user.user.userProfile.settingQuizBuffering">
+                <span id="quiz-buffering-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+    <!-- Sign Out Modal -->
+    <ng-include src="'/templates/user.signoutmodal.html'"></ng-include>
+    <!-- Main Nav -->
+    <ng-include src="'/templates/mainnav.html'"><ng-include>
+  </section>
+</main>
