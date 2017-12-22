@@ -256,17 +256,19 @@
       // check for quizInBuffer, otherwise, rebuild quiz
       if (quizInBuffer) {
         $rootScope.quiz = quizInBuffer;
+        quizInBuffer = initQuiz();
+        buildQuiz(quizInBuffer);
       } else {
         $rootScope.quiz = initQuiz();
         buildQuiz($rootScope.quiz);
+        User.getUserProfile().then(function(userProfile) {
+          if (userProfile.settingQuizBuffering) {
+            quizInBuffer = initQuiz();
+            buildQuiz(quizInBuffer);
+          }
+        });
       }
-      // if 'settingQuizBuffering' is enabled, construct 'quizInBuffer'
-      User.getUserProfile().then(function(userProfile) {
-        if (userProfile.settingQuizBuffering) {
-          quizInBuffer = initQuiz();
-          buildQuiz(quizInBuffer);
-        }
-      });
+
     }
 
     /*
@@ -288,10 +290,16 @@
     });
 
     /*
-      => Detect change in quizLength from User.js + rebuild Quiz
+      => Detect change in quizLength from User.js + reset quiz + quizInBuffer
     */
     $rootScope.$on('quizLengthChanged', function() {
-      Quiz.newQuiz();
+      //Quiz.newQuiz();
+      $rootScope.quiz = initQuiz();
+      buildQuiz($rootScope.quiz);
+      if (quizInBuffer) {
+        quizInBuffer = initQuiz();
+        buildQuiz(quizInBuffer);
+      }
     });
 
     /*
