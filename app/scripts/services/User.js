@@ -77,8 +77,13 @@
     User.updateSettings = function() {
       var newProfile = User.userProfile;
       userProfileRef().once('value').then(function(snapshot) {
+        // detect + emit change in 'settingQuizLength'
         if (snapshot.val().settingQuizLength !== newProfile.settingQuizLength) {
           $rootScope.$emit('quizLengthChanged');
+        }
+        // detect + emit change in 'settingQuizBuffering'
+        if (snapshot.val().settingQuizBuffering !== newProfile.settingQuizBuffering) {
+          $rootScope.$emit('quizBufferingChanged', newProfile.settingQuizBuffering);
         }
       });
       userProfileRef().update({

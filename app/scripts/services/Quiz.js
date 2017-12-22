@@ -16,28 +16,34 @@
 
     var userWordsByNumSuccess = null;
     var settingQuizLength = null;
+    var quizInBuffer = null;
 
-    initQuiz();
-
+    /*
+      initQuiz()
+        => Returns a new quiz object for construction.
+    */
     function initQuiz() {
-      $rootScope.quiz = {
+      return {
         questions: [],
         size: 0,
         progIndex: 0,
-        // determined after quiz completion in 'calcResults()'
+        // ↓ determined after quiz completion in 'calcResults()'
         incorrectQuestionIndices: [],
         total: 0
       }
     }
 
+    /*
+      initWordsByNumSuccess()
+        => Keep an independent array of userWords ordered by 'numSuccess' (a
+        property relevant in quiz word selection) + once loaded, build quiz.
+    */
     function initWordsByNumSuccess() {
-      initQuiz();
       var uid = firebase.auth().currentUser.uid;
       var ref = firebase.database().ref('user-words/' + uid).orderByChild('numSuccess');
       $firebaseArray(ref).$loaded().then(function(userWords) {
         userWordsByNumSuccess = userWords;
-        // then init quiz
-        buildQuiz();
+        Quiz.newQuiz();
       });
     }
 
@@ -152,13 +158,13 @@
             ...
           }
     */
-    function buildQuiz() {
+    function buildQuiz(quizObject) {
       if (userWordsByNumSuccess.length !== 0) {
         // in the event that 'quizSize' > # user words
         User.getUserProfile().then(function(userProfile) {
           var settingQuizLength = userProfile.settingQuizLength;
           var quizSize = Math.min(userWordsByNumSuccess.length, settingQuizLength);
-          $rootScope.quiz.size = quizSize;
+          quizObject.size = quizSize;
 
           // select 'quizWords'
           var quizWords = [];
@@ -184,7 +190,7 @@
             var options = [];
             options.push(quizWords[i].definition);
             gatherOptionsForWord(quizWords[i], options).then(function(wordObject) {
-              $rootScope.quiz.questions.push(wordObject);
+              quizObject.questions.push(wordObject);
             });
           }
         });
@@ -242,16 +248,32 @@
 
     /*
       Quiz.newQuiz()
-        => Rebuilds the quiz object for use in a new quiz.
+        => Builds a new quiz object. When 'settingQuizBuffering' is enabled,
+        will substitute existing quiz with the 'quizInBuffer' + build a new
+        'quizInBuffer'.
     */
     Quiz.newQuiz = function() {
-      initQuiz();
-      buildQuiz();
+      // check for quizInBuffer, otherwise, rebuild quiz
+      if (quizInBuffer) {
+        $rootScope.quiz = quizInBuffer;
+      } else {
+        $rootScope.quiz = initQuiz();
+        buildQuiz($rootScope.quiz);
+      }
+      // if 'settingQuizBuffering' is enabled, construct 'quizInBuffer'
+      User.getUserProfile().then(function(userProfile) {
+        if (userProfile.settingQuizBuffering) {
+          quizInBuffer = initQuiz();
+          buildQuiz(quizInBuffer);
+        }
+      });
     }
 
-    // seize opportunities while the user isn't engaged with the Quiz state to
-    // load a new one to prevent excessive loading screens
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    /*
+      => Seize opportunities while the user isn't engaged with the Quiz state to
+      load a new one to prevent excessive loading screens
+    */
+    $rootScope.$on('$stateChangeStart', function() {
       if ($rootScope.quiz.progIndex > 0) {
         Quiz.newQuiz();
       }
@@ -261,7 +283,6 @@
       => Detect change in userWords from UserWords.js + rebuild Quiz + words
     */
     $rootScope.$on('userWordsChanged', function() {
-      initQuiz();
       // init user words
       initWordsByNumSuccess();
     });
@@ -273,10 +294,30 @@
       Quiz.newQuiz();
     });
 
+    /*
+      => Detect change in quizBuffering from User.js + build/reset quizInBuffer
+    */
+    $rootScope.$on('quizBufferingChanged', function(event, enabled) {
+      if (enabled) {
+        // construct quizInBuffer, also flagging the use of a quizInBuffer in
+        // newQuiz() behavior
+        quizInBuffer = initQuiz();
+        buildQuiz(quizInBuffer);
+      } else {
+        // destruct quizInBuffer, also disabling the use of a quizInBuffer in
+        // newQuiz() behavior
+        quizInBuffer = null;
+      }
+    });
+
+
+    // initialize the first quiz
+    $rootScope.quiz = initQuiz();
+
     // trigger Quiz initializing on user recognition
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        // init user words
+        // init user words + then build quiz
         initWordsByNumSuccess();
       }
     });
