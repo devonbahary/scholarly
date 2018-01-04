@@ -16,7 +16,9 @@ With **[Scholarly](www.scholarly.cc)**, you can:
 
 * Scholarly uses **[Words API](https://www.wordsapi.com/docs)** to pull definitions for your search queries.
 
-* Can't find the right definition? **Fret not**, because..
+* Words in **[Words API](https://www.wordsapi.com/docs)** are mapped to each other in a **network** that allows Scholarly to **make suggestions** for your vocabulary based on what you've already added.
+
+* Can't find the right words? The right definition? **Fret not**, because..
 
 ## Create Your Own Definitions
 <img src="/app/assets/gifs/editworddesktop.gif">
@@ -32,10 +34,15 @@ With **[Scholarly](www.scholarly.cc)**, you can:
 
 * At the end of each quiz, you'll get the chance to **view your results**, **move on** to the next quiz, or **repeat** the same quiz.
 
-* It's important to **minimize time in between quizzes**, so **[Scholarly](www.scholarly.cc)** will attempt to **build your next quiz in the background** whenever you're browsing the app!
+* It's important to **minimize time in between quizzes**, so **[Scholarly](www.scholarly.cc)** will attempt to **build your next quiz in the background** whenever you're browsing the app.
 
 
+## Personalize Your Experience
+<img src="/app/assets/gifs/userdesktop.gif">
 
+* Change the **length** of the quizzes you want thrown at you at any given time.
+
+* On the phone and worried about data? Turn off **quiz buffering** and Scholarly will only load a quiz when you need one.
 
 
 ## Responsive Design
@@ -45,7 +52,7 @@ With **[Scholarly](www.scholarly.cc)**, you can:
 
 * **[Scholarly](www.scholarly.cc)** was built with a **mobile-first design** approach to ensure that users would get the most fluid experience where they'd use it most often.
 
-* On the train, in the cab, between activities--ditch Farmville and **learn a little bit more each day**!
+* On the train, in the cab, between activities--ditch Farmville and **learn a little bit more each day**.
 
 ## Get Started!
 

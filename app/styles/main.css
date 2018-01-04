@@ -104,9 +104,10 @@
   line-height: 2.5rem;
   opacity: 0.9;
   font-size: 1.2rem;
-  border-left: 1px solid gray;
-  width: 10%;
+  border-left: 1px solid rgb(255, 136, 77);
+  width: 15%;
   text-align: center;
+  cursor: pointer;
 }
 
 /* MAIN NAV
@@ -287,6 +288,10 @@
   #viewport .view-content {
     margin-left: 20%;
     width: 80%;
+  }
+
+  #header-display-name #btn-sign-out {
+    width: 10%;
   }
 
   #main-nav {

@@ -148,6 +148,7 @@
 }
 
 #words-content .word-success-rate.suggestion {
+  cursor: pointer;
   padding: 0 12px;
 }
 
