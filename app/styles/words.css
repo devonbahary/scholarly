@@ -307,6 +307,7 @@
   display: grid;
   grid-template-columns: 75% 25%;
   height: 10%;
+  box-shadow: 0 1px 10px 1px black;
 }
 
 #words-view #btn-sort-user-words {
@@ -385,6 +386,7 @@
 #add-word-view #add-word-search-feedback {
   position: relative;
   height: 10%;
+  box-shadow: 0 1px 10px 1px black;
 }
 
 #add-word-view .btn-add-word-search-item {

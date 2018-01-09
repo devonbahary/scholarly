@@ -88,6 +88,8 @@
   height: 50%;
   width: 90%;
   border-radius: 12px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 
 #quiz-content #progress-bar-thumb {
@@ -109,7 +111,8 @@
   position: relative;
   height: 10%;
   border-top-right-radius: 12px;
-  border-bottom: 1px solid rgb(255, 136, 77);
+  box-shadow: 0 1px 10px 1px rgb(255, 136, 77);
+  /* border-bottom: 1px solid rgb(255, 136, 77); */
 }
 
 #quiz-content .header-item-quiz-in-prog {
